@@ -18,7 +18,14 @@ import { Link } from "react-router-dom";
 import Container from "@mui/material/Container";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Tools", "Prices", "Recipes", "Contact"];
+// const navItems = ["Home", "Tools", "Prices", "Recipes", "Contact"];
+const navItems = {
+  "/": "Home",
+  "/tools": "Tools",
+  "/prices": "Prices",
+  "/recipes": "Recipes",
+  "/contact": "Contact",
+};
 
 function DrawerAppBar(props) {
   // const { window } = props;
@@ -34,8 +41,19 @@ function DrawerAppBar(props) {
         Cooking App
       </Typography>
       <Divider />
-
       <List>
+        {Object.entries(navItems).map(([path, itemName]) => (
+          <ListItem key={path} disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <Link to={path} style={{ textDecoration: "none", width: "100%" }}>
+                <ListItemText primary={itemName} />
+              </Link>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+
+      {/* <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
@@ -48,7 +66,7 @@ function DrawerAppBar(props) {
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </Box>
   );
 
@@ -81,11 +99,17 @@ function DrawerAppBar(props) {
             </Typography>
 
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item) => (
+              {Object.entries(navItems).map(([path, itemName]) => (
+                <Link key={path} to={path}>
+                  <Button sx={{ color: "#fff" }}>{itemName}</Button>
+                </Link>
+              ))}
+
+              {/* {navItems.map((item) => (
                 <Link key={item} to={`/${item}`}>
                   <Button sx={{ color: "#fff" }}>{item}</Button>
                 </Link>
-              ))}
+              ))} */}
             </Box>
           </Toolbar>
         </Container>

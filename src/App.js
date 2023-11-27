@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Home from "./pages/Home";
+import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
@@ -13,7 +13,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<Home />} /> */}
+          <Route index element={<Home />} />
+
           {/* <Route path="home" element={<Home />} /> */}
           <Route path="recipes" element={<Recipes />} />
           <Route path="recipes/:recipeId" element={<RecipeDetails />} />
