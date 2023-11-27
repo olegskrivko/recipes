@@ -7,14 +7,16 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#f0f0f0",
+        backgroundColor: "#1976d2",
         padding: "20px",
         textAlign: "center",
-        mt: "auto", // Push the footer to the bottom of the page if using flexbox layout
+        marginTop: "auto",
+
+        //mt: "auto", // Push the footer to the bottom of the page if using flexbox layout
       }}
     >
-      <Typography variant="body2" color="textSecondary">
-        Your footer content here
+      <Typography variant="body2" color="#fff">
+        &copy; 2023 Cooking App. All rights reserved.
       </Typography>
     </Box>
   );

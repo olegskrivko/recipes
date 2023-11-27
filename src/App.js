@@ -5,7 +5,7 @@ import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
 import Tools from "./pages/Tools";
 import Prices from "./pages/Prices";
-import Recipes from "./pages/Recipes";
+import RecipesPage from "./pages/RecipesPage";
 import RecipeDetails from "./pages/RecipeDetails";
 
 function App() {
@@ -14,9 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-
-          {/* <Route path="home" element={<Home />} /> */}
-          <Route path="recipes" element={<Recipes />} />
+          <Route path="recipes" element={<RecipesPage />} />
           <Route path="recipes/:recipeId" element={<RecipeDetails />} />
           <Route path="contact" element={<Contact />} />
           <Route path="tools" element={<Tools />} />

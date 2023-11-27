@@ -6,7 +6,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
+// import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -29,11 +29,11 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeCard({ recipe }) {
-  const [expanded, setExpanded] = React.useState(false);
+  // const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // const handleExpandClick = () => {
+  //   setExpanded(!expanded);
+  // };
 
   // export default function RecipeReviewCard() {
   //   const [expanded, setExpanded] = React.useState(false);
@@ -41,7 +41,14 @@ export default function RecipeCard({ recipe }) {
   //   const handleExpandClick = () => {
   //     setExpanded(!expanded);
   //   };
+  const truncatedTitle =
+    recipe.title.length > 20
+      ? `${recipe.title.substring(0, 16)}...`
+      : recipe.title;
 
+  const truncatedSourceName = recipe.sourceName.length
+    ? `${recipe.sourceName.substring(0, 1)}`
+    : recipe.sourceName;
   return (
     <Grid
       item
@@ -60,7 +67,7 @@ export default function RecipeCard({ recipe }) {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
+              {truncatedSourceName}
             </Avatar>
           }
           action={
@@ -68,7 +75,7 @@ export default function RecipeCard({ recipe }) {
               <MoreVertIcon />
             </IconButton>
           }
-          title={recipe.title}
+          title={truncatedTitle}
           subheader="September 14, 2016"
         />
         <CardMedia
@@ -92,16 +99,16 @@ export default function RecipeCard({ recipe }) {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
-          <ExpandMore
+          {/* <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
           >
             <ExpandMoreIcon />
-          </ExpandMore>
+          </ExpandMore> */}
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography paragraph>Method:</Typography>
             <Typography paragraph>
@@ -109,7 +116,7 @@ export default function RecipeCard({ recipe }) {
               and set aside for 10 minutes.
             </Typography>
           </CardContent>
-        </Collapse>
+        </Collapse> */}
       </Card>
     </Grid>
   );

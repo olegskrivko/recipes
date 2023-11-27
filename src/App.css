@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,21 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
+
+/* Layout.css */
+/* .layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+} */
+
+/* .content {
+  flex-grow: 1;
+  padding-top: 3rem; 
+  padding-bottom: 3rem; 
+} */
+
+/* .footer {
+  margin-top: auto;
+} */
