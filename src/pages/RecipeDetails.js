@@ -15,7 +15,7 @@ const RecipeDetails = () => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const API_KEY = "88345194a6e34c5e83770bdfa6af399c"; // Replace with your actual API key
-  const API_URL = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}`;
+  const API_URL = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}&includeNutrition=true`;
 
   useEffect(() => {
     const fetchRecipeDetails = async () => {
@@ -23,6 +23,7 @@ const RecipeDetails = () => {
         const response = await fetch(API_URL);
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setRecipe(data); // Assuming API returns details of a single recipe
         } else {
           throw new Error("Failed to fetch recipe details");
@@ -75,6 +76,15 @@ const RecipeDetails = () => {
                 ))}
               </ul>
               {/* Display other details of the recipe */}
+              <h3>Ingredients:</h3>
+              <ul>
+                {recipe.nutrition.nutrients.map((item) => (
+                  <li key={item.id}>
+                    Name: {item.name} Amount: {item.amount} Percent Of Daily
+                    Needs: {item.percentOfDailyNeeds} Unit: {item.unit}
+                  </li>
+                ))}
+              </ul>
             </CardContent>
           </Card>
         ) : (
