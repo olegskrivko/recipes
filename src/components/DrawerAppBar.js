@@ -21,9 +21,9 @@ const drawerWidth = 240;
 // const navItems = ["Home", "Tools", "Prices", "Recipes", "Contact"];
 const navItems = {
   "/": "Home",
+  "/recipes": "Recipes",
   "/tools": "Tools",
   "/prices": "Prices",
-  "/recipes": "Recipes",
   "/contact": "Contact",
 };
 
