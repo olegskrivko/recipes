@@ -118,12 +118,12 @@ const Home = () => {
 
   const handleCategoryChange = async (index) => {
     // DO I need to put setselect in try or above?
-    // setSelectedCategory(index); // Update selectedCategory based on index
+    setSelectedCategory(index); // Update selectedCategory based on index
 
-    // // Use slickGoTo method to change the slide
-    // if (sliderRef && sliderRef.current) {
-    //   sliderRef.current.slickGoTo(index);
-    // }
+    // Use slickGoTo method to change the slide
+    if (sliderRef && sliderRef.current) {
+      sliderRef.current.slickGoTo(index);
+    }
     try {
       const API_KEY = "88345194a6e34c5e83770bdfa6af399c"; // Spoonacular API Key
       const API_URL = "https://api.spoonacular.com/recipes/complexSearch";
