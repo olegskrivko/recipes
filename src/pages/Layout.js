@@ -18,12 +18,11 @@
 
 // export default Layout;
 
-import { Outlet } from "react-router-dom";
+import React from "react";
 import DrawerAppBar from "../components/DrawerAppBar";
 import Container from "@mui/material/Container";
-import React from "react";
+import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
-// Import your CSS file with layout styles
 
 const Layout = () => {
   return (
@@ -31,13 +30,20 @@ const Layout = () => {
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
       <DrawerAppBar />
-      <Container
-        component="main"
-        style={{ flexGrow: 1, paddingTop: "3rem", paddingBottom: "3rem" }}
-        className="content"
-      >
-        <Outlet />
-      </Container>
+      <div style={{ flex: "1 0 auto", width: "100%" }}>
+        <Container
+          component="main"
+          sx={{
+            flexGrow: 1,
+            paddingTop: "2rem",
+            paddingBottom: "2rem",
+            width: "100%",
+            overflowX: "hidden",
+          }}
+        >
+          <Outlet />
+        </Container>
+      </div>
       <Footer />
     </div>
   );

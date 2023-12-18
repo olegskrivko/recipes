@@ -11,8 +11,8 @@ const Footer = () => {
         padding: "20px",
         textAlign: "center",
         marginTop: "auto",
-
-        //mt: "auto", // Push the footer to the bottom of the page if using flexbox layout
+        width: "100%", // Ensure the footer takes full width
+        margin: 0, // Reset margin to remove any default spacing
       }}
     >
       <Typography variant="body2" color="#fff">

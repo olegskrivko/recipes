@@ -15,8 +15,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Link } from "react-router-dom";
-
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+import Collapse from "@mui/material/Collapse";
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -29,11 +31,12 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeCard({ recipe }) {
-  // const [expanded, setExpanded] = React.useState(false);
+  console.log(recipe);
+  const [expanded, setExpanded] = React.useState(false);
 
-  // const handleExpandClick = () => {
-  //   setExpanded(!expanded);
-  // };
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   // export default function RecipeReviewCard() {
   //   const [expanded, setExpanded] = React.useState(false);
@@ -41,14 +44,7 @@ export default function RecipeCard({ recipe }) {
   //   const handleExpandClick = () => {
   //     setExpanded(!expanded);
   //   };
-  const truncatedTitle =
-    recipe.title.length > 20
-      ? `${recipe.title.substring(0, 16)}...`
-      : recipe.title;
 
-  const truncatedSourceName = recipe.sourceName.length
-    ? `${recipe.sourceName.substring(0, 1)}`
-    : recipe.sourceName;
   return (
     <Grid
       item
@@ -65,19 +61,62 @@ export default function RecipeCard({ recipe }) {
     >
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {truncatedSourceName}
-            </Avatar>
-          }
           action={
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <MoreVertIcon />
+              {/* <ExpandMoreIcon /> */}
+            </ExpandMore>
+            // <IconButton aria-label="settings">
+            //   <MoreVertIcon />
+            // </IconButton>
+          }
+          title={
+            <Link
+              to={`/recipes/${recipe.id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Typography
+                variant="body1"
+                sx={{
+                  fontSize: "0.8rem",
+                  fontWeight: "bold",
+                }}
+              >
+                {recipe.title}
+              </Typography>
+            </Link>
+          }
+        />
+        {/* <CardContent
+          sx={{
+            display: "flex",
+            
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              width: "100%", // Ensures proper width for ellipsis,
+              textOverflow: "ellipsis",
+            }}
+          >
+            {recipe.title}
+          </Typography>
+          <CardActions disableSpacing>
             <IconButton aria-label="settings">
               <MoreVertIcon />
             </IconButton>
-          }
-          title={truncatedTitle}
-          subheader="September 14, 2016"
-        />
+          </CardActions>
+        </CardContent> */}
+
         <CardMedia
           component="img"
           height="194"
@@ -85,12 +124,11 @@ export default function RecipeCard({ recipe }) {
           alt={recipe.title}
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          {/* <Typography variant="body2" color="text.secondary">
             This impressive paella is a perfect party dish and a fun meal to
             cook together with your guests. Add 1 cup of frozen peas along with
             the mussels, if you like.
-          </Typography>
-          <Link to={`/recipes/${recipe.id}`}>View Recipe</Link>
+          </Typography> */}
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
@@ -99,6 +137,19 @@ export default function RecipeCard({ recipe }) {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
+
+          <div
+            style={{
+              marginLeft: "auto",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <AccessTimeIcon color="action" sx={{ mr: 1 }} />
+            <Typography color="gray" sx={{ marginRight: "1rem" }}>
+              {recipe.readyInMinutes} mins
+            </Typography>
+          </div>
           {/* <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
@@ -108,15 +159,27 @@ export default function RecipeCard({ recipe }) {
             <ExpandMoreIcon />
           </ExpandMore> */}
         </CardActions>
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Method:</Typography>
-            <Typography paragraph>
-              Heat 1/2 cup of the broth in a pot until simmering, add saffron
-              and set aside for 10 minutes.
+            <Typography variant="h6" paragraph>
+              Ingredients:
             </Typography>
+            <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
+              {recipe.extendedIngredients.map((item, index) => (
+                <li
+                  key={index}
+                  style={{
+                    fontSize: "0.9rem",
+                    textAlign: "left",
+                    marginLeft: "0",
+                  }}
+                >
+                  {item.original}
+                </li>
+              ))}
+            </ul>
           </CardContent>
-        </Collapse> */}
+        </Collapse>
       </Card>
     </Grid>
   );

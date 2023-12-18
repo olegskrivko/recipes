@@ -22,7 +22,7 @@ const RecipeList = ({ recipes, loading, initialCardCount, error }) => {
   }
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} style={{ marginTop: "20px" }}>
       {recipes.map((recipe) => (
         <RecipeCard key={recipe.id} recipe={recipe} />
       ))}
