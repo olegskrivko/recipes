@@ -77,7 +77,12 @@ function DrawerAppBar(props) {
     <Box sx={{ display: "flex", p: 3 }}>
       <CssBaseline />
 
-      <AppBar component="nav">
+      <AppBar
+        component="nav"
+        sx={{
+          background: "#1D1D1D",
+        }}
+      >
         <Container disableGutters>
           <Toolbar>
             <IconButton
@@ -101,7 +106,9 @@ function DrawerAppBar(props) {
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {Object.entries(navItems).map(([path, itemName]) => (
                 <Link key={path} to={path}>
-                  <Button sx={{ color: "#fff" }}>{itemName}</Button>
+                  <Button sx={{ color: "#fff", fontWeight: "400" }}>
+                    {itemName}
+                  </Button>
                 </Link>
               ))}
 

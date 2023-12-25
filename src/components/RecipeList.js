@@ -7,9 +7,9 @@ import CustomAlert from "./CustomAlert";
 const RecipeList = ({ recipes, loading, initialCardCount, error }) => {
   if (loading) {
     return (
-      <Grid container spacing={3}>
+      <Grid container spacing={3} style={{ marginTop: "20px" }}>
         {[...Array(initialCardCount)].map((_, index) => (
-          <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+          <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
             <SkeletonRecipeCard />
           </Grid>
         ))}

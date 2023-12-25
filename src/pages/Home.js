@@ -122,7 +122,7 @@ const categories = [
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(0);
   const sliderRef = useRef(null);
-  const initialCardCount = 12;
+  const initialCardCount = 6;
 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -218,6 +218,9 @@ const Home = () => {
               variant="contained"
               startIcon={category.icon}
               size="small"
+              sx={{
+                background: "#1D1D1D !important",
+              }}
               onClick={() => handleCategoryChange(index)}
             >
               {category.title}
@@ -241,7 +244,6 @@ const Home = () => {
         initialCardCount={initialCardCount}
         error={error}
       />
-      {/* <Recipes /> */}
     </Container>
   );
 };

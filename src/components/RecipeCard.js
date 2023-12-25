@@ -19,6 +19,8 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Link } from "react-router-dom";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import Collapse from "@mui/material/Collapse";
+
+import { Button, Chip } from "@mui/material";
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -51,7 +53,7 @@ export default function RecipeCard({ recipe }) {
       xs={12}
       sm={6}
       md={4}
-      lg={3}
+      lg={4}
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -59,39 +61,26 @@ export default function RecipeCard({ recipe }) {
         height: "100%",
       }}
     >
-      <Card sx={{ maxWidth: 345 }}>
-        <CardHeader
-          action={
-            <ExpandMore
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <MoreVertIcon />
-              {/* <ExpandMoreIcon /> */}
-            </ExpandMore>
-            // <IconButton aria-label="settings">
-            //   <MoreVertIcon />
-            // </IconButton>
-          }
-          title={
+      <Card sx={{ maxWidth: 345, background: "#F3F1EF" }}>
+        <CardContent>
+          <Typography
+            variant="body1"
+            sx={{
+              // fontSize: "0.9rem",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              fontWeight: "600",
+            }}
+          >
             <Link
               to={`/recipes/${recipe.id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: "0.8rem",
-                  fontWeight: "bold",
-                }}
-              >
-                {recipe.title}
-              </Typography>
+              {recipe.title}
             </Link>
-          }
-        />
+          </Typography>
+        </CardContent>
         {/* <CardContent
           sx={{
             display: "flex",
@@ -119,17 +108,16 @@ export default function RecipeCard({ recipe }) {
 
         <CardMedia
           component="img"
-          height="194"
           image={recipe.image}
           alt={recipe.title}
+          sx={{
+            width: "100%", // Take up full width
+            height: "auto", // Automatically adjust height to maintain aspect ratio
+            display: "block", // Center the image within the container
+            objectFit: "cover", // Maintain aspect ratio and cover entire area
+          }}
         />
-        <CardContent>
-          {/* <Typography variant="body2" color="text.secondary">
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography> */}
-        </CardContent>
+
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
             <FavoriteIcon />
@@ -149,15 +137,17 @@ export default function RecipeCard({ recipe }) {
             <Typography color="gray" sx={{ marginRight: "1rem" }}>
               {recipe.readyInMinutes} mins
             </Typography>
+
+            <ExpandMore
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              {/* <MoreVertIcon /> */}
+              <ExpandMoreIcon />
+            </ExpandMore>
           </div>
-          {/* <ExpandMore
-            expand={expanded}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-          >
-            <ExpandMoreIcon />
-          </ExpandMore> */}
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
@@ -165,7 +155,7 @@ export default function RecipeCard({ recipe }) {
               Ingredients:
             </Typography>
             <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
-              {recipe.extendedIngredients.map((item, index) => (
+              {recipe?.extendedIngredients?.map((item, index) => (
                 <li
                   key={index}
                   style={{
