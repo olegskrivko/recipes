@@ -15,6 +15,9 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import EuroIcon from "@mui/icons-material/Euro";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ShareIcon from "@mui/icons-material/Share";
+import BlenderIcon from "@mui/icons-material/Blender";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -28,7 +31,7 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 0 }}>
           <div>{children}</div>
           {/* <Typography>{children}</Typography> */}
         </Box>
@@ -48,6 +51,35 @@ function a11yProps(index) {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
+}
+
+function EquipmentPanel({ analyzedInstructions }) {
+  // Extract unique equipment from all steps
+  const allEquipment = analyzedInstructions.flatMap((instruction) =>
+    instruction.steps.flatMap((step) => step.equipment)
+  );
+
+  // Create a Set to remove duplicates
+  const uniqueEquipmentSet = new Set(allEquipment.map((equip) => equip.name));
+
+  // Convert the Set back to an array
+  const uniqueEquipment = Array.from(uniqueEquipmentSet);
+  return (
+    <div>
+      {analyzedInstructions.length > 0 ? (
+        <div>
+          {/* <h3>Equipment Used:</h3> */}
+          <ul>
+            {uniqueEquipment.map((equip, index) => (
+              <li key={index}>{equip}</li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>No instructions available</p>
+      )}
+    </div>
+  );
 }
 
 function NutritionPanel({ nutritionData }) {
@@ -89,8 +121,8 @@ function IngredientsPanel({ ingredients }) {
                 style={{
                   marginRight: "8px",
                   padding: "0",
-                  width: "1rem",
-                  height: "1rem",
+                  width: "16px",
+                  height: "16px",
                   accentColor: "#1D1D1D",
                 }}
               />
@@ -103,7 +135,13 @@ function IngredientsPanel({ ingredients }) {
   );
 }
 
-function BasicTabs({ nutritionData, ingredients, recipeDetails }) {
+function BasicTabs({
+  nutritionData,
+  ingredients,
+  recipeDetails,
+  analyzedInstructions,
+  // caloriesData,
+}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -113,115 +151,118 @@ function BasicTabs({ nutritionData, ingredients, recipeDetails }) {
   return (
     <Box sx={{ width: "100%" }}>
       {/* side card always visible part */}
-      <CardContent>
-        <Box>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            style={{ marginBottom: "5px" }}
-          >
-            <Grid item>
-              <BoltIcon />
-            </Grid>
-            <Grid item>
-              <Typography>450 Calories</Typography>
-            </Grid>
+      {/* <CardContent> */}
+      <Box sx={{ p: 0, marginBottom: "2rem" }}>
+        {/* <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          style={{ marginBottom: "5px" }}
+        >
+          <Grid item>
+            <BoltIcon />
           </Grid>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            style={{ marginBottom: "5px" }}
-          >
-            <Grid item>
-              <SignalCellularAltIcon />
-            </Grid>
-            <Grid item>
-              <Typography>Beginner</Typography>
-            </Grid>
+          <Grid item>
+            <Typography>450 Calories</Typography>
           </Grid>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            style={{ marginBottom: "5px" }}
-          >
-            <Grid item>
-              <AccessTimeIcon />
-            </Grid>
-            <Grid item>
-              <Typography>{recipeDetails.readyInMinutes} minutes</Typography>
-            </Grid>
+        </Grid> */}
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          style={{ marginBottom: "5px" }}
+        >
+          <Grid item>
+            <SignalCellularAltIcon />
           </Grid>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            style={{ marginBottom: "5px" }}
-          >
-            <Grid item>
-              <MonetizationOnIcon />
-            </Grid>
-            <Grid item>
-              <Typography>
-                {recipeDetails.pricePerServing}$ per serving
+          <Grid item>
+            <Typography>Beginner</Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          style={{ marginBottom: "5px" }}
+        >
+          <Grid item>
+            <AccessTimeIcon />
+          </Grid>
+          <Grid item>
+            <Typography>{recipeDetails.readyInMinutes} minutes</Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          style={{ marginBottom: "5px" }}
+        >
+          <Grid item>
+            <MonetizationOnIcon />
+          </Grid>
+          <Grid item>
+            <Typography>
+              {recipeDetails.pricePerServing}$ per serving
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid
+          container
+          spacing={2}
+          alignItems="center"
+          style={{ marginBottom: "5px" }}
+        >
+          <Grid item>
+            <RamenDiningIcon />
+          </Grid>
+          <Grid item>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Typography variant="body1">Servings</Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                sx={{
+                  background: "#1D1D1D !important",
+                  padding: "4px 8px", // Adjust padding here
+                  marginLeft: "4px",
+                  marginRight: "8px",
+                  minWidth: "3rem",
+                }}
+              >
+                -
+              </Button>
+              <Typography style={{ margin: "0 4px" }}>
+                {recipeDetails.servings}
               </Typography>
-            </Grid>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                sx={{
+                  background: "#1D1D1D !important",
+                  padding: "4px 8px", // Adjust padding here
+                  marginLeft: "4px",
+                  marginRight: "8px",
+                  minWidth: "3rem",
+                }}
+              >
+                +
+              </Button>
+            </div>
           </Grid>
-          <Grid
-            container
-            spacing={2}
-            alignItems="center"
-            style={{ marginBottom: "5px" }}
-          >
-            <Grid item>
-              <RamenDiningIcon />
-            </Grid>
-            <Grid item>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Typography variant="body1">Servings</Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  sx={{
-                    background: "#1D1D1D !important",
-                    padding: "4px 8px", // Adjust padding here
-                    marginLeft: "4px",
-                    marginRight: "8px",
-                    minWidth: "3rem",
-                  }}
-                >
-                  -
-                </Button>
-                <Typography style={{ margin: "0 4px" }}>
-                  {recipeDetails.servings}
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  sx={{
-                    background: "#1D1D1D !important",
-                    padding: "4px 8px", // Adjust padding here
-                    marginLeft: "4px",
-                    marginRight: "8px",
-                    minWidth: "3rem",
-                  }}
-                >
-                  +
-                </Button>
-              </div>
-            </Grid>
-          </Grid>
-        </Box>
-      </CardContent>
+        </Grid>
+      </Box>
+      {/* </CardContent> */}
       {/* side card tabs */}
       <CustomTabPanel value={value} index={0}>
         <Typography
           variant="body1"
-          style={{ fontWeight: "bold", marginBottom: "0.6rem" }}
+          style={{
+            fontWeight: "bold",
+            marginBottom: "0.6rem",
+          }}
         >
           Ingredients
         </Typography>
@@ -232,15 +273,32 @@ function BasicTabs({ nutritionData, ingredients, recipeDetails }) {
           variant="body1"
           style={{ fontWeight: "bold", marginBottom: "0.6rem" }}
         >
-          Nutrition Facts
+          Equipment
         </Typography>
-        <NutritionPanel nutritionData={nutritionData} />
-
-        {/* <NutritionChart nutritionData={nutritionData} /> */}
-        {/* Include the chart component here */}
+        <EquipmentPanel analyzedInstructions={analyzedInstructions} />
       </CustomTabPanel>
+
+      {/* <CustomTabPanel value={value} index={1}>
+        <Typography
+          variant="body1"
+          style={{ fontWeight: "bold", marginBottom: "0.6rem" }}
+        >
+          Equipment
+        </Typography> */}
+      {/* <NutritionPanel nutritionData={nutritionData} /> */}
+
+      {/* <NutritionChart nutritionData={nutritionData} /> */}
+      {/* Include the chart component here */}
+      {/* </CustomTabPanel> */}
+
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <Typography
+          variant="body1"
+          style={{ fontWeight: "bold", marginBottom: "0.6rem" }}
+        >
+          Price
+        </Typography>
+        <IngredientsPanel ingredients={ingredients} />
       </CustomTabPanel>
       {/* side card bottom buttons */}
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -265,22 +323,24 @@ function BasicTabs({ nutritionData, ingredients, recipeDetails }) {
             /> */}
 
           <Tab
-            icon={<EuroIcon />}
-            // label="Price"
+            icon={<BlenderIcon />}
+            // label="Share"
             {...a11yProps(1)}
+            aria-label="Equipment"
+          />
+
+          <Tab
+            icon={<ShoppingCartIcon />}
+            // label="Price"
+            {...a11yProps(2)}
             aria-label="Price"
           />
+
           <Tab
-            icon={<BookmarkIcon />}
+            icon={<NoteAltIcon />}
             // label="Share"
             {...a11yProps(2)}
-            aria-label="Bookmark"
-          />
-          <Tab
-            icon={<ShareIcon />}
-            // label="Share"
-            {...a11yProps(2)}
-            aria-label="Share"
+            aria-label="Edit"
           />
         </Tabs>
       </Box>

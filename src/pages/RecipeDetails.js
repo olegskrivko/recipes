@@ -13,14 +13,107 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-
+import { useMediaQuery } from "@mui/material";
 // icons
-
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import PrintIcon from "@mui/icons-material/Print";
+import ShareIcon from "@mui/icons-material/Share";
+import DownloadIcon from "@mui/icons-material/Download";
+import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import BoltIcon from "@mui/icons-material/Bolt";
+import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 // components
 import HalfRating from "../components/HalfRating";
 import NutritionChart from "../components/NutritionChart";
 import BasicAccordion from "../components/BasicAccordion";
 import BasicTabs from "../components/BasicTabs";
+import NutritionDonutChart from "../components/NutritionDonutChart";
+
+import {
+  Table,
+  TableContainer,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@mui/material";
+import ReviewComponent from "../components/ReviewComponent";
+
+const RecipeSummary = ({ summary }) => {
+  return (
+    <div
+      dangerouslySetInnerHTML={{ __html: summary }}
+      style={{ margin: "20px 0", textAlign: "justify" }}
+    />
+  );
+};
+
+const tips = [
+  {
+    tip: "Preparation is Key",
+    description:
+      "Before you start cooking, ensure you have all the ingredients prepped, chopped, and ready to use. This helps streamline the cooking process.",
+  },
+  {
+    tip: "Taste as You Go",
+    description:
+      "Continuously taste your dish while cooking. This allows you to adjust flavors as needed and ensures a well-balanced final product.",
+  },
+  {
+    tip: "Sharp Knives",
+    description:
+      "A sharp knife is your best friend in the kitchen. Keep your knives sharp; they're safer and make cutting and chopping much easier.",
+  },
+  {
+    tip: "Controlled Heat",
+    description:
+      "Learn to control heat levels. Different dishes require different heat levels. Sometimes, lower heat for a longer time is better than high heat.",
+  },
+  {
+    tip: "Rest Your Meat",
+    description:
+      "After cooking meat, let it rest before cutting. This allows the juices to redistribute, resulting in a juicier and more flavorful meal.",
+  },
+  {
+    tip: "Experiment and Have Fun",
+    description:
+      "Don't be afraid to experiment with flavors and ingredients. Cooking is an art, and creativity often leads to fantastic dishes.",
+  },
+  {
+    tip: "Read Recipes Thoroughly",
+    description:
+      "Before starting a new recipe, read it through entirely. It helps avoid surprises and ensures you have everything you need.",
+  },
+  {
+    tip: "Clean as You Go",
+    description:
+      "Cleaning as you cook keeps your workspace organized and makes the post-cooking cleanup much more manageable.",
+  },
+  {
+    tip: "Learn Basic Techniques",
+    description:
+      "Master basic techniques like sautéing, braising, roasting, and blanching. They form the foundation of many dishes.",
+  },
+  {
+    tip: "Don't Be Discouraged by Mistakes",
+    description:
+      "Mistakes happen. Learn from them and keep experimenting. That's how you grow as a cook!",
+  },
+];
+
+const CookingTips = ({ tips }) => {
+  return (
+    <div>
+      {tips.map((tip, index) => (
+        <div key={index}>
+          <h3>{tip.tip}</h3>
+          <p>{tip.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 // Render dish type buttons
 function DishTypeButtons({ dishTypes }) {
@@ -190,6 +283,8 @@ const RecipeDetails = () => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [nutritionData, setNutritionData] = useState(null);
+  const [extendedNutritionData, setExtendedNutritionData] = useState(null);
+  const [caloriesData, setCaloriesData] = useState(null);
   const [ingredients, setIngredients] = useState(null);
   const [instructions, setInstructions] = useState([]);
   const [analyzedInstructions, setAnalyzedInstructions] = useState([]); // New state
@@ -198,7 +293,8 @@ const RecipeDetails = () => {
 
   const API_KEY = "88345194a6e34c5e83770bdfa6af399c";
   const API_URL = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}&includeNutrition=true`;
-
+  // const isSmallScreen = useMediaQuery("(max-width:600px)"); // Example breakpoint for small screens
+  const isXsOrSmScreen = useMediaQuery("(max-width:960px)"); // Example breakpoint for xs and sm screens
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       try {
@@ -229,79 +325,218 @@ const RecipeDetails = () => {
     fetchRecipeDetails();
   }, [recipeId]);
 
+  // useEffect(() => {
+  //   if (recipe) {
+  //     setIngredients(recipe.extendedIngredients);
+  //     const nutrientsData = recipe.nutrition.nutrients.slice(0, 5);
+  //     setNutritionData(nutrientsData);
+  //   }
+  // }, [recipe]);
+
   useEffect(() => {
     if (recipe) {
       setIngredients(recipe.extendedIngredients);
-      const nutrientsData = recipe.nutrition.nutrients.slice(0, 5);
+      const nutrientsArray = recipe.nutrition.nutrients;
+      let caloriesToExtract = ["Calories"];
+      let nutrientsToExtract = [
+        // "Calories",
+        "Fat",
+        "Saturated Fat",
+        "Carbohydrates",
+        "Net Carbohydrates",
+        "Sugar",
+        "Protein",
+        "Fiber",
+      ];
+      const nutrientsData = nutrientsArray.filter((nutrient) =>
+        nutrientsToExtract.includes(nutrient.name)
+      );
+      const caloriesData = nutrientsArray.filter((cal) =>
+        caloriesToExtract.includes(cal.name)
+      );
+      setCaloriesData(caloriesData);
       setNutritionData(nutrientsData);
     }
   }, [recipe]);
 
   useEffect(() => {
     if (recipe) {
-      setIngredients(recipe.extendedIngredients);
-      const nutrientsData = recipe.nutrition.nutrients.slice(0, 5);
-      setNutritionData(nutrientsData);
+      const extendedNutrientsArray = recipe.nutrition.nutrients;
+      let nutrientsToExtract = [
+        "Calories",
+        "Fat",
+        "Saturated Fat",
+        "Carbohydrates",
+        "Net Carbohydrates",
+        "Sugar",
+        "Protein",
+        "Fiber",
+      ];
+
+      const extendedNutrientsData = extendedNutrientsArray.filter(
+        (nutrient) => !nutrientsToExtract.includes(nutrient.name)
+      );
+
+      setExtendedNutritionData(extendedNutrientsData);
     }
   }, [recipe]);
+
+  // useEffect(() => {
+  //   if (recipe) {
+  //     // setIngredients(recipe.extendedIngredients);
+  //     const extendedNutrientsData = recipe.nutrition.nutrients;
+  //     setExtendedNutritionData(extendedNutrientsData);
+  //   }
+  // }, [recipe]);
+
+  // useEffect(() => {
+  //   const fetchAnalyzedInstructions = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${API_KEY}`
+  //       );
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         setAnalyzedInstructions(data);
+  //         console.log("setAnalyzedInstructions", data); // Log the fetched data
+  //       } else {
+  //         throw new Error("Failed to fetch analyzed instructions");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching analyzed instructions:", error);
+  //     }
+  //   };
+
+  //   fetchAnalyzedInstructions();
+  // }, [recipeId]);
+
+  // Extract unique equipment from all steps
+  // const allEquipment = analyzedInstructions.flatMap((instruction) =>
+  //   instruction.steps.flatMap((step) => step.equipment)
+  // );
+
+  // // Create a Set to remove duplicates
+  // const uniqueEquipmentSet = new Set(allEquipment.map((equip) => equip.name));
+
+  // // Convert the Set back to an array
+  // const uniqueEquipment = Array.from(uniqueEquipmentSet);
 
   return (
     <>
+      {/* img & side panel */}
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={7} lg={8}>
+        <Grid item xs={12} sm={12} md={7} lg={7}>
           {recipe ? (
             <Card
-            // sx={{
-            //   borderRadius: "2rem",
-            //   background: "#F3F1EF",
-            // }}
+              sx={{
+                background: "none",
+                boxShadow: "none",
+              }}
+              // sx={{
+              //   borderRadius: "2rem",
+              //   background: "#F3F1EF",
+              // }}
             >
-              <CardContent
+              {/* <CardContent
+                style={
+                  {
+                    // textAlign: "center",
+                    // display: "flex",
+                    // flexDirection: "column",
+                    // alignItems: "center",
+                  }
+                }
+              > */}
+              <Typography
+                variant="h4" // Choose appropriate variant for desired size
                 style={{
-                  textAlign: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  fontWeight: "bold",
                 }}
               >
-                <Typography
-                  variant="h4" // Choose appropriate variant for desired size
-                  style={{
-                    fontWeight: "bold",
-                    paddingBottom: "1rem", // Add padding at the bottom for spacing
+                {recipe.title}
+              </Typography>
+              <HalfRating score={recipe.spoonacularScore} />
+              {/* <h2>{recipe.title}</h2> */}
+              <Stack direction="row" spacing={1} sx={{ marginBottom: "1rem" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  sx={{
+                    background: "#1D1D1D !important",
                   }}
                 >
-                  {recipe.title}
-                </Typography>
-                {/* <h2>{recipe.title}</h2> */}
+                  Save <BookmarkIcon />
+                </Button>
 
-                <img src={recipe.image} alt={recipe.title} />
-                <HalfRating score={recipe.spoonacularScore} />
-              </CardContent>
-              <CardContent>
-                {/* <p>Servings: {recipe.servings}</p>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  sx={{
+                    background: "#1D1D1D !important",
+                  }}
+                >
+                  Download <DownloadIcon />
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  sx={{
+                    background: "#1D1D1D !important",
+                  }}
+                >
+                  Share <ShareIcon />
+                </Button>
+              </Stack>
+              <div>
+                <p>
+                  Recipe by{" "}
+                  <a href={recipe.sourceUrl} rel="noreferrer" target="_blank">
+                    <b>{recipe.sourceName}</b>
+                  </a>{" "}
+                  | Updated on December 12, 2023
+                </p>
+              </div>
+              <img src={recipe.image} alt={recipe.title} />
+              {/* </CardContent> */}
+              {/* <CardContent> */}
+              {/* <p>Servings: {recipe.servings}</p>
                 <p>ReadyInMinutes: {recipe.readyInMinutes}</p>
                 <p>Price Per Serving: ${recipe.pricePerServing}</p> */}
-
-                {/* <Typography>Dish Types</Typography> */}
-                <DishTypeButtons dishTypes={recipe.dishTypes} />
-
-                {/* <Typography>Cuisines</Typography>
+              {/* <Typography>Dish Types</Typography> */}
+              <DishTypeButtons dishTypes={recipe.dishTypes} />
+              {/* <Typography>Cuisines</Typography>
                 <DishTypeButtons dishTypes={recipe.cuisines} /> */}
-                {/* <Typography>Diets</Typography>
+              {/* <Typography>Diets</Typography>
                 <DishTypeButtons dishTypes={recipe.diets} /> */}
-                {/* <Typography>Occasions</Typography>
+              {/* <Typography>Occasions</Typography>
                 <DishTypeButtons dishTypes={recipe.occasions} /> */}
-
-                {/* <h3>Instructions</h3> */}
-                {/* <Typography variant="h6" sx={{ fontWeight: "400" }}>
+              {/* <h3>Instructions</h3> */}
+              {/* <Typography variant="h6" sx={{ fontWeight: "400" }}>
                   Instruments
                 </Typography> */}
+              {/* <Typography>{recipe.summary}</Typography> */}
+              <RecipeSummary summary={recipe.summary} />
+
+              {/* <div>
                 <Typography
                   variant="h6"
-                  sx={{ fontWeight: "400", marginTop: "20px" }}
+                  sx={{
+                    fontWeight: "400",
+                    margin: "20px 0",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
-                  Instructions
+                  Instructions{" "}
+                  <VolumeUpIcon
+                    sx={{
+                      marginLeft: "4px",
+                    }}
+                  />
                 </Typography>
 
                 {analyzedInstructions.length > 0 ? (
@@ -311,7 +546,7 @@ const RecipeDetails = () => {
                 ) : (
                   <p>No instructions available</p>
                 )}
-              </CardContent>
+              </div> */}
             </Card>
           ) : (
             <Card>
@@ -321,8 +556,7 @@ const RecipeDetails = () => {
             </Card>
           )}
         </Grid>
-        <Grid item xs={12} sm={12} md={5} lg={4}>
-          {/* Card with basic recipe details and tabs */}
+        <Grid item xs={12} sm={12} md={5} lg={5}>
           {recipe ? (
             <Card
             // sx={{
@@ -331,11 +565,36 @@ const RecipeDetails = () => {
             // }}
             >
               <CardContent>
+                {/* <Box sx={{ p: 0, marginBottom: "2rem" }}> */}
+                <Grid
+                  container
+                  spacing={2}
+                  alignItems="center"
+                  style={{ marginBottom: "5px" }}
+                >
+                  <Grid item>
+                    <LocalFireDepartmentIcon />
+                  </Grid>
+                  <Grid item>
+                    <Typography>
+                      {caloriesData &&
+                        caloriesData.map((item) => (
+                          <div key={item.id}>
+                            {item.amount} {item.unit}
+                          </div>
+                        ))}
+                    </Typography>
+                  </Grid>
+                </Grid>
+                {/* </Box> */}
                 {/* Basic recipe details */}
                 <BasicTabs
                   nutritionData={nutritionData}
+                  // caloriesData={caloriesData}
                   ingredients={ingredients}
-                  recipeDetails={recipe} // Pass the recipe details here
+                  recipeDetails={recipe}
+                  analyzedInstructions={analyzedInstructions}
+                  // Pass the recipe details here
                 />
               </CardContent>
             </Card>
@@ -346,42 +605,107 @@ const RecipeDetails = () => {
               </CardContent>
             </Card>
           )}
-          <Grid item xs={12} sx={{ margin: "20px 0" }}>
-            <Card
-              sx={
-                {
-                  // borderRadius: "2rem",
-                  // background: "#F3F1EF",
-                  // background: "none",
-                  // boxShadow: "none",
-                }
+        </Grid>
+      </Grid>
+
+      {/* instructions & tips */}
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={7} lg={7}>
+          <div>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "400",
+                margin: "20px 0",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Instructions{" "}
+              <VolumeUpIcon
+                sx={{
+                  marginLeft: "4px",
+                }}
+              />
+            </Typography>
+
+            {analyzedInstructions.length > 0 ? (
+              <VerticalLinearStepper
+                analyzedInstructions={analyzedInstructions}
+              />
+            ) : (
+              <p>No instructions available</p>
+            )}
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={12} md={5} lg={5} sx={{ margin: "20px 0" }}>
+          <Card
+            sx={
+              {
+                // borderRadius: "2rem",
+                // background: "#F3F1EF",
+                // background: "none",
+                // boxShadow: "none",
               }
-            >
-              <CardContent>
-                <p>User`s Tips and Tricks</p>
-                <p>Vote Up</p>
-                <p>Vote Down</p>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} sx={{ margin: "20px 0" }}>
-            <Card
-            // sx={{
-            //   borderRadius: "2rem",
-            //   background: "#F3F1EF",
-            //   // background: "none",
-            //   // boxShadow: "none",
-            // }}
-            >
-              <CardContent>
-                <h5>You may also like</h5>
-              </CardContent>
-            </Card>
-          </Grid>
+            }
+          >
+            <CardContent>
+              <Typography
+                variant="h5"
+                // align="center"
+                sx={{ marginBottom: "20px" }}
+              >
+                Kitchen Tips & TrickS
+              </Typography>
+
+              <CookingTips tips={tips} />
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sx={{ margin: "20px 0" }}>
+          <Card>
+            <CardContent>
+              <h5>You may also like</h5>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
+          >
+            Nutrition Facts{" "}
+            <span style={{ fontSize: "0.8rem", fontWeight: "400" }}>
+              {" "}
+              (per serving)
+            </span>
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table aria-label="nutrition data table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Amount</TableCell>
+                  <TableCell>Percent of Daily Needs</TableCell>
+                  <TableCell>Unit</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {nutritionData &&
+                  nutritionData.map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.name}</TableCell>
+                      <TableCell>{item.amount}</TableCell>
+                      <TableCell>{item.percentOfDailyNeeds}</TableCell>
+                      <TableCell>{item.unit}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <NutritionDonutChart nutritionData={nutritionData} />
           <Card
             sx={
               {
@@ -394,8 +718,55 @@ const RecipeDetails = () => {
             //   boxShadow: "none",
             // }}
           >
-            <BasicAccordion nutritionData={nutritionData} />
+            <BasicAccordion nutritionData={extendedNutritionData} />
           </Card>
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
+          >
+            Reviews{" "}
+            <span style={{ fontSize: "0.8rem", fontWeight: "400" }}> (0)</span>
+          </Typography>
+          <ReviewComponent />
+          {/* {analyzedInstructions.length > 0 ? (
+            <div>
+              {analyzedInstructions.map((instruction, index) => (
+                <div key={index}>
+                  <h3>{instruction.name}</h3>
+                  <ol>
+                    {instruction.steps.map((step, stepIndex) => (
+                      <li key={stepIndex}>
+                        <p>{step.step}</p>
+                        {step.equipment && step.equipment.length > 0 && (
+                          <ul>
+                            {step.equipment.map((equip, equipIndex) => (
+                              <li key={equipIndex}>{equip.name}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No instructions available</p>
+          )} */}
+        </Grid>
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
+          >
+            You may also like
+          </Typography>
         </Grid>
       </Grid>
     </>
