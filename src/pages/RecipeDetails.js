@@ -23,6 +23,19 @@ import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import BoltIcon from "@mui/icons-material/Bolt";
 import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
+
+import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
+import RamenDiningIcon from "@mui/icons-material/RamenDining";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import EuroIcon from "@mui/icons-material/Euro";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
+import BlenderIcon from "@mui/icons-material/Blender";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import EventIcon from "@mui/icons-material/Event";
+import SpaIcon from "@mui/icons-material/Spa";
 // components
 import HalfRating from "../components/HalfRating";
 import NutritionChart from "../components/NutritionChart";
@@ -114,11 +127,34 @@ const CookingTips = ({ tips }) => {
     </div>
   );
 };
+function OccasionButtons({ occasions }) {
+  // Check if occasions is defined before mapping through it
+  if (!occasions || !Array.isArray(occasions)) {
+    return null; // Return null or handle the case where occasions is undefined or not an array
+  }
 
+  return (
+    <Stack direction="row" spacing={1} sx={{ margin: "20px 0" }}>
+      {occasions.map((occasion) => (
+        <Button
+          key={occasion}
+          variant="contained"
+          color="primary"
+          size="small"
+          sx={{
+            background: "#1D1D1D !important",
+          }}
+        >
+          {occasion}
+        </Button>
+      ))}
+    </Stack>
+  );
+}
 // Render dish type buttons
 function DishTypeButtons({ dishTypes }) {
   return (
-    <Stack direction="row" spacing={1}>
+    <Stack direction="row" spacing={1} sx={{ margin: "20px 0" }}>
       {dishTypes.map((dishType) => (
         <Button
           key={dishType}
@@ -424,39 +460,29 @@ const RecipeDetails = () => {
   return (
     <>
       {/* img & side panel */}
+
+      {/* new down */}
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={7} lg={7}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           {recipe ? (
             <Card
               sx={{
                 background: "none",
                 boxShadow: "none",
               }}
-              // sx={{
-              //   borderRadius: "2rem",
-              //   background: "#F3F1EF",
-              // }}
             >
-              {/* <CardContent
-                style={
-                  {
-                    // textAlign: "center",
-                    // display: "flex",
-                    // flexDirection: "column",
-                    // alignItems: "center",
-                  }
-                }
-              > */}
               <Typography
-                variant="h4" // Choose appropriate variant for desired size
+                variant="h4"
                 style={{
                   fontWeight: "bold",
                 }}
               >
                 {recipe.title}
               </Typography>
-              <HalfRating score={recipe.spoonacularScore} />
-              {/* <h2>{recipe.title}</h2> */}
+              <HalfRating
+                score={recipe.spoonacularScore}
+                count={recipe.aggregateLikes}
+              />
               <Stack direction="row" spacing={1} sx={{ marginBottom: "1rem" }}>
                 <Button
                   variant="contained"
@@ -500,53 +526,6 @@ const RecipeDetails = () => {
                   | Updated on December 12, 2023
                 </p>
               </div>
-              <img src={recipe.image} alt={recipe.title} />
-              {/* </CardContent> */}
-              {/* <CardContent> */}
-              {/* <p>Servings: {recipe.servings}</p>
-                <p>ReadyInMinutes: {recipe.readyInMinutes}</p>
-                <p>Price Per Serving: ${recipe.pricePerServing}</p> */}
-              {/* <Typography>Dish Types</Typography> */}
-              <DishTypeButtons dishTypes={recipe.dishTypes} />
-              {/* <Typography>Cuisines</Typography>
-                <DishTypeButtons dishTypes={recipe.cuisines} /> */}
-              {/* <Typography>Diets</Typography>
-                <DishTypeButtons dishTypes={recipe.diets} /> */}
-              {/* <Typography>Occasions</Typography>
-                <DishTypeButtons dishTypes={recipe.occasions} /> */}
-              {/* <h3>Instructions</h3> */}
-              {/* <Typography variant="h6" sx={{ fontWeight: "400" }}>
-                  Instruments
-                </Typography> */}
-              {/* <Typography>{recipe.summary}</Typography> */}
-              <RecipeSummary summary={recipe.summary} />
-
-              {/* <div>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: "400",
-                    margin: "20px 0",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  Instructions{" "}
-                  <VolumeUpIcon
-                    sx={{
-                      marginLeft: "4px",
-                    }}
-                  />
-                </Typography>
-
-                {analyzedInstructions.length > 0 ? (
-                  <VerticalLinearStepper
-                    analyzedInstructions={analyzedInstructions}
-                  />
-                ) : (
-                  <p>No instructions available</p>
-                )}
-              </div> */}
             </Card>
           ) : (
             <Card>
@@ -556,47 +535,28 @@ const RecipeDetails = () => {
             </Card>
           )}
         </Grid>
-        <Grid item xs={12} sm={12} md={5} lg={5}>
+        <Grid item xs={12} sm={12} md={7} lg={7}>
           {recipe ? (
             <Card
-            // sx={{
-            //   background: "#F3F1EF",
-            //   borderRadius: "2rem",
-            // }}
+              sx={{
+                background: "none",
+                boxShadow: "none",
+              }}
             >
-              <CardContent>
-                {/* <Box sx={{ p: 0, marginBottom: "2rem" }}> */}
-                <Grid
-                  container
-                  spacing={2}
-                  alignItems="center"
-                  style={{ marginBottom: "5px" }}
-                >
-                  <Grid item>
-                    <LocalFireDepartmentIcon />
-                  </Grid>
-                  <Grid item>
-                    <Typography>
-                      {caloriesData &&
-                        caloriesData.map((item) => (
-                          <div key={item.id}>
-                            {item.amount} {item.unit}
-                          </div>
-                        ))}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                {/* </Box> */}
-                {/* Basic recipe details */}
-                <BasicTabs
-                  nutritionData={nutritionData}
-                  // caloriesData={caloriesData}
-                  ingredients={ingredients}
-                  recipeDetails={recipe}
-                  analyzedInstructions={analyzedInstructions}
-                  // Pass the recipe details here
-                />
-              </CardContent>
+              <img
+                src={recipe.image}
+                alt={recipe.title}
+                style={{
+                  width: "100%", // Expand to fill the container
+                  objectFit: "cover", // Fill the container while maintaining aspect ratio
+                  height: "400px", // Set the desired height to make the image larger
+                }}
+              />
+              {/* <img src={recipe.image} alt={recipe.title} /> */}
+              <DishTypeButtons dishTypes={recipe.dishTypes} />
+              {/* <DishTypeButtons dishTypes={recipe.occasions} /> */}
+
+              {/* <RecipeSummary summary={recipe.summary} /> */}
             </Card>
           ) : (
             <Card>
@@ -606,11 +566,265 @@ const RecipeDetails = () => {
             </Card>
           )}
         </Grid>
-      </Grid>
 
+        <Grid item xs={12} sm={12} md={5} lg={5}>
+          <Card
+            sx={{
+              background: "none",
+              boxShadow: "none",
+            }}
+          >
+            {recipe ? (
+              <Card
+                sx={
+                  {
+                    // background: "#F3F1EF",
+                    // borderRadius: "2rem",
+                  }
+                }
+              >
+                <CardContent>
+                  {/* <Box sx={{ p: 0, marginBottom: "2rem" }}> */}
+                  <Grid
+                    container
+                    spacing={2}
+                    alignItems="center"
+                    style={{ marginBottom: "5px" }}
+                  >
+                    <Grid item>
+                      <LocalFireDepartmentIcon />
+                    </Grid>
+                    <Grid item>
+                      <Typography>
+                        {caloriesData &&
+                          caloriesData.map((item) => (
+                            <div key={item.id}>
+                              {item.amount} {item.unit}
+                            </div>
+                          ))}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                  {/* </Box> */}
+                  {/* Basic recipe details */}
+                  <Box sx={{ p: 0 }} recipe={recipe}>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <SignalCellularAltIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>Beginner</Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <BlenderIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.preparationMinutes === -1
+                            ? 0
+                            : recipe.preparationMinutes}{" "}
+                          Preparation minutes
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <OutdoorGrillIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.cookingMinutes === -1
+                            ? 0
+                            : recipe.cookingMinutes}{" "}
+                          Cooking minutes
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <AccessTimeIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.readyInMinutes} Ready in minutes
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <MonetizationOnIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.pricePerServing}$ per serving
+                        </Typography>
+                      </Grid>
+                    </Grid>
+
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <SpaIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.vegetarian ? "Vegetarian" : "Non Vegetarian"}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <SpaIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.vegan ? "Vegan" : "Non Vegan"}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <SpaIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.glutenFree
+                            ? "Gluten Free"
+                            : "Non Gluten Free"}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <SpaIcon />
+                      </Grid>
+                      <Grid item>
+                        <Typography>
+                          {recipe.dairyFree ? "Dairy Free" : "Non Dairy Free"}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid
+                      container
+                      spacing={2}
+                      alignItems="center"
+                      style={{ marginBottom: "5px" }}
+                    >
+                      <Grid item>
+                        <RamenDiningIcon />
+                      </Grid>
+                      <Grid item>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <Typography variant="body1">Servings</Typography>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            sx={{
+                              background: "#1D1D1D !important",
+                              padding: "4px 8px", // Adjust padding here
+                              marginLeft: "4px",
+                              marginRight: "8px",
+                              minWidth: "3rem",
+                            }}
+                          >
+                            -
+                          </Button>
+                          <Typography style={{ margin: "0 4px" }}>
+                            {recipe.servings}
+                          </Typography>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            sx={{
+                              background: "#1D1D1D !important",
+                              padding: "4px 8px", // Adjust padding here
+                              marginLeft: "4px",
+                              marginRight: "8px",
+                              minWidth: "3rem",
+                            }}
+                          >
+                            +
+                          </Button>
+                        </div>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card>
+                <CardContent>
+                  <p>Loading...</p>
+                </CardContent>
+              </Card>
+            )}
+          </Card>
+        </Grid>
+      </Grid>
+      {/* new up */}
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <BasicTabs
+            nutritionData={nutritionData}
+            caloriesData={caloriesData}
+            ingredients={ingredients}
+            recipeDetails={recipe}
+            analyzedInstructions={analyzedInstructions}
+            // Pass the recipe details here
+          />
+        </Grid>
+      </Grid>
       {/* instructions & tips */}
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={7} lg={7}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
           <div>
             <Typography
               variant="h6"
@@ -638,7 +852,7 @@ const RecipeDetails = () => {
             )}
           </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={5} lg={5} sx={{ margin: "20px 0" }}>
+        {/* <Grid item xs={12} sm={12} md={5} lg={5} sx={{ margin: "20px 0" }}>
           <Card
             sx={
               {
@@ -661,7 +875,7 @@ const RecipeDetails = () => {
               <CookingTips tips={tips} />
             </CardContent>
           </Card>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} sx={{ margin: "20px 0" }}>
           <Card>
             <CardContent>
@@ -670,8 +884,9 @@ const RecipeDetails = () => {
           </Card>
         </Grid>
       </Grid>
+
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
+        <Grid item xs={12} sm={12} md={6} lg={6} sx={{ margin: "20px 0" }}>
           <Typography
             variant="h6"
             sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
@@ -682,6 +897,7 @@ const RecipeDetails = () => {
               (per serving)
             </span>
           </Typography>
+
           <TableContainer component={Paper}>
             <Table aria-label="nutrition data table">
               <TableHead>
@@ -705,7 +921,18 @@ const RecipeDetails = () => {
               </TableBody>
             </Table>
           </TableContainer>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          lg={6}
+          sx={{ margin: "20px 0", padding: "0 0 0 5 !important" }}
+        >
           <NutritionDonutChart nutritionData={nutritionData} />
+        </Grid>
+        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
           <Card
             sx={
               {

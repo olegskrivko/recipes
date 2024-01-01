@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 
-function HalfRating({ score }) {
+function HalfRating({ score, count }) {
   const [convertedScore, setConvertedScore] = useState(0);
 
   useEffect(() => {
@@ -20,7 +20,9 @@ function HalfRating({ score }) {
           readOnly
         />
       </Stack>
-      <div style={{ marginLeft: "0.5rem" }}>{convertedScore} (103)</div>
+      <div style={{ marginLeft: "0.5rem" }}>
+        {convertedScore} ({count})
+      </div>
     </div>
   );
 }

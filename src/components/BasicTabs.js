@@ -152,8 +152,8 @@ function BasicTabs({
     <Box sx={{ width: "100%" }}>
       {/* side card always visible part */}
       {/* <CardContent> */}
-      <Box sx={{ p: 0, marginBottom: "2rem" }}>
-        {/* <Grid
+      {/* <Box sx={{ p: 0, marginBottom: "2rem" }}> */}
+      {/* <Grid
           container
           spacing={2}
           alignItems="center"
@@ -166,7 +166,7 @@ function BasicTabs({
             <Typography>450 Calories</Typography>
           </Grid>
         </Grid> */}
-        <Grid
+      {/* <Grid
           container
           spacing={2}
           alignItems="center"
@@ -253,9 +253,54 @@ function BasicTabs({
             </div>
           </Grid>
         </Grid>
-      </Box>
+      </Box> */}
       {/* </CardContent> */}
       {/* side card tabs */}
+      <Box
+        sx={{ borderBottom: 1, borderColor: "divider", marginBottom: "1rem" }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          centered
+        >
+          <Tab
+            icon={<RestaurantIcon />}
+            // label="Ingredients"
+            {...a11yProps(0)}
+            aria-label="Ingredients"
+          />
+
+          {/* <Tab
+              icon={<DonutSmallIcon />}
+              label="Nutrition"
+              {...a11yProps(1)}
+              aria-label="Nutrition"
+            /> */}
+
+          <Tab
+            icon={<BlenderIcon />}
+            // label="Share"
+            {...a11yProps(1)}
+            aria-label="Equipment"
+          />
+
+          <Tab
+            icon={<ShoppingCartIcon />}
+            // label="Price"
+            {...a11yProps(2)}
+            aria-label="Price"
+          />
+
+          <Tab
+            icon={<NoteAltIcon />}
+            // label="Share"
+            {...a11yProps(2)}
+            aria-label="Edit"
+          />
+        </Tabs>
+      </Box>
       <CustomTabPanel value={value} index={0}>
         <Typography
           variant="body1"
@@ -301,49 +346,6 @@ function BasicTabs({
         <IngredientsPanel ingredients={ingredients} />
       </CustomTabPanel>
       {/* side card bottom buttons */}
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-          centered
-        >
-          <Tab
-            icon={<RestaurantIcon />}
-            // label="Ingredients"
-            {...a11yProps(0)}
-            aria-label="Ingredients"
-          />
-
-          {/* <Tab
-              icon={<DonutSmallIcon />}
-              label="Nutrition"
-              {...a11yProps(1)}
-              aria-label="Nutrition"
-            /> */}
-
-          <Tab
-            icon={<BlenderIcon />}
-            // label="Share"
-            {...a11yProps(1)}
-            aria-label="Equipment"
-          />
-
-          <Tab
-            icon={<ShoppingCartIcon />}
-            // label="Price"
-            {...a11yProps(2)}
-            aria-label="Price"
-          />
-
-          <Tab
-            icon={<NoteAltIcon />}
-            // label="Share"
-            {...a11yProps(2)}
-            aria-label="Edit"
-          />
-        </Tabs>
-      </Box>
     </Box>
   );
 }
