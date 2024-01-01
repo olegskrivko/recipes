@@ -68,16 +68,23 @@ export const donutChartOptions = {
   pieSliceText: "none", // Show only the value in the pie slice
   slices: [
     // Customize slices if needed
-    { color: "#AF9881" },
-    { color: "#DCC9B0" },
-    { color: "#DE9445" },
-    { color: "#8C5E2F" },
-    { color: "#2E7494" },
-    { color: "#AF9881" },
-    { color: "#D3BEA4" },
-    { color: "#C48848" },
-    { color: "#366374" },
-    { color: "#BA9569" },
+    { color: "#FFB6C1" }, // Light Pink - Fat
+    { color: "#FF69B4" }, // Deep Pink - Saturated Fat
+    { color: "#FFD700" }, // Gold - Carbohydrates
+    { color: "#FFA500" }, // Orange - Net Carbohydrates
+    { color: "#87CEEB" }, // Sky Blue - Sugar
+    { color: "#20B2AA" }, // Light Sea Green - Protein
+    { color: "#BA55D3" }, // Medium Orchid - Fiber
+    // { color: "#AF9881" },
+    // { color: "#DCC9B0" },
+    // { color: "#DE9445" },
+    // { color: "#8C5E2F" },
+    // { color: "#2E7494" },
+    // { color: "#F29332" }, // Unique color
+    // { color: "#D3BEA4" },
+    // { color: "#C48848" },
+    // { color: "#366374" },
+    // { color: "#BA9569" },
   ],
   tooltip: {
     text: "value", // Show the value of each slice in the tooltip

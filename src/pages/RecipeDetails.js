@@ -42,6 +42,7 @@ import NutritionChart from "../components/NutritionChart";
 import BasicAccordion from "../components/BasicAccordion";
 import BasicTabs from "../components/BasicTabs";
 import NutritionDonutChart from "../components/NutritionDonutChart";
+import ShareButtons from "../components/ShareButtons";
 
 import {
   Table,
@@ -154,7 +155,7 @@ function OccasionButtons({ occasions }) {
 // Render dish type buttons
 function DishTypeButtons({ dishTypes }) {
   return (
-    <Stack direction="row" spacing={1} sx={{ margin: "20px 0" }}>
+    <Stack direction="row" spacing={1} sx={{ margin: "20px 0 0 0" }}>
       {dishTypes.map((dishType) => (
         <Button
           key={dishType}
@@ -196,7 +197,7 @@ function VerticalLinearStepper({ analyzedInstructions }) {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((step, index) => (
           <Step key={index}>
-            <StepLabel>{step}</StepLabel>
+            <StepLabel sx={{ textAlign: "justify" }}>{step}</StepLabel>
             <StepContent>
               <Box sx={{ mb: 2 }}>
                 <div>
@@ -876,12 +877,17 @@ const RecipeDetails = () => {
             </CardContent>
           </Card>
         </Grid> */}
-        <Grid item xs={12} sx={{ margin: "20px 0" }}>
+        {/* <Grid item xs={12} sx={{ margin: "20px 0" }}>
           <Card>
             <CardContent>
               <h5>You may also like</h5>
             </CardContent>
           </Card>
+        </Grid> */}
+      </Grid>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={12} md={12} lg={12} sx={{ margin: "20px 0" }}>
+          <ShareButtons />
         </Grid>
       </Grid>
 
