@@ -25,6 +25,7 @@ const navItems = {
   "/tools": "Tools",
   "/prices": "Prices",
   "/contact": "Contact",
+  "/recipeinfo": "Recipe Info",
 };
 
 function DrawerAppBar(props) {

@@ -1,0 +1,276 @@
+  // Assuming your data structure looks like this:
+  const recipex = [
+    {
+      name: "Napoleon Cake",
+      ingredients: [
+        {
+          section: "puff pastry layers",
+          items: [
+            {
+              id: 12334,
+              name: "puff pastry sheets",
+              nameClean: "puff pastry sheets",
+              amount: 500,
+              consistency: "SOLID",
+              unit: "g",
+              image: "puff-pastry-sheets.jpg",
+              original: "500 g of puff pastry sheets",
+              measure: {
+                metric: {
+                  amount: 500,
+                  unitShort: "g",
+                  unitLong: "grams",
+                },
+                us: {
+                  amount: 17.637,
+                  unitShort: "oz",
+                  unitLong: "ounces",
+                },
+              },
+            },
+            {
+              id: 12351,
+              name: "Butter",
+              nameClean: "Butter",
+              amount: 200,
+              consistency: "SOLID",
+              unit: "g",
+              image: "butter.jpg",
+              original: "200 g of Butter",
+              measure: {
+                metric: {
+                  amount: 200,
+                  unitShort: "g",
+                  unitLong: "grams",
+                },
+                us: {
+                  amount: 7.055,
+                  unitShort: "oz",
+                  unitLong: "ounces",
+                },
+              },
+            },
+            {
+              id: 12352,
+              name: "Flour",
+              nameClean: "Flour",
+              amount: 150,
+              consistency: "SOLID",
+              unit: "g",
+              image: "flour.jpg",
+              original: "150 g of Flour",
+              measure: {
+                metric: {
+                  amount: 150,
+                  unitShort: "g",
+                  unitLong: "grams",
+                },
+                us: {
+                  amount: 5.291,
+                  unitShort: "oz",
+                  unitLong: "ounces",
+                },
+              },
+            },
+            {
+              id: 12354,
+              name: "Eggs",
+              nameClean: "Eggs",
+              amount: 4,
+              consistency: "SOLID",
+              unit: "pcs",
+              image: "eggs.jpg",
+              original: "4 Eggs",
+              measure: {
+                metric: {
+                  amount: 4,
+                  unitShort: "pcs",
+                  unitLong: "pieces",
+                },
+                us: {
+                  amount: 4,
+                  unitShort: "pcs",
+                  unitLong: "pieces",
+                },
+              },
+            },
+            {
+              id: 12355,
+              name: "Vanilla extract",
+              nameClean: "Vanilla extract",
+              amount: 1,
+              consistency: "LIQUID",
+              unit: "teaspoon",
+              image: "vanilla-extract.jpg",
+              original: "1 teaspoon of Vanilla extract",
+              measure: {
+                metric: {
+                  amount: 1,
+                  unitShort: "tsp",
+                  unitLong: "teaspoon",
+                },
+                us: {
+                  amount: 1,
+                  unitShort: "tsp",
+                  unitLong: "teaspoon",
+                },
+              },
+            },
+          ],
+        },
+        {
+          section: "pastry cream",
+          items: [
+            {
+              id: 12346,
+              name: "Milk",
+              nameClean: "Milk",
+              amount: 500,
+              consistency: "LIQUID",
+              unit: "ml",
+              image: "milk.jpg",
+              original: "500 ml of milk",
+              measure: {
+                metric: {
+                  amount: 500,
+                  unitShort: "ml",
+                  unitLong: "milliliters",
+                },
+                us: {
+                  amount: 16.907,
+                  unitShort: "fl oz",
+                  unitLong: "fluid ounces",
+                },
+              },
+            },
+            {
+              id: 12347,
+              name: "Sugar",
+              nameClean: "Sugar",
+              amount: 150,
+              consistency: "POWDER",
+              unit: "g",
+              image: "sugar.jpg",
+              original: "150 g of sugar",
+              measure: {
+                metric: {
+                  amount: 150,
+                  unitShort: "g",
+                  unitLong: "grams",
+                },
+                us: {
+                  amount: 5.291,
+                  unitShort: "oz",
+                  unitLong: "ounces",
+                },
+              },
+            },
+            {
+              id: 12348,
+              name: "Egg yolks",
+              nameClean: "Egg yolks",
+              amount: 6,
+              consistency: "LIQUID",
+              unit: "pcs",
+              image: "egg-yolks.jpg",
+              original: "6 Egg yolks",
+              measure: {
+                metric: {
+                  amount: 6,
+                  unitShort: "pcs",
+                  unitLong: "pieces",
+                },
+                us: {
+                  amount: 6,
+                  unitShort: "pcs",
+                  unitLong: "pieces",
+                },
+              },
+            },
+            {
+              id: 12349,
+              name: "Cornstarch",
+              nameClean: "Cornstarch",
+              amount: 30,
+              consistency: "POWDER",
+              unit: "g",
+              image: "cornstarch.jpg",
+              original: "30 g of Cornstarch",
+              measure: {
+                metric: {
+                  amount: 30,
+                  unitShort: "g",
+                  unitLong: "grams",
+                },
+                us: {
+                  amount: 1.058,
+                  unitShort: "oz",
+                  unitLong: "ounces",
+                },
+              },
+            },
+            {
+              id: 12345,
+              name: "Butter",
+              nameClean: "Butter",
+              amount: 200,
+              consistency: "SOLID",
+              unit: "g",
+              image: "butter.jpg",
+              original: "200 g of butter",
+              measure: {
+                metric: {
+                  amount: 200,
+                  unitShort: "g",
+                  unitLong: "grams",
+                },
+                us: {
+                  amount: 7.055,
+                  unitShort: "oz",
+                  unitLong: "ounces",
+                },
+              },
+            },
+            {
+              id: 12350,
+              name: "Vanilla extract",
+              nameClean: "Vanilla extract",
+              amount: 1,
+              consistency: "LIQUID",
+              unit: "tsp",
+              image: "vanilla-extract.jpg",
+              original: "1 tsp of Vanilla extract",
+              measure: {
+                metric: {
+                  amount: 1,
+                  unitShort: "tsp",
+                  unitLong: "teaspoon",
+                },
+                us: {
+                  amount: 1,
+                  unitShort: "tsp",
+                  unitLong: "teaspoon",
+                },
+              },
+            },
+          ],
+        },
+        // Other sections if needed...
+      ],
+      steps: [
+        // Steps details...
+      ],
+    },
+  ];
+
+  // Loop through the recipe and extract ingredient details
+  recipex.forEach((recipe) => {
+    recipe.ingredients.forEach((section) => {
+      console.log(`Section: ${section.section}`);
+      section.items.forEach((ingredient) => {
+        console.log(
+          `${ingredient.amount} ${ingredient.unit} ${ingredient.name}`
+        );
+      });
+    });
+  });

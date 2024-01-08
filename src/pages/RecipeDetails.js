@@ -43,76 +43,55 @@ import BasicAccordion from "../components/BasicAccordion";
 import BasicTabs from "../components/BasicTabs";
 import NutritionDonutChart from "../components/NutritionDonutChart";
 import ShareButtons from "../components/ShareButtons";
+import SwitchLabels from "../components/SwitchLabels";
 
-import {
-  Table,
-  TableContainer,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@mui/material";
+import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell } from "@mui/material";
 import ReviewComponent from "../components/ReviewComponent";
 
 const RecipeSummary = ({ summary }) => {
-  return (
-    <div
-      dangerouslySetInnerHTML={{ __html: summary }}
-      style={{ margin: "20px 0", textAlign: "justify" }}
-    />
-  );
+  return <div dangerouslySetInnerHTML={{ __html: summary }} style={{ margin: "20px 0", textAlign: "justify" }} />;
 };
 
 const tips = [
   {
     tip: "Preparation is Key",
-    description:
-      "Before you start cooking, ensure you have all the ingredients prepped, chopped, and ready to use. This helps streamline the cooking process.",
+    description: "Before you start cooking, ensure you have all the ingredients prepped, chopped, and ready to use. This helps streamline the cooking process.",
   },
   {
     tip: "Taste as You Go",
-    description:
-      "Continuously taste your dish while cooking. This allows you to adjust flavors as needed and ensures a well-balanced final product.",
+    description: "Continuously taste your dish while cooking. This allows you to adjust flavors as needed and ensures a well-balanced final product.",
   },
   {
     tip: "Sharp Knives",
-    description:
-      "A sharp knife is your best friend in the kitchen. Keep your knives sharp; they're safer and make cutting and chopping much easier.",
+    description: "A sharp knife is your best friend in the kitchen. Keep your knives sharp; they're safer and make cutting and chopping much easier.",
   },
   {
     tip: "Controlled Heat",
-    description:
-      "Learn to control heat levels. Different dishes require different heat levels. Sometimes, lower heat for a longer time is better than high heat.",
+    description: "Learn to control heat levels. Different dishes require different heat levels. Sometimes, lower heat for a longer time is better than high heat.",
   },
   {
     tip: "Rest Your Meat",
-    description:
-      "After cooking meat, let it rest before cutting. This allows the juices to redistribute, resulting in a juicier and more flavorful meal.",
+    description: "After cooking meat, let it rest before cutting. This allows the juices to redistribute, resulting in a juicier and more flavorful meal.",
   },
   {
     tip: "Experiment and Have Fun",
-    description:
-      "Don't be afraid to experiment with flavors and ingredients. Cooking is an art, and creativity often leads to fantastic dishes.",
+    description: "Don't be afraid to experiment with flavors and ingredients. Cooking is an art, and creativity often leads to fantastic dishes.",
   },
   {
     tip: "Read Recipes Thoroughly",
-    description:
-      "Before starting a new recipe, read it through entirely. It helps avoid surprises and ensures you have everything you need.",
+    description: "Before starting a new recipe, read it through entirely. It helps avoid surprises and ensures you have everything you need.",
   },
   {
     tip: "Clean as You Go",
-    description:
-      "Cleaning as you cook keeps your workspace organized and makes the post-cooking cleanup much more manageable.",
+    description: "Cleaning as you cook keeps your workspace organized and makes the post-cooking cleanup much more manageable.",
   },
   {
     tip: "Learn Basic Techniques",
-    description:
-      "Master basic techniques like sautéing, braising, roasting, and blanching. They form the foundation of many dishes.",
+    description: "Master basic techniques like sautéing, braising, roasting, and blanching. They form the foundation of many dishes.",
   },
   {
     tip: "Don't Be Discouraged by Mistakes",
-    description:
-      "Mistakes happen. Learn from them and keep experimenting. That's how you grow as a cook!",
+    description: "Mistakes happen. Learn from them and keep experimenting. That's how you grow as a cook!",
   },
 ];
 
@@ -174,9 +153,7 @@ function DishTypeButtons({ dishTypes }) {
 }
 
 function VerticalLinearStepper({ analyzedInstructions }) {
-  const steps = analyzedInstructions.flatMap((instruction) =>
-    instruction.steps.map((step) => step.step)
-  );
+  const steps = analyzedInstructions.flatMap((instruction) => instruction.steps.map((step) => step.step));
 
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -201,18 +178,10 @@ function VerticalLinearStepper({ analyzedInstructions }) {
             <StepContent>
               <Box sx={{ mb: 2 }}>
                 <div>
-                  <Button
-                    variant="contained"
-                    onClick={handleNext}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
+                  <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
                     {index === steps.length - 1 ? "Finish" : "Continue"}
                   </Button>
-                  <Button
-                    disabled={index === 0}
-                    onClick={handleBack}
-                    sx={{ mt: 1, mr: 1 }}
-                  >
+                  <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
                     Back
                   </Button>
                 </div>
@@ -342,10 +311,7 @@ const RecipeDetails = () => {
           console.log(data);
 
           // Check if analyzedInstructions exist and has steps
-          if (
-            data.analyzedInstructions &&
-            data.analyzedInstructions.length > 0
-          ) {
+          if (data.analyzedInstructions && data.analyzedInstructions.length > 0) {
             setInstructions(data.analyzedInstructions[0].steps);
             setAnalyzedInstructions(data.analyzedInstructions); // Set the analyzedInstructions state
           } else {
@@ -385,12 +351,8 @@ const RecipeDetails = () => {
         "Protein",
         "Fiber",
       ];
-      const nutrientsData = nutrientsArray.filter((nutrient) =>
-        nutrientsToExtract.includes(nutrient.name)
-      );
-      const caloriesData = nutrientsArray.filter((cal) =>
-        caloriesToExtract.includes(cal.name)
-      );
+      const nutrientsData = nutrientsArray.filter((nutrient) => nutrientsToExtract.includes(nutrient.name));
+      const caloriesData = nutrientsArray.filter((cal) => caloriesToExtract.includes(cal.name));
       setCaloriesData(caloriesData);
       setNutritionData(nutrientsData);
     }
@@ -399,71 +361,19 @@ const RecipeDetails = () => {
   useEffect(() => {
     if (recipe) {
       const extendedNutrientsArray = recipe.nutrition.nutrients;
-      let nutrientsToExtract = [
-        "Calories",
-        "Fat",
-        "Saturated Fat",
-        "Carbohydrates",
-        "Net Carbohydrates",
-        "Sugar",
-        "Protein",
-        "Fiber",
-      ];
+      let nutrientsToExtract = ["Calories", "Fat", "Saturated Fat", "Carbohydrates", "Net Carbohydrates", "Sugar", "Protein", "Fiber"];
 
-      const extendedNutrientsData = extendedNutrientsArray.filter(
-        (nutrient) => !nutrientsToExtract.includes(nutrient.name)
-      );
+      const extendedNutrientsData = extendedNutrientsArray.filter((nutrient) => !nutrientsToExtract.includes(nutrient.name));
 
       setExtendedNutritionData(extendedNutrientsData);
     }
   }, [recipe]);
 
-  // useEffect(() => {
-  //   if (recipe) {
-  //     // setIngredients(recipe.extendedIngredients);
-  //     const extendedNutrientsData = recipe.nutrition.nutrients;
-  //     setExtendedNutritionData(extendedNutrientsData);
-  //   }
-  // }, [recipe]);
-
-  // useEffect(() => {
-  //   const fetchAnalyzedInstructions = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${API_KEY}`
-  //       );
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setAnalyzedInstructions(data);
-  //         console.log("setAnalyzedInstructions", data); // Log the fetched data
-  //       } else {
-  //         throw new Error("Failed to fetch analyzed instructions");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching analyzed instructions:", error);
-  //     }
-  //   };
-
-  //   fetchAnalyzedInstructions();
-  // }, [recipeId]);
-
-  // Extract unique equipment from all steps
-  // const allEquipment = analyzedInstructions.flatMap((instruction) =>
-  //   instruction.steps.flatMap((step) => step.equipment)
-  // );
-
-  // // Create a Set to remove duplicates
-  // const uniqueEquipmentSet = new Set(allEquipment.map((equip) => equip.name));
-
-  // // Convert the Set back to an array
-  // const uniqueEquipment = Array.from(uniqueEquipmentSet);
-
   return (
-    <>
-      {/* img & side panel */}
-
-      {/* new down */}
+    <React.Fragment>
+      {/* General Info */}
       <Grid container spacing={3}>
+        {/* Title | Rating | Action Buttons */}
         <Grid item xs={12} sm={12} md={12} lg={12}>
           {recipe ? (
             <Card
@@ -480,10 +390,7 @@ const RecipeDetails = () => {
               >
                 {recipe.title}
               </Typography>
-              <HalfRating
-                score={recipe.spoonacularScore}
-                count={recipe.aggregateLikes}
-              />
+              <HalfRating score={recipe.spoonacularScore} count={recipe.aggregateLikes} />
               <Stack direction="row" spacing={1} sx={{ marginBottom: "1rem" }}>
                 <Button
                   variant="contained"
@@ -536,13 +443,14 @@ const RecipeDetails = () => {
             </Card>
           )}
         </Grid>
+        {/* Image Section */}
         <Grid item xs={12} sm={12} md={7} lg={7}>
           {recipe ? (
             <Card
-              sx={{
-                background: "none",
-                boxShadow: "none",
-              }}
+            // sx={{
+            //   background: "none",
+            //   boxShadow: "none",
+            // }}
             >
               <img
                 src={recipe.image}
@@ -567,7 +475,7 @@ const RecipeDetails = () => {
             </Card>
           )}
         </Grid>
-
+        {/* Icons Sections */}
         <Grid item xs={12} sm={12} md={5} lg={5}>
           <Card
             sx={{
@@ -586,12 +494,7 @@ const RecipeDetails = () => {
               >
                 <CardContent>
                   {/* <Box sx={{ p: 0, marginBottom: "2rem" }}> */}
-                  <Grid
-                    container
-                    spacing={2}
-                    alignItems="center"
-                    style={{ marginBottom: "5px" }}
-                  >
+                  <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                     <Grid item>
                       <LocalFireDepartmentIcon />
                     </Grid>
@@ -609,12 +512,7 @@ const RecipeDetails = () => {
                   {/* </Box> */}
                   {/* Basic recipe details */}
                   <Box sx={{ p: 0 }} recipe={recipe}>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <SignalCellularAltIcon />
                       </Grid>
@@ -622,141 +520,72 @@ const RecipeDetails = () => {
                         <Typography>Beginner</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <BlenderIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.preparationMinutes === -1
-                            ? 0
-                            : recipe.preparationMinutes}{" "}
-                          Preparation minutes
-                        </Typography>
+                        <Typography>{recipe.preparationMinutes === -1 ? 0 : recipe.preparationMinutes} Preparation minutes</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <OutdoorGrillIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.cookingMinutes === -1
-                            ? 0
-                            : recipe.cookingMinutes}{" "}
-                          Cooking minutes
-                        </Typography>
+                        <Typography>{recipe.cookingMinutes === -1 ? 0 : recipe.cookingMinutes} Cooking minutes</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <AccessTimeIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.readyInMinutes} Ready in minutes
-                        </Typography>
+                        <Typography>{recipe.readyInMinutes} Ready in minutes</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <MonetizationOnIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.pricePerServing}$ per serving
-                        </Typography>
+                        <Typography>{recipe.pricePerServing}$ per serving</Typography>
                       </Grid>
                     </Grid>
 
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <SpaIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.vegetarian ? "Vegetarian" : "Non Vegetarian"}
-                        </Typography>
+                        <Typography>{recipe.vegetarian ? "Vegetarian" : "Non Vegetarian"}</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <SpaIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.vegan ? "Vegan" : "Non Vegan"}
-                        </Typography>
+                        <Typography>{recipe.vegan ? "Vegan" : "Non Vegan"}</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <SpaIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.glutenFree
-                            ? "Gluten Free"
-                            : "Non Gluten Free"}
-                        </Typography>
+                        <Typography>{recipe.glutenFree ? "Gluten Free" : "Non Gluten Free"}</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <SpaIcon />
                       </Grid>
                       <Grid item>
-                        <Typography>
-                          {recipe.dairyFree ? "Dairy Free" : "Non Dairy Free"}
-                        </Typography>
+                        <Typography>{recipe.dairyFree ? "Dairy Free" : "Non Dairy Free"}</Typography>
                       </Grid>
                     </Grid>
-                    <Grid
-                      container
-                      spacing={2}
-                      alignItems="center"
-                      style={{ marginBottom: "5px" }}
-                    >
+                    <Grid container spacing={2} alignItems="center" style={{ marginBottom: "5px" }}>
                       <Grid item>
                         <RamenDiningIcon />
                       </Grid>
@@ -777,9 +606,7 @@ const RecipeDetails = () => {
                           >
                             -
                           </Button>
-                          <Typography style={{ margin: "0 4px" }}>
-                            {recipe.servings}
-                          </Typography>
+                          <Typography style={{ margin: "0 4px" }}>{recipe.servings}</Typography>
                           <Button
                             variant="contained"
                             color="primary"
@@ -810,7 +637,7 @@ const RecipeDetails = () => {
           </Card>
         </Grid>
       </Grid>
-      {/* new up */}
+      {/* Horizontal Tabs - Instructions | Equipment | Price | Notes */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <BasicTabs
@@ -823,7 +650,7 @@ const RecipeDetails = () => {
           />
         </Grid>
       </Grid>
-      {/* instructions & tips */}
+      {/* Instructions */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <div>
@@ -836,7 +663,8 @@ const RecipeDetails = () => {
                 alignItems: "center",
               }}
             >
-              Instructions{" "}
+              Instructions
+              {/* <SwitchLabels /> */}
               <VolumeUpIcon
                 sx={{
                   marginLeft: "4px",
@@ -844,66 +672,23 @@ const RecipeDetails = () => {
               />
             </Typography>
 
-            {analyzedInstructions.length > 0 ? (
-              <VerticalLinearStepper
-                analyzedInstructions={analyzedInstructions}
-              />
-            ) : (
-              <p>No instructions available</p>
-            )}
+            {analyzedInstructions.length > 0 ? <VerticalLinearStepper analyzedInstructions={analyzedInstructions} /> : <p>No instructions available</p>}
           </div>
         </Grid>
-        {/* <Grid item xs={12} sm={12} md={5} lg={5} sx={{ margin: "20px 0" }}>
-          <Card
-            sx={
-              {
-                // borderRadius: "2rem",
-                // background: "#F3F1EF",
-                // background: "none",
-                // boxShadow: "none",
-              }
-            }
-          >
-            <CardContent>
-              <Typography
-                variant="h5"
-                // align="center"
-                sx={{ marginBottom: "20px" }}
-              >
-                Kitchen Tips & TrickS
-              </Typography>
-
-              <CookingTips tips={tips} />
-            </CardContent>
-          </Card>
-        </Grid> */}
-        {/* <Grid item xs={12} sx={{ margin: "20px 0" }}>
-          <Card>
-            <CardContent>
-              <h5>You may also like</h5>
-            </CardContent>
-          </Card>
-        </Grid> */}
       </Grid>
+      {/* Share */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12} sx={{ margin: "20px 0" }}>
           <ShareButtons />
         </Grid>
       </Grid>
-
+      {/* Nutrition Facts */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={6} lg={6} sx={{ margin: "20px 0" }}>
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
-          >
-            Nutrition Facts{" "}
-            <span style={{ fontSize: "0.8rem", fontWeight: "400" }}>
-              {" "}
-              (per serving)
-            </span>
+          <Typography variant="h6" sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}>
+            Nutrition Facts <span style={{ fontSize: "0.8rem", fontWeight: "400" }}> (per serving)</span>
           </Typography>
-
+          {/* <BasicAccordion nutritionData={nutritionData} /> */}
           <TableContainer component={Paper}>
             <Table aria-label="nutrition data table">
               <TableHead>
@@ -928,17 +713,10 @@ const RecipeDetails = () => {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          lg={6}
-          sx={{ margin: "20px 0", padding: "0 0 0 5 !important" }}
-        >
+        <Grid item xs={12} sm={12} md={6} lg={6} sx={{ margin: "20px 0", padding: "0 0 0 5 !important" }}>
           <NutritionDonutChart nutritionData={nutritionData} />
         </Grid>
-        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
+        <Grid item xs={12} sm={12} md={6} lg={6} sx={{ margin: "20px 0" }}>
           <Card
             sx={
               {
@@ -951,18 +729,15 @@ const RecipeDetails = () => {
             //   boxShadow: "none",
             // }}
           >
-            <BasicAccordion nutritionData={extendedNutritionData} />
+            {/* <BasicAccordion nutritionData={extendedNutritionData} /> */}
           </Card>
         </Grid>
       </Grid>
+      {/* Reviews */}
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
-          >
-            Reviews{" "}
-            <span style={{ fontSize: "0.8rem", fontWeight: "400" }}> (0)</span>
+        <Grid item xs={12} sm={12} md={6} lg={6} sx={{ margin: "20px 0" }}>
+          <Typography variant="h6" sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}>
+            Reviews <span style={{ fontSize: "0.8rem", fontWeight: "400" }}> (0)</span>
           </Typography>
           <ReviewComponent />
           {/* {analyzedInstructions.length > 0 ? (
@@ -992,17 +767,15 @@ const RecipeDetails = () => {
           )} */}
         </Grid>
       </Grid>
+      {/* You May Also Like */}
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={12} md={7} lg={8} sx={{ margin: "20px 0" }}>
-          <Typography
-            variant="h6"
-            sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}
-          >
+        <Grid item xs={12} sm={12} md={6} lg={8} sx={{ margin: "20px 0" }}>
+          <Typography variant="h6" sx={{ fontWeight: "600", paddingBottom: "0", marginBottom: "0" }}>
             You may also like
           </Typography>
         </Grid>
       </Grid>
-    </>
+    </React.Fragment>
   );
 };
 

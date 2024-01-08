@@ -34,7 +34,7 @@ function BasicAccordion({ nutritionData }) {
             variant="h6"
             sx={{ fontWeight: "400", paddingBottom: "0", marginBottom: "0" }}
           >
-            Show Full Nutrition Label
+            Nutrition Facts
           </Typography>
         </AccordionSummary>
 

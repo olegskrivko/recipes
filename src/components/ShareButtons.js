@@ -22,6 +22,7 @@ const ShareButtons = () => {
 
   const shareInstagram = () => {
     // Your Instagram share logic here
+    window.open("https://www.instagram.com/", "_blank");
   };
 
   return (
@@ -35,7 +36,7 @@ const ShareButtons = () => {
             marginBottom: "0",
           }}
         >
-          Making this recipe? Let me know!
+          Making this recipe? Let us know!
         </Typography>
         <Grid
           container
@@ -51,7 +52,7 @@ const ShareButtons = () => {
               size="small"
               startIcon={<FacebookIcon />}
             >
-              Share on Facebook
+              Facebook
             </Button>
           </Grid>
           <Grid item>
@@ -62,7 +63,7 @@ const ShareButtons = () => {
               size="small"
               startIcon={<TwitterIcon />}
             >
-              Share on Twitter
+              Twitter
             </Button>
           </Grid>
           <Grid item>
@@ -73,7 +74,7 @@ const ShareButtons = () => {
               size="small"
               startIcon={<PinterestIcon />}
             >
-              Share on Pinterest
+              Pinterest
             </Button>
           </Grid>
           <Grid item>
@@ -84,7 +85,7 @@ const ShareButtons = () => {
               size="small"
               startIcon={<InstagramIcon />}
             >
-              Share on Instagram
+              Instagram
             </Button>
           </Grid>
         </Grid>

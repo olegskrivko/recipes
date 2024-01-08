@@ -1,0 +1,412 @@
+{
+  "id": "819190",
+  "name": "Napoleon Cake",
+  "description": "The Napoleon Cake, also known as mille-feuille or custard slice, is a classic dessert made of multiple layers of thin puff pastry alternating with pastry cream. This confection is often topped with icing or powdered sugar and is recognized for its delicate, flaky layers and rich, creamy filling. The Napoleon Cake is a popular dessert in various cultures and is enjoyed for its combination of textures and flavors, blending crisp pastry with smooth, luscious cream.",
+  "pricePerServing": {
+    "amount": 3.5,
+    "currency": "EUR"
+  },
+  "instruments": ["Mixing Bowls", "Rolling Pin", "Parchment Paper", "Measuring Cups and Spoons", "Spatula", "Baking Trays", "Sharp Knife", "Refrigerator", "Pastry Brush", "Whisk or Hand Mixer"],
+  "servings": 4,
+  "cookingTime": {
+    "preparation": {
+      "time": 20,
+      "unit": "min"
+    },
+    "cooking": {
+      "time": 40,
+      "unit": "min"
+    },
+    "total": {
+      "time": 1,
+      "unit": "h"
+    },
+    "marinating": {
+      "time": null,
+      "unit": null
+    },
+    "resting": {
+      "time": null,
+      "unit": null
+    }
+  },
+  "difficulty": "Medium",
+  "cuisines": ["French", "Russian"],
+  "occasions": ["Birthday", "Celebration", "Holiday"],
+  "mealTypes": ["Dessert", "Snack"],
+  "dietTypes": ["Vegetarian"],
+  "dishTypes": ["Cake", "Pastry"],
+
+  "instructions": [
+    {
+      "name": "Dough",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Prepare the puff pastry layers by rolling them out and baking until golden brown."
+        },
+        {
+          "step": 2,
+          "description": "Prepare the cream by mixing custard and buttercream until smooth."
+        },
+        {
+          "step": 3,
+          "description": "Assemble the cake by layering the puff pastry with the cream, alternating between the two."
+        },
+        {
+          "step": 4,
+          "description": "Allow the cake to set in the refrigerator for a few hours or overnight."
+        },
+        {
+          "step": 5,
+          "description": "Slice and serve the Napoleon cake."
+        }
+      ]
+    },
+    {
+      "name": "Cream",
+      "steps": [
+        {
+          "step": 1,
+          "description": "Prepare the custard by heating milk, sugar, and eggs until thickened."
+        },
+        {
+          "step": 2,
+          "description": "Prepare the buttercream by mixing butter and sugar until creamy."
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "section": "puff pastry layers",
+      "items": [
+        {
+          "id": 12334,
+          "name": "puff pastry sheets",
+          "nameClean": "puff pastry sheets",
+          "amount": 500,
+          "consistency": "SOLID",
+          "unit": "g",
+          "image": "puff-pastry-sheets.jpg",
+          "original": "500 g of puff pastry sheets",
+          "measure": {
+            "metric": {
+              "amount": 500,
+              "unitShort": "g",
+              "unitLong": "grams"
+            },
+            "us": {
+              "amount": 17.637,
+              "unitShort": "oz",
+              "unitLong": "ounces"
+            }
+          }
+        },
+        {
+          "id": 12351,
+          "name": "Butter",
+          "nameClean": "Butter",
+          "amount": 200,
+          "consistency": "SOLID",
+          "unit": "g",
+          "image": "butter.jpg",
+          "original": "200 g of Butter",
+          "measure": {
+            "metric": {
+              "amount": 200,
+              "unitShort": "g",
+              "unitLong": "grams"
+            },
+            "us": {
+              "amount": 7.055,
+              "unitShort": "oz",
+              "unitLong": "ounces"
+            }
+          }
+        },
+        {
+          "id": 12352,
+          "name": "Flour",
+          "nameClean": "Flour",
+          "amount": 150,
+          "consistency": "SOLID",
+          "unit": "g",
+          "image": "flour.jpg",
+          "original": "150 g of Flour",
+          "measure": {
+            "metric": {
+              "amount": 150,
+              "unitShort": "g",
+              "unitLong": "grams"
+            },
+            "us": {
+              "amount": 5.291,
+              "unitShort": "oz",
+              "unitLong": "ounces"
+            }
+          }
+        },
+        {
+          "id": 12354,
+          "name": "Eggs",
+          "nameClean": "Eggs",
+          "amount": 4,
+          "consistency": "SOLID",
+          "unit": "pcs",
+          "image": "eggs.jpg",
+          "original": "4 Eggs",
+          "measure": {
+            "metric": {
+              "amount": 4,
+              "unitShort": "pcs",
+              "unitLong": "pieces"
+            },
+            "us": {
+              "amount": 4,
+              "unitShort": "pcs",
+              "unitLong": "pieces"
+            }
+          }
+        },
+        {
+          "id": 12355,
+          "name": "Vanilla extract",
+          "nameClean": "Vanilla extract",
+          "amount": 1,
+          "consistency": "LIQUID",
+          "unit": "teaspoon",
+          "image": "vanilla-extract.jpg",
+          "original": "1 teaspoon of Vanilla extract",
+          "measure": {
+            "metric": {
+              "amount": 1,
+              "unitShort": "tsp",
+              "unitLong": "teaspoon"
+            },
+            "us": {
+              "amount": 1,
+              "unitShort": "tsp",
+              "unitLong": "teaspoon"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "section": "pastry cream",
+      "items": [
+        {
+          "id": 12346,
+          "name": "Milk",
+          "nameClean": "Milk",
+          "amount": 500,
+          "consistency": "LIQUID",
+          "unit": "ml",
+          "image": "milk.jpg",
+          "original": "500 ml of milk",
+          "measure": {
+            "metric": {
+              "amount": 500,
+              "unitShort": "ml",
+              "unitLong": "milliliters"
+            },
+            "us": {
+              "amount": 16.907,
+              "unitShort": "fl oz",
+              "unitLong": "fluid ounces"
+            }
+          }
+        },
+        {
+          "id": 12347,
+          "name": "Sugar",
+          "nameClean": "Sugar",
+          "amount": 150,
+          "consistency": "POWDER",
+          "unit": "g",
+          "image": "sugar.jpg",
+          "original": "150 g of sugar",
+          "measure": {
+            "metric": {
+              "amount": 150,
+              "unitShort": "g",
+              "unitLong": "grams"
+            },
+            "us": {
+              "amount": 5.291,
+              "unitShort": "oz",
+              "unitLong": "ounces"
+            }
+          }
+        },
+        {
+          "id": 12348,
+          "name": "Egg yolks",
+          "nameClean": "Egg yolks",
+          "amount": 6,
+          "consistency": "LIQUID",
+          "unit": "pcs",
+          "image": "egg-yolks.jpg",
+          "original": "6 Egg yolks",
+          "measure": {
+            "metric": {
+              "amount": 6,
+              "unitShort": "pcs",
+              "unitLong": "pieces"
+            },
+            "us": {
+              "amount": 6,
+              "unitShort": "pcs",
+              "unitLong": "pieces"
+            }
+          }
+        },
+        {
+          "id": 12349,
+          "name": "Cornstarch",
+          "nameClean": "Cornstarch",
+          "amount": 30,
+          "consistency": "POWDER",
+          "unit": "g",
+          "image": "cornstarch.jpg",
+          "original": "30 g of Cornstarch",
+          "measure": {
+            "metric": {
+              "amount": 30,
+              "unitShort": "g",
+              "unitLong": "grams"
+            },
+            "us": {
+              "amount": 1.058,
+              "unitShort": "oz",
+              "unitLong": "ounces"
+            }
+          }
+        },
+        {
+          "id": 12345,
+          "name": "Butter",
+          "nameClean": "Butter",
+          "amount": 200,
+          "consistency": "SOLID",
+          "unit": "g",
+          "image": "butter.jpg",
+          "original": "200 g of butter",
+          "measure": {
+            "metric": {
+              "amount": 200,
+              "unitShort": "g",
+              "unitLong": "grams"
+            },
+            "us": {
+              "amount": 7.055,
+              "unitShort": "oz",
+              "unitLong": "ounces"
+            }
+          }
+        },
+        {
+          "id": 12350,
+          "name": "Vanilla extract",
+          "nameClean": "Vanilla extract",
+          "amount": 1,
+          "consistency": "LIQUID",
+          "unit": "tsp",
+          "image": "vanilla-extract.jpg",
+          "original": "1 tsp of Vanilla extract",
+          "measure": {
+            "metric": {
+              "amount": 1,
+              "unitShort": "tsp",
+              "unitLong": "teaspoon"
+            },
+            "us": {
+              "amount": 1,
+              "unitShort": "tsp",
+              "unitLong": "teaspoon"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "mainImage": "http://via.placeholder.com/640x360",
+  "extraImages": ["http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360"],
+  "video": "video_url_if_available",
+  "nutritionFacts": {
+    "calories": {
+      "amount": 250,
+      "unit": "kcal"
+    },
+    "fat": {
+      "amount": 10,
+      "unit": "g"
+    },
+    "carbs": {
+      "amount": 30,
+      "unit": "g"
+    },
+    "protein": {
+      "amount": 15,
+      "unit": "g"
+    }
+  },
+  "source": {
+    "name": "Pie galda!",
+    "url": "https://www.piegalda.lv/receptes/svetku-kuka-napoleons-jeb-karavadonis-ir-maigs/"
+  },
+  "tags": ["Tag1", "Tag2"],
+  "createdBy": {
+    "userId": "user_id",
+    "username": "username"
+  },
+  "createdAt": "2024-01-06T12:00:00Z",
+  "updatedAt": "2024-01-06T12:00:00Z",
+  "likes": 34,
+  "score": 90,
+  "comments": [
+    {
+      "userId": "user_id",
+      "comment": "Comment text",
+      "timestamp": "comment_timestamp"
+    }
+  ],
+  "reviews": [
+    {
+      "userId": "user_id",
+      "rating": 4.5,
+      "review": "Review text",
+      "timestamp": "review_timestamp"
+    }
+  ],
+  "similarRecipes": [
+    {
+      "id": "similar_recipe_id",
+      "title": "Similar Recipe Title"
+    }
+  ],
+  "allergens": ["Nuts", "Dairy", "Gluten"],
+  "storageInstructions": "Store in an airtight container in the refrigerator for up to 3 days.",
+  "presentationTips": "Garnish with fresh herbs before serving for added flavor and visual appeal.",
+  "variations": ["Vegan Version", "Low-Carb Option"],
+  "winePairing": ["Red Wine", "White Wine"],
+  "seasonalAvailability": "Best during winter season",
+  "sustainability": "Eco-friendly ingredients and packaging",
+  "isVegetarian": true,
+  "isVegan": false,
+  "isGlutenFree": true,
+  "isDairyFree": false,
+  "isNutFree": true,
+  "isLowSugar": false,
+  "isLowFat": true,
+  "isLowCarb": false,
+  "isSpicy": true,
+  "isSweet": false,
+  "isSour": true,
+  "isBitter": false,
+  "isSalty": true,
+  "isUmami": false,
+  "isHealthy": true,
+  "isPopular": true
+}
