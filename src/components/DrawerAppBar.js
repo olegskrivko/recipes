@@ -26,6 +26,7 @@ const navItems = {
   "/prices": "Prices",
   "/contact": "Contact",
   "/recipeinfo": "Recipe Info",
+  "/dashboard": "Dashboard",
 };
 
 function DrawerAppBar(props) {
@@ -86,30 +87,18 @@ function DrawerAppBar(props) {
       >
         <Container disableGutters>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
+            <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2, display: { sm: "none" } }}>
               <MenuIcon />
             </IconButton>
 
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            >
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}>
               Cooking App
             </Typography>
 
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               {Object.entries(navItems).map(([path, itemName]) => (
                 <Link key={path} to={path}>
-                  <Button sx={{ color: "#fff", fontWeight: "400" }}>
-                    {itemName}
-                  </Button>
+                  <Button sx={{ color: "#fff", fontWeight: "400" }}>{itemName}</Button>
                 </Link>
               ))}
 

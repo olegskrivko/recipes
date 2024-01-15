@@ -50,6 +50,106 @@ import HalfRating from "../components/HalfRating";
 import IconLabelTabs from "../components/IconLabelTabs";
 import ReviewComponent from "../components/ReviewComponent";
 import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell } from "@mui/material";
+import NutritionDonutChart from "../../src/components/NutritionDonutChart";
+
+// import Congratulations from "../components/Congratulations";
+
+import Confetti from "react-confetti";
+
+const RecipePreparationButton = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowConfetti(true);
+    setButtonDisabled(true);
+
+    // You can add additional logic or actions here
+
+    // Hide confetti after 2 seconds
+    setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000);
+  };
+
+  return (
+    // <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
+    //   <Typography variant="h5" style={{ marginRight: "20px" }}>
+    //     Have you successfully prepared this delicious recipe?
+    //   </Typography>
+
+    //   <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled}>
+    //     Yes
+    //   </Button>
+
+    //   <div style={{ position: "relative" }}>{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}</div>
+    // </div>
+
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
+      <Typography variant="h6" sx={{ textAlign: "center" }} gutterBottom>
+        Have you successfully prepared this delicious recipe?
+      </Typography>
+
+      <div style={{ marginTop: "10px" }}>
+        <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled}>
+          Yes
+        </Button>
+      </div>
+
+      <div style={{ position: "relative" }}>{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}</div>
+    </div>
+
+    // <div style={{ textAlign: "center", marginTop: "20px" }}>
+    //   <Typography variant="h5" gutterBottom>
+    //     Did you prepare this recipe?
+    //   </Typography>
+
+    //   <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled} style={{ marginTop: "10px" }}>
+    //     Yes
+    //   </Button>
+
+    //   <div style={{ position: "relative" }}>
+    //     {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}
+    //     {/* Your other components/content */}
+    //   </div>
+    // </div>
+    // <div style={{ textAlign: "center", marginTop: "20px" }}>
+    //   <Typography variant="h5" gutterBottom>
+    //     Did you prepare this recipe?
+    //   </Typography>
+
+    //   <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled} style={{ marginTop: "10px" }}>
+    //     Yes
+    //   </Button>
+
+    //   <div style={{ position: "relative" }}>
+    //     {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}
+
+    //   </div>
+    // </div>
+  );
+};
+
+// const Congratulations = () => {
+//   const [showMessage, setShowMessage] = useState(false);
+//   const [showConfetti, setShowConfetti] = useState(false);
+
+//   const handleFinish = () => {
+//     setShowMessage(true);
+//     setShowConfetti(true);
+//     setTimeout(() => {
+//       setShowConfetti(false);
+//     }, 5000); // Adjust the duration for confetti as needed
+//   };
+
+//   return (
+//     <div>
+//       <button onClick={handleFinish}>Finish</button>
+//       {showMessage && <h1>Congratulations! You've Finished!</h1>}
+//       {showConfetti && <Confetti />}
+//     </div>
+//   );
+// };
 
 function CircularIndeterminate() {
   return (
@@ -61,6 +161,12 @@ function CircularIndeterminate() {
 
 const RecipeInfo = () => {
   const [recipe, setRecipe] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const handleRecipePrepared = () => {
+    // You can perform any other actions here, e.g., send analytics data, etc.
+    setShowConfetti(true);
+  };
 
   useEffect(() => {
     // Simulate fetching data from API
@@ -144,30 +250,30 @@ const RecipeInfo = () => {
   //   // Add more fake data as needed...
   // ];
 
-  const recipeInstructions = [
-    {
-      name: "Dough",
-      steps: [
-        { step: 1, description: "Prepare the puff pastry layers..." },
-        { step: 2, description: "Prepare the cream by mixing custard..." },
-        { step: 3, description: "Assemble the cake by layering pastry and cream..." },
-        { step: 4, description: "Allow the cake to set in the refrigerator..." },
-        { step: 5, description: "Slice and serve the Napoleon cake..." },
-        // Add other steps as needed...
-      ],
-    },
-    {
-      name: "Cream",
-      steps: [
-        { step: 1, description: "Prepare the custard by heating milk..." },
-        { step: 2, description: "Prepare the buttercream by mixing butter..." },
-        { step: 3, description: "Combine custard and buttercream..." },
-        { step: 4, description: "Mix until smooth and creamy..." },
-        // Add other steps as needed...
-      ],
-    },
-    // Add other instruction sections as needed...
-  ];
+  // const recipeInstructions = [
+  //   {
+  //     name: "Dough",
+  //     steps: [
+  //       { step: 1, description: "Prepare the puff pastry layers..." },
+  //       { step: 2, description: "Prepare the cream by mixing custard..." },
+  //       { step: 3, description: "Assemble the cake by layering pastry and cream..." },
+  //       { step: 4, description: "Allow the cake to set in the refrigerator..." },
+  //       { step: 5, description: "Slice and serve the Napoleon cake..." },
+  //       // Add other steps as needed...
+  //     ],
+  //   },
+  //   {
+  //     name: "Cream",
+  //     steps: [
+  //       { step: 1, description: "Prepare the custard by heating milk..." },
+  //       { step: 2, description: "Prepare the buttercream by mixing butter..." },
+  //       { step: 3, description: "Combine custard and buttercream..." },
+  //       { step: 4, description: "Mix until smooth and creamy..." },
+  //       // Add other steps as needed...
+  //     ],
+  //   },
+  //   // Add other instruction sections as needed...
+  // ];
 
   //   const numberOfSections = recipeInstructions.length;
   //   console.log(numberOfSections); // This will log the number of sections in the recipeInstructions array
@@ -675,22 +781,47 @@ const RecipeInfo = () => {
   }
   function MultipleSteppers({ section }) {
     const [activeStep, setActiveStep] = React.useState(0);
+    const [showReset, setShowReset] = React.useState(false);
+    const [showConfetti, setShowConfetti] = useState(false);
+    console.log(activeStep);
 
     const handleNext = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      console.log(section.steps.length);
+      if (activeStep + 1 === section.steps.length) {
+        console.log("its max");
+        setShowReset(true);
+        setShowConfetti(true);
+        setTimeout(() => {
+          setShowConfetti(false);
+        }, 5000); // Adjust the duration for confetti as needed
+      }
     };
+
+    // const handleFinish = () => {
+    //   setShowMessage(true);
+    //   setShowConfetti(true);
+    //   setTimeout(() => {
+    //     setShowConfetti(false);
+    //   }, 5000); // Adjust the duration for confetti as needed
+    // };
 
     const handleBack = () => {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    // const handleReset = () => {
+    //   setActiveStep(0);
+    // };
     const handleReset = () => {
       setActiveStep(0);
+      setShowReset(false);
     };
 
     const handleFinish = () => {
       // Perform finish action here
-      alert("Finished!");
+      // alert("Finished!");
+      setShowReset(true);
       console.log("finished");
     };
 
@@ -719,6 +850,14 @@ const RecipeInfo = () => {
 
     return (
       <div>
+        {/* {showConfetti && <Confetti />} */}
+        {/* {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />} */}
+        {/* {showConfetti && <Confetti width={window.innerWidth} className="confetti" height={window.innerHeight} />} */}
+        <div style={{ position: "relative" }}>
+          {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}
+          {/* Your other components/content */}
+        </div>
+
         <Box sx={{ maxWidth: 600 }}>
           <Typography variant="h6" gutterBottom>
             {section.name}
@@ -729,6 +868,7 @@ const RecipeInfo = () => {
                 {/* <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel> */}
                 <StepLabel StepIconComponent={CustomStepIcon}>{`${step.description}`}</StepLabel>
                 <StepContent>
+                  <img src={step.image} alt="" style={{ maxWidth: "100%", height: "auto" }} />
                   {/* <Typography>{step.description}</Typography> */}
                   <Box sx={{ mb: 2 }}>
                     <div>
@@ -737,15 +877,15 @@ const RecipeInfo = () => {
                           Next Step
                         </Button>
                       )} */}
-                      <Button variant="contained" size="small" onClick={activeStep === section.steps.length ? handleFinish : handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length}>
+                      {/* <Button variant="contained" size="small" onClick={activeStep === section.steps.length - 1 ? handleFinish : handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length}>
                         {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
-                      </Button>
+                      </Button> */}
 
-                      {/* {activeStep !== section.steps.length && (
+                      {activeStep !== section.steps.length && (
                         <Button variant="contained" size="small" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                          Next Step
+                          {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
                         </Button>
-                      )} */}
+                      )}
                       {/* <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
                         {activeStep === section.steps.length - 1 ? "Next Step" : "Next Step"}
                       </Button> */}
@@ -783,20 +923,41 @@ const RecipeInfo = () => {
                         Back
                       </Button>
                     </div>
+                    {/* <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                      <Button variant="contained" size="small" onClick={handleReset}>
+                        Reset
+                      </Button>
+                      <Button variant="contained" size="small" onClick={handleFinish} disabled={activeStep !== section.steps.length} style={{ marginLeft: "10px" }}>
+            Finish
+          </Button>
+                    </div> */}
                   </Box>
                 </StepContent>
               </Step>
             ))}
           </Stepper>
         </Box>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+        {showReset && (
+          <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+            <Button variant="contained" size="small" onClick={handleReset}>
+              Reset
+            </Button>
+          </div>
+        )}
+
+        {/* <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
           <Button variant="contained" size="small" onClick={handleReset}>
             Reset
           </Button>
           <Button variant="contained" size="small" onClick={handleFinish} disabled={activeStep !== section.steps.length} style={{ marginLeft: "10px" }}>
             Finish
           </Button>
-        </div>
+        </div> */}
+        {/* <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+          <Button variant="contained" size="small" onClick={handleFinish} disabled={activeStep !== section.steps.length} style={{ marginLeft: "10px" }}>
+            Finish
+          </Button>
+        </div> */}
       </div>
     );
   }
@@ -881,14 +1042,14 @@ const RecipeInfo = () => {
         {/* Title | Rating | Action Buttons | Author | Description */}
         <Grid item xs={12} sm={12} md={12} lg={12}>
           <>
-            {recipe && recipe.name && (
+            {recipe && recipe.title && (
               <Typography
                 variant="h4"
                 sx={{
                   fontWeight: "bold",
                 }}
               >
-                {recipe.name}
+                {recipe.title}
               </Typography>
             )}
             {recipe && recipe.likes && recipe.score && <HalfRating score={recipe.score} count={recipe.likes} />}
@@ -1222,7 +1383,7 @@ const RecipeInfo = () => {
       {/* Horizontal Tabs - Ingredients | Equipment | Price | Notes */}
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={12} lg={12}>
-          <IconLabelTabs />
+          <IconLabelTabs recipe={recipe} />
         </Grid>
       </Grid>
       {/* Instructions */}
@@ -1234,7 +1395,22 @@ const RecipeInfo = () => {
           {/* <MultipleSteppers /> */}
         </Grid>
       </Grid>
-      {/* Nutrition Facts */}
+      <Grid container spacing={3}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          sx={{
+            margin: "20px 0",
+          }}
+        >
+          <RecipePreparationButton />
+        </Grid>
+      </Grid>
+
+      {/* Similar Recipes */}
       <Grid container spacing={3}>
         <Grid
           item
@@ -1245,31 +1421,7 @@ const RecipeInfo = () => {
           sx={{
             margin: "20px 0",
           }}
-        >
-          {/* <TableContainer component={Paper}>
-            <Table aria-label="nutrition data table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Amount</TableCell>
-                  <TableCell>Percent of Daily Needs</TableCell>
-                  <TableCell>Unit</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {nutritionData &&
-                  nutritionData.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell>{item.amount}</TableCell>
-                      <TableCell>{item.percentOfDailyNeeds}</TableCell>
-                      <TableCell>{item.unit}</TableCell>
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          </TableContainer> */}
-        </Grid>
+        ></Grid>
         <Grid
           item
           xs={12}
@@ -1279,34 +1431,7 @@ const RecipeInfo = () => {
           sx={{
             margin: "20px 0",
           }}
-        >
-          chart
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          lg={6}
-          sx={{
-            margin: "20px 0",
-          }}
-        >
-          <Card
-            sx={
-              {
-                // borderRadius: "2rem",
-                // background: "#F3F1EF",
-              }
-            }
-            // sx={{
-            //   background: "none",
-            //   boxShadow: "none",
-            // }}
-          >
-            {/* <BasicAccordion nutritionData={extendedNutritionData} /> */}
-          </Card>
-        </Grid>
+        ></Grid>
       </Grid>
       {/* Reviews */}
       <Grid container spacing={3}>
@@ -1339,6 +1464,7 @@ const RecipeInfo = () => {
           You may also like
         </Grid>
       </Grid>
+      <Grid>{/* <RecipePreparationButton /> */}</Grid>
     </React.Fragment>
   );
 };

@@ -1,12 +1,23 @@
 {
   "id": "819190",
-  "name": "Napoleon Cake",
+  "title": "Napoleon Cake",
   "description": "The Napoleon Cake, also known as mille-feuille or custard slice, is a classic dessert made of multiple layers of thin puff pastry alternating with pastry cream. This confection is often topped with icing or powdered sugar and is recognized for its delicate, flaky layers and rich, creamy filling. The Napoleon Cake is a popular dessert in various cultures and is enjoyed for its combination of textures and flavors, blending crisp pastry with smooth, luscious cream.",
   "pricePerServing": {
     "amount": 3.5,
     "currency": "EUR"
   },
-  "instruments": ["Mixing Bowls", "Rolling Pin", "Parchment Paper", "Measuring Cups and Spoons", "Spatula", "Baking Trays", "Sharp Knife", "Refrigerator", "Pastry Brush", "Whisk or Hand Mixer"],
+  "instruments": [
+    { "id": 1, "name": "Mixing Bowls", "image": "mixing_bowls.jpg" },
+    { "id": 2, "name": "Rolling Pin", "image": "rolling_pin.jpg" },
+    { "id": 3, "name": "Parchment Paper", "image": "parchment_paper.jpg" },
+    { "id": 4, "name": "Measuring Cups and Spoons", "image": "measuring_cups_spoons.jpg" },
+    { "id": 5, "name": "Spatula", "image": "spatula.jpg" },
+    { "id": 6, "name": "Baking Trays", "image": "baking_trays.jpg" },
+    { "id": 7, "name": "Sharp Knife", "image": "sharp_knife.jpg" },
+    { "id": 8, "name": "Refrigerator", "image": "refrigerator.jpg" },
+    { "id": 9, "name": "Pastry Brush", "image": "pastry_brush.jpg" },
+    { "id": 10, "name": "Whisk or Hand Mixer", "image": "whisk_hand_mixer.jpg" }
+  ],
   "servings": 4,
   "cookingTime": {
     "preparation": {
@@ -39,47 +50,54 @@
 
   "instructions": [
     {
-      "name": "Dough",
+      "name": "Puff Pastry Layers",
       "steps": [
         {
+          "step": 0,
+          "description": "Prepare the puff pastry layers by rolling them out and baking until golden brown.",
+          "image": "http://via.placeholder.com/640x360"
+        },
+        {
           "step": 1,
-          "description": "Prepare the puff pastry layers by rolling them out and baking until golden brown."
+          "description": "Prepare the cream by mixing custard and buttercream until smooth.",
+          "image": "http://via.placeholder.com/640x360"
         },
         {
           "step": 2,
-          "description": "Prepare the cream by mixing custard and buttercream until smooth."
-        },
-        {
-          "step": 3,
-          "description": "Assemble the cake by layering the puff pastry with the cream, alternating between the two."
-        },
-        {
-          "step": 4,
-          "description": "Allow the cake to set in the refrigerator for a few hours or overnight."
-        },
-        {
-          "step": 5,
-          "description": "Slice and serve the Napoleon cake."
+          "description": "Assemble the cake by layering the puff pastry with the cream, alternating between the two.",
+          "image": "http://via.placeholder.com/640x360"
         }
       ]
     },
     {
-      "name": "Cream",
+      "name": "Pastry Cream",
       "steps": [
         {
           "step": 1,
-          "description": "Prepare the custard by heating milk, sugar, and eggs until thickened."
+          "description": "Prepare the custard by heating milk, sugar, and eggs until thickened.",
+          "image": "http://via.placeholder.com/640x360"
         },
         {
           "step": 2,
-          "description": "Prepare the buttercream by mixing butter and sugar until creamy."
+          "description": "Prepare the buttercream by mixing butter and sugar until creamy.",
+          "image": "http://via.placeholder.com/640x360"
+        },
+        {
+          "step": 3,
+          "description": "Allow the cake to set in the refrigerator for a few hours or overnight.",
+          "image": "http://via.placeholder.com/640x360"
+        },
+        {
+          "step": 4,
+          "description": "Slice and serve the Napoleon cake.",
+          "image": "http://via.placeholder.com/640x360"
         }
       ]
     }
   ],
   "ingredients": [
     {
-      "section": "puff pastry layers",
+      "section": "Puff pastry layers",
       "items": [
         {
           "id": 12334,
@@ -194,7 +212,7 @@
       ]
     },
     {
-      "section": "pastry cream",
+      "section": "Pastry cream",
       "items": [
         {
           "id": 12346,
@@ -334,6 +352,16 @@
   "mainImage": "http://via.placeholder.com/640x360",
   "extraImages": ["http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360", "http://via.placeholder.com/640x360"],
   "video": "video_url_if_available",
+  "nutritionData": [
+    { "id": 1, "name": "Calories", "amount": 300, "unit": "cal", "dailyNeedPercent": "15", "dailyUnit": "%" },
+    { "id": 2, "name": "Total Fat", "amount": 20, "unit": "g", "dailyNeedPercent": "31", "dailyUnit": "%" },
+    { "id": 3, "name": "Saturated Fat", "amount": 10, "unit": "g", "dailyNeedPercent": "50", "dailyUnit": "%" },
+    { "id": 4, "name": "Sodium", "amount": 150, "unit": "mg", "dailyNeedPercent": "6", "dailyUnit": "%" },
+    { "id": 5, "name": "Total Carbohydrates", "amount": 25, "unit": "g", "dailyNeedPercent": "8", "dailyUnit": "%" },
+    { "id": 6, "name": "Dietary Fiber", "amount": 3, "unit": "g", "dailyNeedPercent": "12", "dailyUnit": "%" },
+    { "id": 7, "name": "Sugars", "amount": 15, "unit": "g", "dailyNeedPercent": "1", "dailyUnit": "%" },
+    { "id": 8, "name": "Proteins", "amount": 4.5, "unit": "g", "dailyNeedPercent": "9", "dailyUnit": "%" }
+  ],
   "nutritionFacts": {
     "calories": {
       "amount": 250,
