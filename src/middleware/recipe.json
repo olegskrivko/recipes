@@ -384,13 +384,15 @@
     "name": "Pie galda!",
     "url": "https://www.piegalda.lv/receptes/svetku-kuka-napoleons-jeb-karavadonis-ir-maigs/"
   },
-  "tags": ["Tag1", "Tag2"],
+
   "createdBy": {
     "userId": "user_id",
     "username": "username"
   },
   "createdAt": "2024-01-06T12:00:00Z",
   "updatedAt": "2024-01-06T12:00:00Z",
+
+  "tags": ["Tag1", "Tag2"],
   "likes": 34,
   "score": 90,
   "comments": [
@@ -421,6 +423,7 @@
   "winePairing": ["Red Wine", "White Wine"],
   "seasonalAvailability": "Best during winter season",
   "sustainability": "Eco-friendly ingredients and packaging",
+
   "isVegetarian": true,
   "isVegan": false,
   "isGlutenFree": true,
@@ -435,6 +438,8 @@
   "isBitter": false,
   "isSalty": true,
   "isUmami": false,
+
   "isHealthy": true,
-  "isPopular": true
+  "isPopular": true,
+  "isPublished": true
 }

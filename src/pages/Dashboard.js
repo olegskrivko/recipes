@@ -52,17 +52,27 @@
 // export default Dashboard;
 import React, { useState } from "react";
 import { Grid, CssBaseline, AppBar, Toolbar, Typography, Container, List, ListItem, ListItemIcon, ListItemText, IconButton } from "@mui/material";
-import DishTypeForm from "../components/dashboard/DishTypeForm";
-import DishTypeList from "../components/dashboard/DishTypeList";
+import MealForm from "../components/dashboard/MealForm";
+import MealList from "../components/dashboard/MealList";
+
+import CuisineForm from "../components/dashboard/CuisineForm";
+import CuisineList from "../components/dashboard/CuisineList";
+
+import OccasionForm from "../components/dashboard/OccasionForm";
+import OccasionList from "../components/dashboard/OccasionList";
+
 import RecipeForm from "../components/dashboard/RecipeForm";
+
+// MUI Icons
 import MenuIcon from "@mui/icons-material/Menu";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import CategoryIcon from "@mui/icons-material/Category";
 import PersonIcon from "@mui/icons-material/Person";
+import PublicIcon from "@mui/icons-material/Public";
+import CakeIcon from "@mui/icons-material/Cake";
+import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const Dashboard = () => {
-  const [selectedPage, setSelectedPage] = useState("dishTypes");
+  const [selectedPage, setSelectedPage] = useState("recipes");
 
   const handlePageChange = (page) => {
     setSelectedPage(page);
@@ -71,8 +81,8 @@ const Dashboard = () => {
   return (
     <Grid container spacing={2}>
       <CssBaseline />
-      <Grid item xs={12}>
-        {/* <AppBar position="fixed"> */}
+      {/* <Grid item xs={12}>
+        <AppBar position="fixed">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
@@ -81,29 +91,35 @@ const Dashboard = () => {
             Dashboard
           </Typography>
         </Toolbar>
-        {/* </AppBar> */}
-      </Grid>
+        </AppBar>
+      </Grid> */}
       <Grid item xs={4}>
         <Container>
           {/* Sidebar with Icons */}
           <List>
-            <ListItem button selected={selectedPage === "dishTypes"} onClick={() => handlePageChange("dishTypes")}>
-              <ListItemIcon>
-                <FastfoodIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dish Types" />
-            </ListItem>
             <ListItem button selected={selectedPage === "recipes"} onClick={() => handlePageChange("recipes")}>
               <ListItemIcon>
-                <ReceiptIcon />
+                <MenuBookIcon />
               </ListItemIcon>
               <ListItemText primary="Recipes" />
             </ListItem>
-            <ListItem button selected={selectedPage === "categories"} onClick={() => handlePageChange("categories")}>
+            <ListItem button selected={selectedPage === "meals"} onClick={() => handlePageChange("meals")}>
               <ListItemIcon>
-                <CategoryIcon />
+                <BrunchDiningIcon />
               </ListItemIcon>
-              <ListItemText primary="Categories" />
+              <ListItemText primary="Meals" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "cuisines"} onClick={() => handlePageChange("cuisines")}>
+              <ListItemIcon>
+                <PublicIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cuisines" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "occasions"} onClick={() => handlePageChange("occasions")}>
+              <ListItemIcon>
+                <CakeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Occasions" />
             </ListItem>
             <ListItem button selected={selectedPage === "userProfile"} onClick={() => handlePageChange("userProfile")}>
               <ListItemIcon>
@@ -118,13 +134,6 @@ const Dashboard = () => {
       <Grid item xs={8}>
         <Container>
           {/* Main Content */}
-          {selectedPage === "dishTypes" && (
-            <section>
-              <h2>Dish Types</h2>
-              <DishTypeForm />
-              <DishTypeList />
-            </section>
-          )}
           {selectedPage === "recipes" && (
             <section>
               <h2>Recipes</h2>
@@ -132,12 +141,30 @@ const Dashboard = () => {
               {/* Add components for managing recipes */}
             </section>
           )}
-          {selectedPage === "categories" && (
+          {selectedPage === "meals" && (
             <section>
-              <h2>Categories</h2>
-              {/* Add components for managing categories */}
+              <h2>Meals</h2>
+              <MealForm />
+              <MealList />
             </section>
           )}
+          {selectedPage === "cuisines" && (
+            <section>
+              <h2>Cuisines</h2>
+              <CuisineForm />
+              <CuisineList />
+              {/* Add components for managing cuisines */}
+            </section>
+          )}
+          {selectedPage === "occasions" && (
+            <section>
+              <h2>Occasions</h2>
+              <OccasionForm />
+              <OccasionList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
           {selectedPage === "userProfile" && (
             <section>
               <h2>User Profile</h2>
