@@ -247,7 +247,7 @@ const RecipeForm = () => {
           {difficultyError && <FormHelperText>{difficultyError}</FormHelperText>}
         </FormControl>
         <FormControl fullWidth variant="outlined" margin="normal" error={Boolean(mealError)}>
-          <InputLabel htmlFor="meal-select">Dish Type</InputLabel>
+          <InputLabel htmlFor="meal-select">Meal</InputLabel>
           <Select
             multiple
             value={selectedMeals} // This should always be an array
