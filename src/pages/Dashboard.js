@@ -61,6 +61,18 @@ import CuisineList from "../components/dashboard/CuisineList";
 import OccasionForm from "../components/dashboard/OccasionForm";
 import OccasionList from "../components/dashboard/OccasionList";
 
+import ToolForm from "../components/dashboard/ToolForm";
+import ToolList from "../components/dashboard/ToolList";
+
+import AllergenForm from "../components/dashboard/AllergenForm";
+import AllergenList from "../components/dashboard/AllergenList";
+
+import CookingMethodForm from "../components/dashboard/CookingMethodForm";
+import CookingMethodList from "../components/dashboard/CookingMethodList";
+
+import DietForm from "../components/dashboard/DietForm";
+import DietList from "../components/dashboard/DietList";
+
 import RecipeForm from "../components/dashboard/RecipeForm";
 
 // MUI Icons
@@ -70,6 +82,10 @@ import PublicIcon from "@mui/icons-material/Public";
 import CakeIcon from "@mui/icons-material/Cake";
 import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import BlenderIcon from "@mui/icons-material/Blender";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
+import NoMealsIcon from "@mui/icons-material/NoMeals";
 
 const Dashboard = () => {
   const [selectedPage, setSelectedPage] = useState("recipes");
@@ -121,6 +137,30 @@ const Dashboard = () => {
               </ListItemIcon>
               <ListItemText primary="Occasions" />
             </ListItem>
+            <ListItem button selected={selectedPage === "tools"} onClick={() => handlePageChange("tools")}>
+              <ListItemIcon>
+                <BlenderIcon />
+              </ListItemIcon>
+              <ListItemText primary="Tools" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "allergens"} onClick={() => handlePageChange("allergens")}>
+              <ListItemIcon>
+                <ReportProblemIcon />
+              </ListItemIcon>
+              <ListItemText primary="Allergens" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "cookingMethods"} onClick={() => handlePageChange("cookingMethods")}>
+              <ListItemIcon>
+                <OutdoorGrillIcon />
+              </ListItemIcon>
+              <ListItemText primary="Cooking Methods" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "diets"} onClick={() => handlePageChange("diets")}>
+              <ListItemIcon>
+                <NoMealsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Diets" />
+            </ListItem>
             <ListItem button selected={selectedPage === "userProfile"} onClick={() => handlePageChange("userProfile")}>
               <ListItemIcon>
                 <PersonIcon />
@@ -161,6 +201,41 @@ const Dashboard = () => {
               <h2>Occasions</h2>
               <OccasionForm />
               <OccasionList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
+          {selectedPage === "tools" && (
+            <section>
+              <h2>Tools</h2>
+              <ToolForm />
+              <ToolList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
+          {selectedPage === "allergens" && (
+            <section>
+              <h2>Allergens</h2>
+              <AllergenForm />
+              <AllergenList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
+          {selectedPage === "cookingMethods" && (
+            <section>
+              <h2>Cooking Methods</h2>
+              <CookingMethodForm />
+              <CookingMethodList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+          {selectedPage === "diets" && (
+            <section>
+              <h2>Diets</h2>
+              <DietForm />
+              <DietList />
               {/* Add components for managing occasions */}
             </section>
           )}
