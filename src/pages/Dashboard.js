@@ -51,7 +51,7 @@
 
 // export default Dashboard;
 import React, { useState } from "react";
-import { Grid, CssBaseline, AppBar, Toolbar, Typography, Container, List, ListItem, ListItemIcon, ListItemText, IconButton } from "@mui/material";
+import { Grid, CssBaseline, AppBar, Toolbar, Typography, Container, List, ListItem, ListItemIcon, ListItemText, IconButton, Divider } from "@mui/material";
 import MealForm from "../components/dashboard/MealForm";
 import MealList from "../components/dashboard/MealList";
 
@@ -73,10 +73,21 @@ import CookingMethodList from "../components/dashboard/CookingMethodList";
 import DietForm from "../components/dashboard/DietForm";
 import DietList from "../components/dashboard/DietList";
 
+import IngredientForm from "../components/dashboard/IngredientForm";
+import IngredientList from "../components/dashboard/IngredientList";
+
+import UnitForm from "../components/dashboard/UnitForm";
+import UnitList from "../components/dashboard/UnitList";
+
+import IngredientCategoryForm from "../components/dashboard/IngredientCategoryForm";
+import IngredientCategoryList from "../components/dashboard/IngredientCategoryList";
+
+import TimeForm from "../components/dashboard/TimeForm";
+import TimeList from "../components/dashboard/TimeList";
+
 import RecipeForm from "../components/dashboard/RecipeForm";
 
 // MUI Icons
-import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import PublicIcon from "@mui/icons-material/Public";
 import CakeIcon from "@mui/icons-material/Cake";
@@ -86,6 +97,10 @@ import BlenderIcon from "@mui/icons-material/Blender";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import OutdoorGrillIcon from "@mui/icons-material/OutdoorGrill";
 import NoMealsIcon from "@mui/icons-material/NoMeals";
+import KitchenIcon from "@mui/icons-material/Kitchen";
+import ScaleIcon from "@mui/icons-material/Scale";
+import SchemaIcon from "@mui/icons-material/Schema";
+import AccessTimeSharpIcon from "@mui/icons-material/AccessTimeSharp";
 
 const Dashboard = () => {
   const [selectedPage, setSelectedPage] = useState("recipes");
@@ -119,6 +134,7 @@ const Dashboard = () => {
               </ListItemIcon>
               <ListItemText primary="Recipes" />
             </ListItem>
+            <Divider component="li" />
             <ListItem button selected={selectedPage === "meals"} onClick={() => handlePageChange("meals")}>
               <ListItemIcon>
                 <BrunchDiningIcon />
@@ -161,6 +177,32 @@ const Dashboard = () => {
               </ListItemIcon>
               <ListItemText primary="Diets" />
             </ListItem>
+            <ListItem button selected={selectedPage === "ingredients"} onClick={() => handlePageChange("ingredients")}>
+              <ListItemIcon>
+                <KitchenIcon />
+              </ListItemIcon>
+              <ListItemText primary="Ingredients" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "units"} onClick={() => handlePageChange("units")}>
+              <ListItemIcon>
+                <ScaleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Units" />
+            </ListItem>
+            <ListItem button selected={selectedPage === "ingredientCategories"} onClick={() => handlePageChange("ingredientCategories")}>
+              <ListItemIcon>
+                <SchemaIcon />
+              </ListItemIcon>
+              <ListItemText primary="Ingredient Categories" />
+            </ListItem>
+
+            <ListItem button selected={selectedPage === "times"} onClick={() => handlePageChange("times")}>
+              <ListItemIcon>
+                <AccessTimeSharpIcon />
+              </ListItemIcon>
+              <ListItemText primary="Times" />
+            </ListItem>
+
             <ListItem button selected={selectedPage === "userProfile"} onClick={() => handlePageChange("userProfile")}>
               <ListItemIcon>
                 <PersonIcon />
@@ -236,6 +278,41 @@ const Dashboard = () => {
               <h2>Diets</h2>
               <DietForm />
               <DietList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+          {selectedPage === "ingredients" && (
+            <section>
+              <h2>Ingredients</h2>
+              <IngredientForm />
+              <IngredientList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
+          {selectedPage === "units" && (
+            <section>
+              <h2>Units</h2>
+              <UnitForm />
+              <UnitList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
+          {selectedPage === "ingredientCategories" && (
+            <section>
+              <h2>Ingredient Categories</h2>
+              <IngredientCategoryForm />
+              <IngredientCategoryList />
+              {/* Add components for managing occasions */}
+            </section>
+          )}
+
+          {selectedPage === "times" && (
+            <section>
+              <h2>Times</h2>
+              <TimeForm />
+              <TimeList />
               {/* Add components for managing occasions */}
             </section>
           )}

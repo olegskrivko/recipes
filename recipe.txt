@@ -274,3 +274,99 @@
       });
     });
   });
+
+
+
+
+
+  Certainly! Here are the translated properties to Russian:
+
+json
+
+"cookingTime": {
+  "preparation": {
+    "time": 20,
+    "unit": "мин"
+  },
+  "cooking": {
+    "time": 40,
+    "unit": "мин"
+  },
+  "total": {
+    "time": 1,
+    "unit": "ч"
+  },
+  "marinating": {
+    "time": 30,
+    "unit": "мин"
+  },
+  "resting": {
+    "time": 15,
+    "unit": "мин"
+  },
+  "baking": {
+    "time": 45,
+    "unit": "мин"
+  },
+  "chilling": {
+    "time": 2,
+    "unit": "ч"
+  },
+  "grilling": {
+    "time": 30,
+    "unit": "мин"
+  },
+  "roasting": {
+    "time": 1,
+    "unit": "ч"
+  },
+  "simmering": {
+    "time": 20,
+    "unit": "мин"
+  },
+  "steaming": {
+    "time": 15,
+    "unit": "мин"
+  },
+  "fermenting": {
+    "time": 4,
+    "unit": "ч"
+  }
+}
+
+Translated properties:
+
+    "preparation" to "приготовление"
+    "cooking" to "готовка"
+    "total" to "всего"
+    "marinating" to "маринование"
+    "resting" to "отдых"
+    "baking" to "выпекание"
+    "chilling" to "охлаждение"
+    "grilling" to "жарка"
+    "roasting" to "жарка в духовке"
+    "simmering" to "тушение"
+    "steaming" to "парение"
+    "fermenting" to "брожение"
+
+User
+and how about frying?
+ChatGPT
+
+"Frying" can be translated to Russian as "жарка" or "жарение." You can choose either term based on your preference or context:
+
+json
+
+"frying": {
+  "time": 15,
+  "unit": "мин"
+}
+
+Translated to Russian:
+
+json
+
+"жарка": {
+  "time": 15,
+  "unit": "мин"
+}

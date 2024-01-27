@@ -22,6 +22,13 @@ import StepContent from "@mui/material/StepContent";
 
 import Paper from "@mui/material/Paper";
 
+import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell } from "@mui/material";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DonutSmallIcon from "@mui/icons-material/DonutSmall";
+
+// import NutritionDonutChart from "./NutritionDonutChart";
+
 // icons
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PrintIcon from "@mui/icons-material/Print";
@@ -49,8 +56,8 @@ import StepIcon from "@mui/material/StepIcon";
 import HalfRating from "../components/HalfRating";
 import IconLabelTabs from "../components/IconLabelTabs";
 import ReviewComponent from "../components/ReviewComponent";
-import { Table, TableContainer, TableHead, TableBody, TableRow, TableCell } from "@mui/material";
-import NutritionDonutChart from "../../src/components/NutritionDonutChart";
+
+// import NutritionDonutChart from "../../src/components/NutritionDonutChart";
 
 // import Congratulations from "../components/Congratulations";
 
@@ -63,28 +70,12 @@ const RecipePreparationButton = () => {
   const handleButtonClick = () => {
     setShowConfetti(true);
     setButtonDisabled(true);
-
-    // You can add additional logic or actions here
-
-    // Hide confetti after 2 seconds
     setTimeout(() => {
       setShowConfetti(false);
     }, 5000);
   };
 
   return (
-    // <div style={{ display: "flex", alignItems: "center", marginTop: "20px" }}>
-    //   <Typography variant="h5" style={{ marginRight: "20px" }}>
-    //     Have you successfully prepared this delicious recipe?
-    //   </Typography>
-
-    //   <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled}>
-    //     Yes
-    //   </Button>
-
-    //   <div style={{ position: "relative" }}>{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}</div>
-    // </div>
-
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
       <Typography variant="h6" sx={{ textAlign: "center" }} gutterBottom>
         Have you successfully prepared this delicious recipe?
@@ -98,35 +89,6 @@ const RecipePreparationButton = () => {
 
       <div style={{ position: "relative" }}>{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}</div>
     </div>
-
-    // <div style={{ textAlign: "center", marginTop: "20px" }}>
-    //   <Typography variant="h5" gutterBottom>
-    //     Did you prepare this recipe?
-    //   </Typography>
-
-    //   <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled} style={{ marginTop: "10px" }}>
-    //     Yes
-    //   </Button>
-
-    //   <div style={{ position: "relative" }}>
-    //     {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}
-    //     {/* Your other components/content */}
-    //   </div>
-    // </div>
-    // <div style={{ textAlign: "center", marginTop: "20px" }}>
-    //   <Typography variant="h5" gutterBottom>
-    //     Did you prepare this recipe?
-    //   </Typography>
-
-    //   <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={buttonDisabled} style={{ marginTop: "10px" }}>
-    //     Yes
-    //   </Button>
-
-    //   <div style={{ position: "relative" }}>
-    //     {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}
-
-    //   </div>
-    // </div>
   );
 };
 
@@ -182,594 +144,6 @@ const RecipeInfo = () => {
     return date.toLocaleDateString("en-US", options);
   };
 
-  // Instructions
-  //   function VerticalLinearStepper({ recipe }) {
-  //     const steps = recipe.instructions || [];
-
-  //     const [activeStep, setActiveStep] = React.useState(0);
-
-  //     const handleNext = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     };
-
-  //     const handleBack = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <Box sx={{ maxWidth: "100%" }}>
-  //         {steps.map((instruction, index) => (
-  //           <div key={index}>
-  //             <Typography variant="h6" sx={{ marginBottom: "1rem" }}>
-  //               {instruction.name}
-  //             </Typography>
-  //             <Stepper activeStep={activeStep} orientation="vertical">
-  //               {instruction.steps.map((step, stepIndex) => (
-  //                 <Step key={stepIndex}>
-  //                   <StepLabel sx={{ textAlign: "justify" }}>{step.step}</StepLabel>
-  //                   <StepContent>
-  //                     <Box sx={{ mb: 2 }}>
-  //                       <Typography>{step.description}</Typography>
-  //                       <div>
-  //                         <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === instruction.steps.length - 1}>
-  //                           {activeStep === instruction.steps.length - 1 ? "Finish" : "Continue"}
-  //                         </Button>
-  //                         <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                           Back
-  //                         </Button>
-  //                       </div>
-  //                     </Box>
-  //                   </StepContent>
-  //                 </Step>
-  //               ))}
-  //             </Stepper>
-  //           </div>
-  //         ))}
-  //         {activeStep === steps.length && (
-  //           <Paper square elevation={0} sx={{ p: 3 }}>
-  //             <Typography>All steps completed - you're finished</Typography>
-  //             <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-  //               Reset
-  //             </Button>
-  //           </Paper>
-  //         )}
-  //       </Box>
-  //     );
-  //   }
-
-  // Your recipe instructions from the JSON file
-  // const nutritionData = [
-  //   { id: 1, name: "Protein", amount: "25g", percentOfDailyNeeds: "50%", unit: "grams" },
-  //   { id: 2, name: "Fat", amount: "15g", percentOfDailyNeeds: "30%", unit: "grams" },
-  //   { id: 3, name: "Carbohydrates", amount: "60g", percentOfDailyNeeds: "20%", unit: "grams" },
-  //   { id: 4, name: "Fiber", amount: "10g", percentOfDailyNeeds: "40%", unit: "grams" },
-  //   // Add more fake data as needed...
-  // ];
-
-  // const recipeInstructions = [
-  //   {
-  //     name: "Dough",
-  //     steps: [
-  //       { step: 1, description: "Prepare the puff pastry layers..." },
-  //       { step: 2, description: "Prepare the cream by mixing custard..." },
-  //       { step: 3, description: "Assemble the cake by layering pastry and cream..." },
-  //       { step: 4, description: "Allow the cake to set in the refrigerator..." },
-  //       { step: 5, description: "Slice and serve the Napoleon cake..." },
-  //       // Add other steps as needed...
-  //     ],
-  //   },
-  //   {
-  //     name: "Cream",
-  //     steps: [
-  //       { step: 1, description: "Prepare the custard by heating milk..." },
-  //       { step: 2, description: "Prepare the buttercream by mixing butter..." },
-  //       { step: 3, description: "Combine custard and buttercream..." },
-  //       { step: 4, description: "Mix until smooth and creamy..." },
-  //       // Add other steps as needed...
-  //     ],
-  //   },
-  //   // Add other instruction sections as needed...
-  // ];
-
-  //   const numberOfSections = recipeInstructions.length;
-  //   console.log(numberOfSections); // This will log the number of sections in the recipeInstructions array
-
-  //   function VerticalLinearStepper() {
-  //     const [activeStep, setActiveStep] = React.useState(0);
-  //     const steps = recipeInstructions.flatMap((section) => section.steps);
-
-  //     const handleNext = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     };
-
-  //     const handleBack = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <Box sx={{ maxWidth: 400 }}>
-  //         <Stepper activeStep={activeStep} orientation="vertical">
-  //           {steps.map((step, index) => (
-  //             <Step key={step.step}>
-  //               <StepLabel>{`Step ${step.description}`}</StepLabel>
-  //               <StepContent>
-  //                 {/* <Typography>{step.description}</Typography> */}
-  //                 <Box sx={{ mb: 2 }}>
-  //                   <div>
-  //                     <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === steps.length - 1}>
-  //                       {activeStep === steps.length - 1 ? "Finish" : "Continue"}
-  //                     </Button>
-  //                     <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                       Back
-  //                     </Button>
-  //                   </div>
-  //                 </Box>
-  //               </StepContent>
-  //             </Step>
-  //           ))}
-  //         </Stepper>
-  //         {activeStep === steps.length && (
-  //           <Paper square elevation={0} sx={{ p: 3 }}>
-  //             <Typography>All steps completed - you&apos;re finished</Typography>
-  //             <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-  //               Reset
-  //             </Button>
-  //           </Paper>
-  //         )}
-  //       </Box>
-  //     );
-  //   }
-  //   function VerticalLinearStepper() {
-  //     const [activeStep, setActiveStep] = React.useState(0);
-  //     const steps = recipeInstructions.flatMap((section) => section.steps);
-
-  //     const handleNext = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     };
-
-  //     const handleBack = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <Box sx={{ maxWidth: 400 }}>
-  //         <Stepper activeStep={activeStep} orientation="vertical">
-  //           {steps.map((step, index) => (
-  //             <Step key={step.step}>
-  //               {index === 0 || steps[index - 1].step === 1 || recipeInstructions.findIndex((section) => section.steps.includes(step)) !== recipeInstructions.findIndex((section) => section.steps.includes(steps[index - 1])) ? <StepLabel>{recipeInstructions.find((section) => section.steps.includes(step)).name}</StepLabel> : null}
-  //               <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //               <StepContent>
-  //                 {/* <Typography>{step.description}</Typography> */}
-  //                 <Box sx={{ mb: 2 }}>
-  //                   <div>
-  //                     <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === steps.length - 1}>
-  //                       {activeStep === steps.length - 1 ? "Finish" : "Continue"}
-  //                     </Button>
-  //                     <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                       Back
-  //                     </Button>
-  //                   </div>
-  //                 </Box>
-  //               </StepContent>
-  //             </Step>
-  //           ))}
-  //         </Stepper>
-  //         {activeStep === steps.length && (
-  //           <Paper square elevation={0} sx={{ p: 3 }}>
-  //             <Typography>All steps completed - you&apos;re finished</Typography>
-  //             <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-  //               Reset
-  //             </Button>
-  //           </Paper>
-  //         )}
-  //       </Box>
-  //     );
-  //   }
-
-  //   function VerticalLinearStepper() {
-  //     const [activeStep, setActiveStep] = React.useState(0);
-  //     const steps = recipeInstructions.flatMap((section) => section.steps);
-
-  //     const handleNext = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     };
-
-  //     const handleBack = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <Box sx={{ maxWidth: 400 }}>
-  //         <Stepper activeStep={activeStep} orientation="vertical">
-  //           {steps.map((step, index) => (
-  //             <Step key={step.step}>
-  //               {index === 0 || recipeInstructions.findIndex((section) => section.steps.includes(step)) !== recipeInstructions.findIndex((section) => section.steps.includes(steps[index - 1])) ? <StepLabel>{recipeInstructions.find((section) => section.steps.includes(step)).name}</StepLabel> : null}
-  //               <StepLabel>{`${step.description}`}</StepLabel>
-  //               {/* <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel> */}
-
-  //               <StepContent>
-  //                 {/* <Typography>{step.description}</Typography> */}
-  //                 <Box sx={{ mb: 2 }}>
-  //                   <div>
-  //                     <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === steps.length - 1}>
-  //                       {activeStep === steps.length - 1 ? "Finish" : "Continue"}
-  //                     </Button>
-  //                     <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                       Back
-  //                     </Button>
-  //                   </div>
-  //                 </Box>
-  //               </StepContent>
-  //             </Step>
-  //           ))}
-  //         </Stepper>
-  //         {activeStep === steps.length && (
-  //           <Paper square elevation={0} sx={{ p: 3 }}>
-  //             <Typography>All steps completed - you&apos;re finished</Typography>
-  //             <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-  //               Reset
-  //             </Button>
-  //           </Paper>
-  //         )}
-  //       </Box>
-  //     );
-  //   }
-  //   function VerticalLinearStepper() {
-  //     const [activeStep, setActiveStep] = React.useState(0);
-  //     const steps = recipeInstructions.flatMap((section) => [{ isSection: true, name: section.name }, ...section.steps]);
-
-  //     const handleNext = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     };
-
-  //     const handleBack = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <Box sx={{ maxWidth: 400 }}>
-  //         <Stepper activeStep={activeStep} orientation="vertical">
-  //           {steps.map((step, index) => (
-  //             <Step key={index}>
-  //               {step.isSection ? (
-  //                 <StepLabel>
-  //                   <Typography variant="subtitle1">{step.name}</Typography>
-  //                 </StepLabel>
-  //               ) : (
-  //                 <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //               )}
-  //               <StepContent>
-  //                 {!step.isSection && <Typography>{step.description}</Typography>}
-  //                 <Box sx={{ mb: 2 }}>
-  //                   <div>
-  //                     <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === steps.length - 1}>
-  //                       {activeStep === steps.length - 1 ? "Finish" : "Continue"}
-  //                     </Button>
-  //                     <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                       Back
-  //                     </Button>
-  //                   </div>
-  //                 </Box>
-  //               </StepContent>
-  //             </Step>
-  //           ))}
-  //         </Stepper>
-  //         {activeStep === steps.length && (
-  //           <Paper square elevation={0} sx={{ p: 3 }}>
-  //             <Typography>All steps completed - you&apos;re finished</Typography>
-  //             <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-  //               Reset
-  //             </Button>
-  //           </Paper>
-  //         )}
-  //       </Box>
-  //     );
-  //   }
-  //   function MultipleSteppers() {
-  //     const [activeSection, setActiveSection] = React.useState(0);
-  //     const [activeStep, setActiveStep] = React.useState(0);
-
-  //     const handleNext = () => {
-  //       if (activeStep === recipeInstructions[activeSection].steps.length - 1) {
-  //         if (activeSection === recipeInstructions.length - 1) return; // Reached the last section's last step
-  //         setActiveSection((prevActiveSection) => prevActiveSection + 1);
-  //         setActiveStep(0);
-  //       } else {
-  //         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //       }
-  //     };
-
-  //     const handleBack = () => {
-  //       if (activeStep === 0) {
-  //         if (activeSection === 0) return; // At the first step of the first section
-  //         setActiveSection((prevActiveSection) => prevActiveSection - 1);
-  //         setActiveStep(recipeInstructions[activeSection - 1].steps.length - 1);
-  //       } else {
-  //         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //       }
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveSection(0);
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <div>
-  //         <Box sx={{ maxWidth: 400 }}>
-  //           <Typography variant="h5" gutterBottom>
-  //             {recipeInstructions[activeSection].name}
-  //           </Typography>
-  //           <Stepper activeStep={activeStep} orientation="vertical">
-  //             {recipeInstructions[activeSection].steps.map((step, stepIndex) => (
-  //               <Step key={stepIndex}>
-  //                 <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //                 <StepContent>
-  //                   <Typography>{step.description}</Typography>
-  //                 </StepContent>
-  //               </Step>
-  //             ))}
-  //           </Stepper>
-  //           <Box sx={{ mb: 2 }}>
-  //             <div>
-  //               <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === recipeInstructions[activeSection].steps.length - 1 && activeSection === recipeInstructions.length - 1}>
-  //                 {activeStep === recipeInstructions[activeSection].steps.length - 1 && activeSection === recipeInstructions.length - 1 ? "Finish" : "Next Step"}
-  //               </Button>
-  //               <Button disabled={activeStep === 0 && activeSection === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                 Back
-  //               </Button>
-  //             </div>
-  //           </Box>
-  //         </Box>
-  //         <div style={{ display: activeStep === recipeInstructions[activeSection].steps.length && activeSection === recipeInstructions.length ? "block" : "none" }}>
-  //           <Paper square elevation={0} sx={{ p: 3 }}>
-  //             <Typography>All steps completed - you&apos;re finished</Typography>
-  //             <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-  //               Reset
-  //             </Button>
-  //           </Paper>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  //   function MultipleSteppers() {
-  //     const [activeSection, setActiveSection] = React.useState(0);
-  //     const [activeStep, setActiveStep] = React.useState(0);
-
-  //     const handleNext = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //     };
-
-  //     const handleBack = () => {
-  //       setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveStep(0);
-  //     };
-
-  //     return (
-  //       <div>
-  //         {recipeInstructions.map((section, sectionIndex) => (
-  //           <div key={sectionIndex} style={{ display: activeSection === sectionIndex ? "block" : "none" }}>
-  //             <Box sx={{ maxWidth: 400 }}>
-  //               <Typography variant="h5" gutterBottom>
-  //                 {section.name}
-  //               </Typography>
-  //               <Stepper activeStep={activeStep} orientation="vertical">
-  //                 {section.steps.map((step, stepIndex) => (
-  //                   <Step key={stepIndex}>
-  //                     <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //                     <StepContent>
-  //                       <Typography>{step.description}</Typography>
-  //                       <Box sx={{ mb: 2 }}>
-  //                         <div>
-  //                           <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
-  //                             {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
-  //                           </Button>
-  //                           <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                             Back
-  //                           </Button>
-  //                         </div>
-  //                       </Box>
-  //                     </StepContent>
-  //                   </Step>
-  //                 ))}
-  //               </Stepper>
-  //             </Box>
-  //           </div>
-  //         ))}
-  //         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-  //           <Button variant="contained" onClick={handleReset}>
-  //             Reset
-  //           </Button>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  //   function MultipleSteppers() {
-  //     const [activeSection, setActiveSection] = React.useState(0);
-  //     const [activeStep, setActiveStep] = React.useState(0);
-
-  //     const handleNext = () => {
-  //       if (activeStep === recipeInstructions[activeSection].steps.length - 1) {
-  //         if (activeSection === recipeInstructions.length - 1) return; // Reached the last section's last step
-  //         setActiveSection((prevActiveSection) => prevActiveSection + 1);
-  //         setActiveStep(0);
-  //       } else {
-  //         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //       }
-  //     };
-
-  //     const handleBack = () => {
-  //       if (activeStep === 0) {
-  //         if (activeSection === 0) return; // At the first step of the first section
-  //         setActiveSection((prevActiveSection) => prevActiveSection - 1);
-  //         setActiveStep(recipeInstructions[activeSection - 1].steps.length - 1);
-  //       } else {
-  //         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //       }
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveSection(0);
-  //       setActiveStep(0);
-  //     };
-
-  //     const handleFinish = () => {
-  //       if (activeSection === recipeInstructions.length - 1 && activeStep === recipeInstructions[activeSection].steps.length - 1) {
-  //         // Perform finish action here
-  //         alert("Finished!");
-  //       }
-  //     };
-
-  //     return (
-  //       <div>
-  //         {recipeInstructions.map((section, sectionIndex) => (
-  //           <div key={sectionIndex} style={{ display: sectionIndex === activeSection ? "block" : "none" }}>
-  //             <Box sx={{ maxWidth: 400 }}>
-  //               <Typography variant="h5" gutterBottom>
-  //                 {section.name}
-  //               </Typography>
-  //               <Stepper activeStep={activeStep} orientation="vertical">
-  //                 {section.steps.map((step, stepIndex) => (
-  //                   <Step key={stepIndex}>
-  //                     <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //                     <StepContent>
-  //                       <Typography>{step.description}</Typography>
-  //                       <Box sx={{ mb: 2 }}>
-  //                         <div>
-  //                           <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1 && activeSection === recipeInstructions.length - 1}>
-  //                             {activeStep === section.steps.length - 1 && activeSection === recipeInstructions.length - 1 ? "Finish" : "Next Step"}
-  //                           </Button>
-  //                           <Button disabled={activeStep === 0 && activeSection === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                             Back
-  //                           </Button>
-  //                         </div>
-  //                       </Box>
-  //                     </StepContent>
-  //                   </Step>
-  //                 ))}
-  //               </Stepper>
-  //             </Box>
-  //           </div>
-  //         ))}
-  //         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-  //           <Button variant="contained" onClick={handleReset}>
-  //             Reset
-  //           </Button>
-  //           <Button variant="contained" onClick={handleFinish} disabled={!(activeSection === recipeInstructions.length - 1 && activeStep === recipeInstructions[activeSection].steps.length - 1)} style={{ marginLeft: "10px" }}>
-  //             Finish
-  //           </Button>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  //   function MultipleSteppers() {
-  //     const [activeSection, setActiveSection] = React.useState(0);
-  //     const [activeStep, setActiveStep] = React.useState(0);
-
-  //     const handleNext = () => {
-  //       if (activeStep === recipeInstructions[activeSection].steps.length - 1) {
-  //         if (activeSection === recipeInstructions.length - 1) return; // Reached the last section's last step
-  //         setActiveSection((prevActiveSection) => prevActiveSection + 1);
-  //         setActiveStep(0);
-  //       } else {
-  //         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //       }
-  //     };
-
-  //     const handleBack = () => {
-  //       if (activeStep === 0) {
-  //         if (activeSection === 0) return; // At the first step of the first section
-  //         setActiveSection((prevActiveSection) => prevActiveSection - 1);
-  //         setActiveStep(recipeInstructions[activeSection - 1].steps.length - 1);
-  //       } else {
-  //         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  //       }
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveSection(0);
-  //       setActiveStep(0);
-  //     };
-
-  //     const handleFinish = () => {
-  //       if (activeSection === recipeInstructions.length - 1 && activeStep === recipeInstructions[activeSection].steps.length - 1) {
-  //         // Perform finish action here
-  //         alert("Finished!");
-  //       }
-  //     };
-
-  //     return (
-  //       <div>
-  //         {recipeInstructions.map((section, sectionIndex) => (
-  //           <div key={sectionIndex} style={{ display: "block" }}>
-  //             <Box sx={{ maxWidth: 400 }}>
-  //               <Typography variant="h5" gutterBottom>
-  //                 {section.name}
-  //               </Typography>
-  //               <Stepper activeStep={activeStep} orientation="vertical">
-  //                 {section.steps.map((step, stepIndex) => (
-  //                   <Step key={stepIndex}>
-  //                     <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //                     <StepContent>
-  //                       <Typography>{step.description}</Typography>
-  //                       <Box sx={{ mb: 2 }}>
-  //                         <div>
-  //                           <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1 && activeSection === recipeInstructions.length - 1}>
-  //                             {activeStep === section.steps.length - 1 && activeSection === recipeInstructions.length - 1 ? "Finish" : "Next Step"}
-  //                           </Button>
-  //                           <Button disabled={activeStep === 0 && activeSection === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                             Back
-  //                           </Button>
-  //                         </div>
-  //                       </Box>
-  //                     </StepContent>
-  //                   </Step>
-  //                 ))}
-  //               </Stepper>
-  //             </Box>
-  //           </div>
-  //         ))}
-  //         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-  //           <Button variant="contained" onClick={handleReset}>
-  //             Reset
-  //           </Button>
-  //           <Button variant="contained" onClick={handleFinish} disabled={!(activeSection === recipeInstructions.length - 1 && activeStep === recipeInstructions[activeSection].steps.length - 1)} style={{ marginLeft: "10px" }}>
-  //             Finish
-  //           </Button>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-
-  //   function ParentComponent({ numberOfSteppers }) {
-  //     const steppers = Array.from({ length: numberOfSteppers }, (_, index) => <MultipleSteppers key={index} />);
-
-  //     return <div>{steppers}</div>;
-  //   }
-
   function ParentComponent({ recipeInstructions }) {
     return (
       <div>
@@ -798,43 +172,18 @@ const RecipeInfo = () => {
       }
     };
 
-    // const handleFinish = () => {
-    //   setShowMessage(true);
-    //   setShowConfetti(true);
-    //   setTimeout(() => {
-    //     setShowConfetti(false);
-    //   }, 5000); // Adjust the duration for confetti as needed
-    // };
-
     const handleBack = () => {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-
-    // const handleReset = () => {
-    //   setActiveStep(0);
-    // };
     const handleReset = () => {
       setActiveStep(0);
       setShowReset(false);
     };
 
     const handleFinish = () => {
-      // Perform finish action here
-      // alert("Finished!");
       setShowReset(true);
       console.log("finished");
     };
-
-    // const nextOrFinishButton =
-    //   activeStep === section.steps.length - 1 ? (
-    //     <Button variant="contained" onClick={handleFinish} disabled={activeStep !== section.steps.length - 1} style={{ marginLeft: "10px" }}>
-    //       Finish
-    //     </Button>
-    //   ) : (
-    //     <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
-    //       Next Step
-    //     </Button>
-    //   );
 
     const CustomStepIcon = (props) => {
       const { active, completed } = props;
@@ -850,13 +199,7 @@ const RecipeInfo = () => {
 
     return (
       <div>
-        {/* {showConfetti && <Confetti />} */}
-        {/* {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} />} */}
-        {/* {showConfetti && <Confetti width={window.innerWidth} className="confetti" height={window.innerHeight} />} */}
-        <div style={{ position: "relative" }}>
-          {showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}
-          {/* Your other components/content */}
-        </div>
+        <div style={{ position: "relative" }}>{showConfetti && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} recycle={false} style={{ position: "fixed", top: 0, left: 0 }} />}</div>
 
         <Box sx={{ maxWidth: 600 }}>
           <Typography variant="h6" gutterBottom>
@@ -865,72 +208,21 @@ const RecipeInfo = () => {
           <Stepper activeStep={activeStep} orientation="vertical">
             {section.steps.map((step, stepIndex) => (
               <Step key={stepIndex}>
-                {/* <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel> */}
                 <StepLabel StepIconComponent={CustomStepIcon}>{`${step.description}`}</StepLabel>
                 <StepContent>
                   <img src={step.image} alt="" style={{ maxWidth: "100%", height: "auto" }} />
-                  {/* <Typography>{step.description}</Typography> */}
+
                   <Box sx={{ mb: 2 }}>
                     <div>
-                      {/* {activeStep !== section.steps.length - 1 && (
-                        <Button variant="contained" size="small" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                          Next Step
-                        </Button>
-                      )} */}
-                      {/* <Button variant="contained" size="small" onClick={activeStep === section.steps.length - 1 ? handleFinish : handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length}>
-                        {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
-                      </Button> */}
-
                       {activeStep !== section.steps.length && (
                         <Button variant="contained" size="small" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
                           {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
                         </Button>
                       )}
-                      {/* <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
-                        {activeStep === section.steps.length - 1 ? "Next Step" : "Next Step"}
-                      </Button> */}
-                      {/* <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
-                        {activeStep === section.steps.step - 1 ? "Finish" : "Next Step"}
-                      </Button> */}
-                      {/* {activeStep === section.steps.length - 1 ? (
-                        <Button variant="contained" onClick={handleFinish} sx={{ mt: 1, mr: 1 }}>
-                          Finish
-                        </Button>
-                      ) : (
-                        <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                          Next Step
-                        </Button>
-                      )} */}
-                      {/* <Button variant="contained" onClick={activeStep === section.steps.length - 1 ? handleFinish : handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length}>
-                        {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
-                      </Button> */}
-
-                      {/* <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
-                        {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
-                      </Button> */}
-
-                      {/* {nextOrFinishButton} */}
-                      {/* <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-                        Back
-                      </Button> */}
-                      {/* <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeStep === section.steps.length - 1}>
-                        {activeStep === section.steps.length - 1 ? "Finish" : "Next Step"}
-                      </Button> */}
-                      {/* <Button variant="contained" onClick={handleNext}>
-                        Continue
-                      </Button> */}
                       <Button disabled={activeStep === 0} size="small" onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
                         Back
                       </Button>
                     </div>
-                    {/* <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-                      <Button variant="contained" size="small" onClick={handleReset}>
-                        Reset
-                      </Button>
-                      <Button variant="contained" size="small" onClick={handleFinish} disabled={activeStep !== section.steps.length} style={{ marginLeft: "10px" }}>
-            Finish
-          </Button>
-                    </div> */}
                   </Box>
                 </StepContent>
               </Step>
@@ -944,96 +236,9 @@ const RecipeInfo = () => {
             </Button>
           </div>
         )}
-
-        {/* <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <Button variant="contained" size="small" onClick={handleReset}>
-            Reset
-          </Button>
-          <Button variant="contained" size="small" onClick={handleFinish} disabled={activeStep !== section.steps.length} style={{ marginLeft: "10px" }}>
-            Finish
-          </Button>
-        </div> */}
-        {/* <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-          <Button variant="contained" size="small" onClick={handleFinish} disabled={activeStep !== section.steps.length} style={{ marginLeft: "10px" }}>
-            Finish
-          </Button>
-        </div> */}
       </div>
     );
   }
-
-  //   function MultipleSteppers() {
-  //     const [activeSection, setActiveSection] = React.useState(0);
-  //     const [activeSteps, setActiveSteps] = React.useState(Array(recipeInstructions.length).fill(0));
-
-  //     const handleNext = () => {
-  //       const updatedSteps = [...activeSteps];
-  //       updatedSteps[activeSection] = activeSteps[activeSection] === recipeInstructions[activeSection].steps.length - 1 ? activeSteps[activeSection] : activeSteps[activeSection] + 1;
-  //       setActiveSteps(updatedSteps);
-  //     };
-
-  //     const handleBack = () => {
-  //       const updatedSteps = [...activeSteps];
-  //       updatedSteps[activeSection] = activeSteps[activeSection] > 0 ? activeSteps[activeSection] - 1 : 0;
-  //       setActiveSteps(updatedSteps);
-  //     };
-
-  //     const handleReset = () => {
-  //       setActiveSection(0);
-  //       setActiveSteps(Array(recipeInstructions.length).fill(0));
-  //     };
-
-  //     const handleFinish = () => {
-  //       const lastSectionIndex = recipeInstructions.length - 1;
-  //       const lastStepIndex = recipeInstructions[lastSectionIndex].steps.length - 1;
-  //       if (activeSection === lastSectionIndex && activeSteps[activeSection] === lastStepIndex) {
-  //         // Perform finish action here
-  //         alert("Finished!");
-  //       }
-  //     };
-
-  //     return (
-  //       <div>
-  //         {recipeInstructions.map((section, sectionIndex) => (
-  //           <div key={sectionIndex} style={{ display: activeSection === sectionIndex ? "block" : "none" }}>
-  //             <Box sx={{ maxWidth: 400 }}>
-  //               <Typography variant="h5" gutterBottom>
-  //                 {section.name}
-  //               </Typography>
-  //               <Stepper activeStep={activeSteps[activeSection]} orientation="vertical">
-  //                 {section.steps.map((step, stepIndex) => (
-  //                   <Step key={stepIndex}>
-  //                     <StepLabel>{`Step ${step.step}: ${step.description}`}</StepLabel>
-  //                     <StepContent>
-  //                       <Typography>{step.description}</Typography>
-  //                       <Box sx={{ mb: 2 }}>
-  //                         <div>
-  //                           <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }} disabled={activeSteps[activeSection] === section.steps.length - 1 && activeSection === recipeInstructions.length - 1}>
-  //                             {activeSteps[activeSection] === section.steps.length - 1 && activeSection === recipeInstructions.length - 1 ? "Finish" : "Next Step"}
-  //                           </Button>
-  //                           <Button disabled={activeSteps[activeSection] === 0 && activeSection === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-  //                             Back
-  //                           </Button>
-  //                         </div>
-  //                       </Box>
-  //                     </StepContent>
-  //                   </Step>
-  //                 ))}
-  //               </Stepper>
-  //             </Box>
-  //           </div>
-  //         ))}
-  //         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-  //           <Button variant="contained" onClick={handleReset}>
-  //             Reset
-  //           </Button>
-  //           <Button variant="contained" onClick={handleFinish} disabled={!(activeSection === recipeInstructions.length - 1 && activeSteps[activeSection] === recipeInstructions[activeSection].steps.length - 1)} style={{ marginLeft: "10px" }}>
-  //             Finish
-  //           </Button>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
 
   return (
     <React.Fragment>

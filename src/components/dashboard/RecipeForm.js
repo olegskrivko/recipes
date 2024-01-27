@@ -61,8 +61,11 @@
 // };
 
 // export default RecipeForm;
+
+/////////////////////
+
 import React, { useState, useEffect } from "react";
-import { TextField, Button, CircularProgress, MenuItem, Snackbar, FormControl, InputLabel, Select, FormHelperText } from "@mui/material";
+import { TextField, Button, Grid, CircularProgress, MenuItem, Snackbar, FormControl, InputLabel, Select, FormHelperText } from "@mui/material";
 import axios from "axios";
 
 const RecipeForm = () => {
@@ -72,7 +75,26 @@ const RecipeForm = () => {
   const [meals, setMeals] = useState([]); // Add state for meals
   const [selectedMeals, setSelectedMeals] = useState([]); // Updated state for multiple selections
   const [occasions, setOccasions] = useState([]);
+  const [cuisines, setCuisines] = useState([]);
+  const [tools, setTools] = useState([]);
+  const [cookingMethods, setCookingMethods] = useState([]);
+  const [servings, setServings] = useState(1);
+  const [availableIngredients, setAvailableIngredients] = useState([]);
   const [selectedOccasions, setSelectedOccasions] = useState([]);
+  const [selectedCuisines, setSelectedCuisines] = useState([]);
+  const [selectedTools, setSelectedTools] = useState([]);
+  const [selectedCookingMethods, setSelectedCookingMethods] = useState([]);
+
+  // const [times, setTimes] = useState([]); // Add this line to decl
+  // const [selectedTimes, setSelectedTimes] = useState([]);
+  // const [selectedHours, setSelectedHours] = useState({});
+  // const [selectedMinutes, setSelectedMinutes] = useState({});
+  // State for handling times
+  const [selectedTimes, setSelectedTimes] = useState([]);
+
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [times, setTimes] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [titleError, setTitleError] = useState(null);
@@ -80,10 +102,57 @@ const RecipeForm = () => {
   const [difficultyError, setDifficultyError] = useState(null); // Add state for difficulty error
   const [mealError, setMealError] = useState(""); // Add state for meal error
   const [occasionError, setOccasionError] = useState("");
+  const [cuisineError, setCuisineError] = useState("");
+  const [toolError, setToolError] = useState("");
+  const [cookingMethodError, setCookingMethodError] = useState("");
+  const [servingsError, setServingsError] = useState("");
 
   const [successMessage, setSuccessMessage] = useState(null);
 
   const [instructions, setInstructions] = useState([{ name: "", steps: [{ step: 1, description: "", image: "" }] }]);
+  const [ingredientCategories, setIngredientCategories] = useState([{ name: "", items: [{ ingredient: "", quantity: 0, unit: "", ingredientPrice: "" }] }]);
+  // check how long user is on page and if he clicks after preparation time than it means he did it
+  // Fetch times from the backend on component mount
+  useEffect(() => {
+    const fetchTimes = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/times");
+        setTimes(response.data);
+      } catch (error) {
+        console.error("Error fetching times:", error.message);
+      }
+    };
+
+    fetchTimes();
+  }, []);
+
+  const handleTimeChange = (event, index) => {
+    const updatedTimes = [...selectedTimes];
+    updatedTimes[index].label = event.target.value;
+    setSelectedTimes(updatedTimes);
+  };
+
+  const handleHoursChange = (event, index) => {
+    const updatedTimes = [...selectedTimes];
+    updatedTimes[index].hours = event.target.value;
+    setSelectedTimes(updatedTimes);
+  };
+
+  const handleMinutesChange = (event, index) => {
+    const updatedTimes = [...selectedTimes];
+    updatedTimes[index].minutes = event.target.value;
+    setSelectedTimes(updatedTimes);
+  };
+
+  const handleAddTime = () => {
+    setSelectedTimes([...selectedTimes, { label: "", hours: 0, minutes: 0 }]);
+  };
+
+  const handleRemoveTime = (index) => {
+    const updatedTimes = [...selectedTimes];
+    updatedTimes.splice(index, 1);
+    setSelectedTimes(updatedTimes);
+  };
 
   useEffect(() => {
     // Fetch meals from the backend when the component mounts
@@ -100,6 +169,7 @@ const RecipeForm = () => {
     fetchMeals();
   }, []); // Empty dependency array ensures this effect runs once on mount
 
+  // Fetch occasions from the backend when the component mounts
   useEffect(() => {
     const fetchOccasions = async () => {
       try {
@@ -111,6 +181,75 @@ const RecipeForm = () => {
     };
 
     fetchOccasions();
+  }, []);
+
+  // Fetch cuisines from the backend when the component mounts
+  useEffect(() => {
+    const fetchCuisines = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/cuisines");
+        setCuisines(response.data);
+      } catch (error) {
+        console.error("Error fetching cuisines:", error.message);
+      }
+    };
+
+    fetchCuisines();
+  }, []);
+
+  // Fetch tools from the backend when the component mounts
+  useEffect(() => {
+    const fetchTools = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/tools");
+        setTools(response.data);
+      } catch (error) {
+        console.error("Error fetching tools:", error.message);
+      }
+    };
+
+    fetchTools();
+  }, []);
+
+  // Fetch cooking methods from the backend when the component mounts
+  useEffect(() => {
+    const fetchCookingMethods = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/cooking-methods");
+        setCookingMethods(response.data);
+      } catch (error) {
+        console.error("Error fetching tools:", error.message);
+      }
+    };
+
+    fetchCookingMethods();
+  }, []);
+  // Fetch ingredients from the backend when the component mounts
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/ingredients");
+        setAvailableIngredients(response.data);
+      } catch (error) {
+        console.error("Error fetching ingredients:", error.message);
+      }
+    };
+
+    fetchIngredients();
+  }, []);
+
+  // Fetch ingredients from the backend when the component mounts
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/ingredients");
+        setAvailableIngredients(response.data);
+      } catch (error) {
+        console.error("Error fetching ingredients:", error.message);
+      }
+    };
+
+    fetchIngredients();
   }, []);
 
   const handleTitleChange = (event) => {
@@ -128,6 +267,7 @@ const RecipeForm = () => {
     setDifficultyError(null);
   };
 
+  // Meal
   const handleMealChange = (event) => {
     // If event.target.value is not an array, wrap it in an array
     const selectedValues = Array.isArray(event.target.value) ? event.target.value : [event.target.value];
@@ -135,13 +275,48 @@ const RecipeForm = () => {
     setSelectedMeals(selectedValues);
     setMealError(null);
   };
-
+  // Occasion
   const handleOccasionChange = (event) => {
     const selectedValues = Array.isArray(event.target.value) ? event.target.value : [event.target.value];
     setSelectedOccasions(selectedValues);
     setOccasionError(null);
   };
+  // Cuisine
+  const handleCuisineChange = (event) => {
+    const selectedValues = Array.isArray(event.target.value) ? event.target.value : [event.target.value];
+    setSelectedCuisines(selectedValues);
+    setCuisineError(null);
+  };
+  // Tool
+  const handleToolChange = (event) => {
+    const selectedValues = Array.isArray(event.target.value) ? event.target.value : [event.target.value];
+    setSelectedTools(selectedValues);
+    setToolError(null);
+  };
 
+  // Cooking Method
+  const handleCookingMethodChange = (event) => {
+    const selectedValues = Array.isArray(event.target.value) ? event.target.value : [event.target.value];
+    setSelectedCookingMethods(selectedValues);
+    setCookingMethodError(null);
+  };
+
+  // Servings
+  const handleServingsChange = (event) => {
+    setServings(event.target.value);
+    setServingsError(null);
+  };
+  // Utility function to map selected times
+
+  const mapSelectedTimes = (selectedTimes, times, selectedHours, selectedMinutes) => {
+    return selectedTimes.map((time) => ({
+      name: times.find((t) => t._id === time).name,
+      hours: selectedHours[time],
+      minutes: selectedMinutes[time],
+    }));
+  };
+
+  // Instruction Name
   const handleInstructionNameChange = (index, event) => {
     const newInstructions = [...instructions];
     newInstructions[index].name = event.target.value;
@@ -164,11 +339,55 @@ const RecipeForm = () => {
     setInstructions([...instructions, { name: "", steps: [{ step: 1, description: "", image: "" }] }]);
   };
 
+  // Ingredient
+  const handleIngredientCategoryChange = (index, event) => {
+    const newIngredientCategories = [...ingredientCategories];
+    newIngredientCategories[index].name = event.target.value;
+    setIngredientCategories(newIngredientCategories);
+  };
+
+  // Ingredient Name
+  const handleIngredientNameChange = (categoryIndex, itemIndex, event) => {
+    const newIngredientCategories = [...ingredientCategories];
+    const selectedIngredientId = event.target.value; // Capture the selected ingredient's ID
+    newIngredientCategories[categoryIndex].items[itemIndex].ingredient = selectedIngredientId;
+    setIngredientCategories(newIngredientCategories);
+  };
+
+  const handleIngredientQuantityChange = (categoryIndex, itemIndex, event) => {
+    const newIngredientCategories = [...ingredientCategories];
+    newIngredientCategories[categoryIndex].items[itemIndex].quantity = event.target.value;
+    setIngredientCategories(newIngredientCategories);
+  };
+
+  const handleIngredientUnitChange = (categoryIndex, itemIndex, event) => {
+    const newIngredientCategories = [...ingredientCategories];
+    newIngredientCategories[categoryIndex].items[itemIndex].unit = event.target.value;
+    setIngredientCategories(newIngredientCategories);
+  };
+
+  const handleAddIngredientItem = (categoryIndex) => {
+    const newIngredientCategories = [...ingredientCategories];
+    newIngredientCategories[categoryIndex].items.push({ ingredient: "", quantity: 0, unit: "", ingredientPrice: "" });
+    setIngredientCategories(newIngredientCategories);
+  };
+
+  const handleAddIngredientCategory = () => {
+    setIngredientCategories([...ingredientCategories, { name: "", items: [{ ingredient: "", quantity: 0, unit: "", ingredientPrice: "" }] }]);
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
       setLoading(true);
+
+      // Validate Servings
+      // if (servings < 1 || servings > 10) {
+      //   setServingsError("Servings must be between 1 and 10");
+      //   setLoading(false);
+      //   return;
+      // }
 
       // const response = await axios.post("http://localhost:3000/api/recipes", { title, description, difficulty, meals });
       const response = await axios.post("http://localhost:3000/api/recipes", {
@@ -177,7 +396,13 @@ const RecipeForm = () => {
         difficulty,
         meals: selectedMeals, // Include the selected meal in the request payload
         occasions: selectedOccasions, // Include the selected occasions in the request payload
+        cuisines: selectedCuisines,
+        tools: selectedTools,
+        cookingMethods: selectedCookingMethods,
         instructions,
+        ingredients: ingredientCategories,
+        servings,
+        times: selectedTimes,
       });
 
       console.log("Recipe created:", response.data);
@@ -188,12 +413,20 @@ const RecipeForm = () => {
       setDifficulty("");
       setSelectedMeals([]); // Clear selected meal
       setSelectedOccasions([]);
+      setSelectedCuisines([]);
+      setSelectedTools([]);
+      setSelectedCookingMethods([]);
+      setServings(1);
 
       setTitleError(null);
       setDescriptionError(null);
       setDifficultyError(null);
       setMealError(null);
       setOccasionError(null);
+      setCuisineError(null);
+      setToolError(null);
+      setCookingMethodError(null);
+      setServingsError(null);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const serverErrors = error.response.data.errors;
@@ -208,6 +441,14 @@ const RecipeForm = () => {
             setMealError(err.msg);
           } else if (err.path === "occasions") {
             setOccasionError(err.msg);
+          } else if (err.path === "cuisines") {
+            setCuisineError(err.msg);
+          } else if (err.path === "tools") {
+            setToolError(err.msg);
+          } else if (err.path === "cookingMethods") {
+            setCookingMethodError(err.msg);
+          } else if (err.path === "servings") {
+            setServingsError(err.msg);
           }
         });
       } else {
@@ -246,6 +487,7 @@ const RecipeForm = () => {
           </Select>
           {difficultyError && <FormHelperText>{difficultyError}</FormHelperText>}
         </FormControl>
+        <TextField label="Number of Servings" type="number" variant="outlined" fullWidth value={servings} onChange={handleServingsChange} margin="normal" error={Boolean(servingsError)} helperText={servingsError} />
         <FormControl fullWidth variant="outlined" margin="normal" error={Boolean(mealError)}>
           <InputLabel htmlFor="meal-select">Meal</InputLabel>
           <Select
@@ -286,7 +528,279 @@ const RecipeForm = () => {
           </Select>
           {occasionError && <FormHelperText>{occasionError}</FormHelperText>}
         </FormControl>
+        <FormControl fullWidth variant="outlined" margin="normal" error={Boolean(cuisineError)}>
+          <InputLabel htmlFor="cuisine-select">Cuisines</InputLabel>
+          <Select
+            multiple
+            value={selectedCuisines}
+            onChange={handleCuisineChange}
+            label="Cuisines"
+            inputProps={{
+              id: "cuisine-select",
+            }}
+            MenuComponent="div"
+          >
+            {cuisines.map((cuisine) => (
+              <MenuItem key={cuisine._id} value={cuisine._id}>
+                {cuisine.name}
+              </MenuItem>
+            ))}
+          </Select>
+          {cuisineError && <FormHelperText>{cuisineError}</FormHelperText>}
+        </FormControl>
+        <FormControl fullWidth variant="outlined" margin="normal" error={Boolean(toolError)}>
+          <InputLabel htmlFor="tool-select">Tools</InputLabel>
+          <Select
+            multiple
+            value={selectedTools}
+            onChange={handleToolChange}
+            label="Tools"
+            inputProps={{
+              id: "tool-select",
+            }}
+            MenuComponent="div"
+          >
+            {tools.map((tool) => (
+              <MenuItem key={tool._id} value={tool._id}>
+                {tool.name}
+              </MenuItem>
+            ))}
+          </Select>
+          {toolError && <FormHelperText>{toolError}</FormHelperText>}
+        </FormControl>
+        <FormControl fullWidth variant="outlined" margin="normal" error={Boolean(cookingMethodError)}>
+          <InputLabel htmlFor="cookingMethod-select">Cooking Methods</InputLabel>
+          <Select
+            multiple
+            value={selectedCookingMethods}
+            onChange={handleCookingMethodChange}
+            label="Cooking Methods"
+            inputProps={{
+              id: "cookingMethod-select",
+            }}
+            MenuComponent="div"
+          >
+            {cookingMethods.map((cookingMethod) => (
+              <MenuItem key={cookingMethod._id} value={cookingMethod._id}>
+                {cookingMethod.name}
+              </MenuItem>
+            ))}
+          </Select>
+          {cookingMethodError && <FormHelperText>{cookingMethodError}</FormHelperText>}
+        </FormControl>
+        {selectedTimes.map((time, index) => (
+          <Grid container spacing={2} key={index}>
+            <Grid item xs={4}>
+              <FormControl fullWidth>
+                <InputLabel id={`select-time-label-${index}`}>Select Time</InputLabel>
+                <Select labelId={`select-time-label-${index}`} id={`select-time-${index}`} value={time.name} onChange={(e) => handleTimeChange(e, index)}>
+                  {times.map((availableTime) => (
+                    <MenuItem key={availableTime._id} value={availableTime.name}>
+                      {availableTime.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <TextField label="Hours" variant="outlined" fullWidth type="number" value={time.hours} onChange={(e) => handleHoursChange(e, index)} margin="normal" />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField label="Minutes" variant="outlined" fullWidth type="number" value={time.minutes} onChange={(e) => handleMinutesChange(e, index)} margin="normal" />
+            </Grid>
+            <Grid item xs={2}>
+              <Button variant="outlined" color="secondary" onClick={() => handleRemoveTime(index)}>
+                Remove
+              </Button>
+            </Grid>
+          </Grid>
+        ))}
 
+        <Button type="button" variant="outlined" color="primary" onClick={handleAddTime}>
+          Add Time
+        </Button>
+
+        {/* <FormControl fullWidth>
+          <InputLabel>Select Time</InputLabel>
+          <Select
+            value={selectedTimes}
+            onChange={handleTimeSelect}
+            multiple
+            renderValue={(selected) => (
+              <Grid container spacing={1}>
+                {selected.map((value) => (
+                  <Grid item key={value}>
+                    {times.find((t) => t._id === value).name}
+                  </Grid>
+                ))}
+              </Grid>
+            )}
+          >
+            {times.map((time) => (
+              <MenuItem key={time._id} value={time._id}>
+                {time.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl> */}
+
+        {/* <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel htmlFor="time-select">Select Time</InputLabel>
+          <Select
+            multiple
+            value={selectedTimes}
+            onChange={handleTimeSelect}
+            label="Select Time"
+            inputProps={{
+              id: "time-select",
+            }}
+            MenuComponent="div"
+          >
+            {times.map((time) => (
+              <MenuItem key={time._id} value={time._id}>
+                {time.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        {selectedTimes.map((time) => (
+          <div key={time}>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel htmlFor={`hours-select-${time}`}>Select Hours for {times.find((t) => t._id === time)?.name}</InputLabel>
+              <Select
+                value={selectedHours[time]}
+                onChange={(e) => handleHourSelect(time, e)}
+                label={`Select Hours for ${times.find((t) => t._id === time)?.name}`}
+                inputProps={{
+                  id: `hours-select-${time}`,
+                }}
+                MenuComponent="div"
+              >
+                {Array.from({ length: 24 }, (_, i) => (
+                  <MenuItem key={i} value={i}>
+                    {i}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel htmlFor={`minutes-select-${time}`}>Select Minutes for {times.find((t) => t._id === time)?.name}</InputLabel>
+              <Select
+                value={selectedMinutes[time]}
+                onChange={(e) => handleMinuteSelect(time, e)}
+                label={`Select Minutes for ${times.find((t) => t._id === time)?.name}`}
+                inputProps={{
+                  id: `minutes-select-${time}`,
+                }}
+                MenuComponent="div"
+              >
+                {Array.from({ length: 60 }, (_, i) => (
+                  <MenuItem key={i} value={i}>
+                    {i}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        ))} */}
+        {/* <div>
+          {ingredientCategories.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              <TextField label={`Ingredient Category ${categoryIndex + 1}`} variant="outlined" fullWidth value={category.name} onChange={(event) => handleIngredientCategoryChange(categoryIndex, event)} margin="normal" />
+              {category.items.map((item, itemIndex) => (
+                <div key={itemIndex}>
+                  <TextField label={`Ingredient Name ${itemIndex + 1}`} variant="outlined" fullWidth value={item.ingredient} onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)} margin="normal" />
+                  <TextField label={`Ingredient Quantity ${itemIndex + 1}`} variant="outlined" fullWidth type="number" value={item.quantity} onChange={(event) => handleIngredientQuantityChange(categoryIndex, itemIndex, event)} margin="normal" />
+                  <TextField label={`Ingredient Unit ${itemIndex + 1}`} variant="outlined" fullWidth value={item.unit} onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)} margin="normal" />
+                </div>
+              ))}
+              <Button onClick={() => handleAddIngredientItem(categoryIndex)}>Add Ingredient</Button>
+            </div>
+          ))}
+          <Button onClick={handleAddIngredientCategory}>Add Ingredient Category</Button>
+        </div> */}
+        <div>
+          {ingredientCategories.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              <TextField label={`Ingredient Category ${categoryIndex + 1}`} variant="outlined" fullWidth value={category.name} onChange={(event) => handleIngredientCategoryChange(categoryIndex, event)} margin="normal" />
+              {category.items.map((item, itemIndex) => (
+                <div key={itemIndex}>
+                  {/* <TextField label={`Ingredient Name ${itemIndex + 1}`} variant="outlined" fullWidth value={item.ingredient} onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)} margin="normal" select>
+                    {availableIngredients.map((ingredient) => (
+                      <MenuItem key={ingredient._id} value={ingredient.name}>
+                        {ingredient.name}
+                      </MenuItem>
+                    ))}
+                  </TextField> */}
+                  {/* <TextField
+                    label={`Ingredient Name ${itemIndex + 1}`}
+                    variant="outlined"
+                    fullWidth
+                    value={item.ingredient}
+                    onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)}
+                    margin="normal"
+                    select // Use select for dropdown
+                  >
+                    {availableIngredients.map((ingredient) => (
+                      <MenuItem key={ingredient._id} value={ingredient._id}>
+                        {ingredient.name}
+                      </MenuItem>
+                    ))}
+                  </TextField> */}
+                  <TextField
+                    label={`Ingredient Name ${itemIndex + 1}`}
+                    variant="outlined"
+                    fullWidth
+                    value={item.ingredient}
+                    onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)}
+                    margin="normal"
+                    select // Use select for dropdown
+                  >
+                    {availableIngredients.map((ingredient) => (
+                      <MenuItem key={ingredient._id} value={ingredient._id}>
+                        {ingredient.name}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <TextField label={`Ingredient Quantity ${itemIndex + 1}`} variant="outlined" fullWidth type="number" value={item.quantity} onChange={(event) => handleIngredientQuantityChange(categoryIndex, itemIndex, event)} margin="normal" />
+                  {/* <TextField label={`Ingredient Unit ${itemIndex + 1}`} variant="outlined" fullWidth value={item.unit} onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)} margin="normal" /> */}
+                  {/* <TextField
+                    label={`Ingredient Unit ${itemIndex + 1}`}
+                    variant="outlined"
+                    fullWidth
+                    select // Use select for dropdown
+                    value={item.unit}
+                    onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)}
+                    margin="normal"
+                  >
+                    {availableIngredients
+                      .find((ingredient) => ingredient._id === item.ingredient)
+                      ?.allowedUnits?.map((allowedUnit) => (
+                        <MenuItem key={allowedUnit.unit} value={allowedUnit.unit}>
+                          {allowedUnit.unit}
+                        </MenuItem>
+                      ))}
+                  </TextField> */}
+                  <TextField label={`Ingredient Unit ${itemIndex + 1}`} variant="outlined" fullWidth select value={item.unit} onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)} margin="normal">
+                    {item.ingredient &&
+                      availableIngredients
+                        .find((ingredient) => ingredient._id === item.ingredient)
+                        ?.allowedUnits?.map((allowedUnit) => (
+                          <MenuItem key={allowedUnit.unit} value={allowedUnit.unit}>
+                            {allowedUnit.unit} (Conversion Factor: {allowedUnit.conversionFactor})
+                          </MenuItem>
+                        ))}
+                  </TextField>
+                </div>
+              ))}
+              <Button onClick={() => handleAddIngredientItem(categoryIndex)}>Add Ingredient</Button>
+            </div>
+          ))}
+          <Button onClick={handleAddIngredientCategory}>Add Ingredient Category</Button>
+        </div>
         <div>
           {instructions.map((instruction, index) => (
             <div key={index}>

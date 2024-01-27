@@ -5,8 +5,10 @@ import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
 import Tools from "./pages/Tools";
 import Prices from "./pages/Prices";
-import RecipesPage from "./pages/RecipesPage";
-import RecipeDetails from "./pages/RecipeDetails";
+// import RecipesPage from "./pages/RecipesPage";
+import CustomRecipesPage from "./pages/CustomRecipesPage";
+// import RecipeDetails from "./pages/RecipeDetails";
+import CustomRecipeInfo from "./pages/CustomRecipeInfo";
 import RecipeInfo from "./pages/RecipeInfo";
 import Dashboard from "./pages/Dashboard";
 
@@ -16,8 +18,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="recipes" element={<RecipesPage />} />
-          <Route path="recipes/:recipeId" element={<RecipeDetails />} />
+          {/* <Route path="recipes" element={<RecipesPage />} /> */}
+          <Route path="recipes" element={<CustomRecipesPage />} />
+          {/* <Route path="recipes/:recipeId" element={<RecipeDetails />} /> */}
+          <Route path="recipes/:id" element={<CustomRecipeInfo />} />
           <Route path="contact" element={<Contact />} />
           <Route path="recipeinfo" element={<RecipeInfo />} />
           <Route path="dashboard" element={<Dashboard />} />
