@@ -9,7 +9,8 @@ const ChatCard = ({ avatarUrl, senderName, message, timestamp, rating, ratings }
     textAlign: "justify",
   };
   const chipStyleRating = {
-    margin: "8px 8px 0 0",
+    marginRight: "8px",
+    marginBottom: "8px",
     backgroundColor: "#424242", // Dark color
     color: "#ffffff", // White text
   };
@@ -22,12 +23,13 @@ const ChatCard = ({ avatarUrl, senderName, message, timestamp, rating, ratings }
 
   const avatarStyle = {
     marginRight: "12px", // You can adjust the spacing as needed
-    marginLeft: "8px",
-    marginTop: "8px", // Push avatar slightly down for better alignment
+    // marginLeft: "8px",
+    //marginTop: "8px", // Push avatar slightly down for better alignment
   };
 
   const contentStyle = {
     width: "100%", // Fill the remaining space
+    marginBottom: "-8px",
   };
   const ratingsContainerStyle = {
     display: "flex",
@@ -57,20 +59,7 @@ const ChatCard = ({ avatarUrl, senderName, message, timestamp, rating, ratings }
 
   return (
     <Card style={cardStyle}>
-      <Avatar alt={senderName} src={avatarUrl} style={avatarStyle} />
-
       <CardContent style={contentStyle}>
-        {/* <Typography
-          variant="subtitle1"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "8px",
-          }}
-        >
-          {senderName} <Chip size="small" secondary label="Recipe Wizard" style={chipStyle} color="primary" />
-        </Typography> */}
-
         <div
           style={{
             display: "flex",
@@ -78,13 +67,14 @@ const ChatCard = ({ avatarUrl, senderName, message, timestamp, rating, ratings }
             marginBottom: "8px",
           }}
         >
+          <Avatar alt={senderName} src={avatarUrl} style={avatarStyle} />
           <Typography variant="subtitle1" style={{ display: "flex" }}>
             {senderName}
           </Typography>
           <Chip secondary label="Recipe Wizard" style={chipStyle} color="primary" />
         </div>
 
-        <Typography variant="body1" color="textSecondary">
+        <Typography variant="body1" color="textSecondary" style={{ marginBottom: "8px" }}>
           {message}
         </Typography>
         <Typography variant="caption" color="textSecondary">

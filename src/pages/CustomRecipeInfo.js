@@ -68,12 +68,7 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import Carousel from "react-material-ui-carousel";
 import Chart from "react-google-charts";
-// const tips = [
-//   "Tip 1: Once the Napoleon cake is assembled, let it rest in the refrigerator overnight before serving. This resting period allows the layers to absorb the flavors from the pastry cream, resulting in a more delicious and cohesive dessert. The chilling time also improves the texture, making it easier to slice and serve.",
-//   "Tip 2: When rolling out the dough for the layers, aim for thin and even layers. This will ensure that each layer bakes uniformly, resulting in a light and flaky texture. Use a ruler or a template to maintain consistency in thickness.",
-//   "Tip 3: After baking each layer, allow it to cool completely before adding the pastry cream. This helps in preventing the cream from melting and ensures that each layer maintains its structure. You can speed up the cooling process by placing the baked layers in the refrigerator.",
-//   // Add more tips as needed
-// ];
+import TotalCalories from "../../src/components/recipeDetails/TotalCalories";
 
 const tips = [
   {
@@ -89,7 +84,6 @@ const tips = [
     description: "Use chilled bowls, beaters, and add sugar gradually while whipping. Stop when soft peaks form for a light and fluffy texture.",
   },
 ];
-
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -247,92 +241,19 @@ const Home = () => {
     </Container>
   );
 };
-
-// const SimilarRecipes = () => {
-//   const API_URL = "http://localhost:3000/api/recipes";
-//   const [recipes, setRecipes] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const fetchRecipes = async () => {
-//       try {
-//         const response = await fetch(API_URL);
-//         if (response.ok) {
-//           const data = await response.json();
-//           setRecipes(data);
-//         } else {
-//           throw new Error("Failed to fetch recipes");
-//         }
-//       } catch (error) {
-//         setError(error.message);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchRecipes();
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
-
-//   if (loading) {
-//     return <Typography variant="h4">Loading Recipes...</Typography>;
-//   }
-
-//   if (error) {
-//     return <Typography variant="h4">Error Loading Recipes: {error}</Typography>;
-//   }
-
-//   return (
-//     <>
-//       {recipes.slice(0, 6).map((recipe) => (
-//         <Card key={recipe._id} style={{ maxWidth: 300, margin: "1rem" }}>
-//           <CardActionArea component={Link} to={`/recipes/${recipe._id}`}>
-//             <CardMedia component="img" alt={recipe.title} height="120" image={recipe.coverImage} />
-
-//             <Typography variant="h6" component="div" style={{ padding: "2px 8px" }}>
-//               {recipe.title}
-//             </Typography>
-//           </CardActionArea>
-//         </Card>
-//       ))}
-//     </>
-//   );
-// };
-
-// const RecipeCard = ({ recipe }) => {
-//   const { title, image } = recipe;
-
-//   return (
-//     <Card>
-//       <CardMedia component="img" height="140" image={image} alt={title} />
-//       <CardContent>
-//         <Typography variant="h5">{title}</Typography>
-//       </CardContent>
-//     </Card>
-//   );
-// };
-
 const QuestionRating = () => {
   const [taste, setTaste] = useState(50);
   const [visualAppeal, setVisualAppeal] = useState(50);
   const [originality, setOriginality] = useState(50);
   const [accuracy, setAccuracy] = useState(50);
   const [availability, setAvailability] = useState(50);
+  const [difficulty, setDifficulty] = useState(50);
 
   const [wouldMakeAgain, setWouldMakeAgain] = useState(null);
 
   const handleButtonClick = (value) => {
     setWouldMakeAgain(value);
   };
-
-  // const handleSubmit = () => {
-  //   // Implement your logic to submit the review with the chosen rating.
-  //   console.log("Would Make Again:", wouldMakeAgain);
-  // };
-
-  // const [effort, setEffort] = useState(0);
-  // const [overallEnjoyment, setOverallEnjoyment] = useState(0);
 
   const handleSubmit = () => {
     // Implement your logic to submit the review with the chosen ratings.
@@ -341,355 +262,270 @@ const QuestionRating = () => {
     console.log("Originality:", originality);
     console.log("Accuracy:", accuracy);
     console.log("Availability:", availability);
+    console.log("Difficulty:", difficulty);
     console.log("Would Make Again:", wouldMakeAgain);
-
-    // console.log("Presentation:", presentation);
   };
 
-  //     console.log("Вкус:", taste);
-  //     console.log("Визуальное воздействие:", visualAppeal);
-  //     console.log("Оригинальность:", originality);
-  //     console.log("Доступность ингредиентов:", availability);
-  //     console.log("Точность указаний:", Accuracy of Instructions);
-
-  //    console.log("Представление:", presentation);
-  //     console.log("Ценность усилий:", valueForEffort);
-
-  //     console.log("Подготовка:", preparation);
-
-  //     console.log("Время приготовления:", cookingTime);
-  //     console.log("Пищевая ценность:", nutritionalValue);
-  //     console.log("Универсальность:", versatility);
-  //     console.log("Пригодность для семьи:", familyFriendliness);
-  //     console.log("Качество остатков:", leftoversQuality);
-
   return (
-    <div>
-      <Typography
-        variant="h6"
+    <>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={6}
+        lg={6}
         sx={{
           margin: "20px 0",
         }}
       >
-        Rate the Recipe
-      </Typography>
-
-      <Box mb={3}>
-        <Typography>Taste:</Typography>
-        <Slider
-          value={taste}
-          onChange={(_, newValue) => setTaste(newValue)}
-          valueLabelDisplay="auto"
-          step={5}
-          marks={[
-            { value: 0, label: "0" },
-            { value: 5, label: "" },
-            { value: 10, label: "" },
-            { value: 15, label: "" },
-            { value: 20, label: "" },
-            { value: 25, label: "" },
-            { value: 30, label: "" },
-            { value: 35, label: "" },
-            { value: 40, label: "" },
-            { value: 45, label: "" },
-            { value: 50, label: "" },
-            { value: 55, label: "" },
-            { value: 60, label: "" },
-            { value: 65, label: "" },
-            { value: 70, label: "" },
-            { value: 75, label: "" },
-            { value: 80, label: "" },
-            { value: 85, label: "" },
-            { value: 90, label: "" },
-            { value: 95, label: "" },
-            { value: 100, label: "100" },
-          ]}
-        />
-      </Box>
-
-      <Box mb={3}>
-        <Typography>Accuracy of instructions:</Typography>
-        <Slider
-          value={accuracy}
-          onChange={(_, newValue) => setAccuracy(newValue)}
-          valueLabelDisplay="auto"
-          step={5}
-          marks={[
-            { value: 0, label: "0" },
-            { value: 5, label: "" },
-            { value: 10, label: "" },
-            { value: 15, label: "" },
-            { value: 20, label: "" },
-            { value: 25, label: "" },
-            { value: 30, label: "" },
-            { value: 35, label: "" },
-            { value: 40, label: "" },
-            { value: 45, label: "" },
-            { value: 50, label: "" },
-            { value: 55, label: "" },
-            { value: 60, label: "" },
-            { value: 65, label: "" },
-            { value: 70, label: "" },
-            { value: 75, label: "" },
-            { value: 80, label: "" },
-            { value: 85, label: "" },
-            { value: 90, label: "" },
-            { value: 95, label: "" },
-            { value: 100, label: "100" },
-          ]}
-        />
-      </Box>
-
-      <Box mb={3}>
-        <Typography>Originality:</Typography>
-        <Slider
-          value={originality}
-          onChange={(_, newValue) => setOriginality(newValue)}
-          valueLabelDisplay="auto"
-          step={5}
-          marks={[
-            { value: 0, label: "0" },
-            { value: 5, label: "" },
-            { value: 10, label: "" },
-            { value: 15, label: "" },
-            { value: 20, label: "" },
-            { value: 25, label: "" },
-            { value: 30, label: "" },
-            { value: 35, label: "" },
-            { value: 40, label: "" },
-            { value: 45, label: "" },
-            { value: 50, label: "" },
-            { value: 55, label: "" },
-            { value: 60, label: "" },
-            { value: 65, label: "" },
-            { value: 70, label: "" },
-            { value: 75, label: "" },
-            { value: 80, label: "" },
-            { value: 85, label: "" },
-            { value: 90, label: "" },
-            { value: 95, label: "" },
-            { value: 100, label: "100" },
-          ]}
-        />
-      </Box>
-
-      <Box mb={3}>
-        <Typography>Visual Appeal:</Typography>
-        <Slider
-          value={visualAppeal}
-          onChange={(_, newValue) => setVisualAppeal(newValue)}
-          valueLabelDisplay="auto"
-          step={5}
-          marks={[
-            { value: 0, label: "0" },
-            { value: 5, label: "" },
-            { value: 10, label: "" },
-            { value: 15, label: "" },
-            { value: 20, label: "" },
-            { value: 25, label: "" },
-            { value: 30, label: "" },
-            { value: 35, label: "" },
-            { value: 40, label: "" },
-            { value: 45, label: "" },
-            { value: 50, label: "" },
-            { value: 55, label: "" },
-            { value: 60, label: "" },
-            { value: 65, label: "" },
-            { value: 70, label: "" },
-            { value: 75, label: "" },
-            { value: 80, label: "" },
-            { value: 85, label: "" },
-            { value: 90, label: "" },
-            { value: 95, label: "" },
-            { value: 100, label: "100" },
-          ]}
-        />
-      </Box>
-
-      <Box mb={3}>
-        <Typography>Availability of Ingredients:</Typography>
-        <Slider
-          value={availability}
-          onChange={(_, newValue) => setAvailability(newValue)}
-          valueLabelDisplay="auto"
-          step={5}
-          marks={[
-            { value: 0, label: "0" },
-            { value: 5, label: "" },
-            { value: 10, label: "" },
-            { value: 15, label: "" },
-            { value: 20, label: "" },
-            { value: 25, label: "" },
-            { value: 30, label: "" },
-            { value: 35, label: "" },
-            { value: 40, label: "" },
-            { value: 45, label: "" },
-            { value: 50, label: "" },
-            { value: 55, label: "" },
-            { value: 60, label: "" },
-            { value: 65, label: "" },
-            { value: 70, label: "" },
-            { value: 75, label: "" },
-            { value: 80, label: "" },
-            { value: 85, label: "" },
-            { value: 90, label: "" },
-            { value: 95, label: "" },
-            { value: 100, label: "100" },
-          ]}
-        />
-      </Box>
-
-      {/* <Box mb={3}>
-        <Typography>Overall Enjoyment:</Typography>
-        <Slider
-          value={overallEnjoyment}
-          onChange={(_, newValue) => setOverallEnjoyment(newValue)}
-          valueLabelDisplay="auto"
-          step={1}
-          marks={[
-            { value: 0, label: "0" },
-            { value: 10, label: "10" },
-          ]}
-        />
-      </Box> */}
-
-      <div>
-        <Typography variant="h6" textAlign="center">
-          Would You Make It Again?
-        </Typography>
-
-        <Box display="flex" justifyContent="center" mt={2}>
-          <Button variant={wouldMakeAgain === "Yes" ? "contained" : "outlined"} color="primary" onClick={() => handleButtonClick("Yes")}>
-            Yes
-          </Button>
-          <Button variant={wouldMakeAgain === "No" ? "contained" : "outlined"} color="primary" onClick={() => handleButtonClick("No")} sx={{ marginLeft: 2 }}>
-            No
-          </Button>
+        <Box mb={3}>
+          <Typography>Taste:</Typography>
+          <Slider
+            value={taste}
+            onChange={(_, newValue) => setTaste(newValue)}
+            valueLabelDisplay="auto"
+            step={5}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 5, label: "" },
+              { value: 10, label: "" },
+              { value: 15, label: "" },
+              { value: 20, label: "" },
+              { value: 25, label: "" },
+              { value: 30, label: "" },
+              { value: 35, label: "" },
+              { value: 40, label: "" },
+              { value: 45, label: "" },
+              { value: 50, label: "" },
+              { value: 55, label: "" },
+              { value: 60, label: "" },
+              { value: 65, label: "" },
+              { value: 70, label: "" },
+              { value: 75, label: "" },
+              { value: 80, label: "" },
+              { value: 85, label: "" },
+              { value: 90, label: "" },
+              { value: 95, label: "" },
+              { value: 100, label: "100" },
+            ]}
+          />
         </Box>
-        <Box display="flex" justifyContent="left" mt={2}>
-          <Button variant="contained" color="primary" onClick={handleSubmit} disabled={wouldMakeAgain === null}>
-            Submit Rating
-          </Button>
-        </Box>
-      </div>
 
-      {/* <Button variant="contained" color="primary" onClick={handleSubmit} disabled={wouldMakeAgain === null}>
+        <Box mb={3}>
+          <Typography>Accuracy of Instructions:</Typography>
+          <Slider
+            value={accuracy}
+            onChange={(_, newValue) => setAccuracy(newValue)}
+            valueLabelDisplay="auto"
+            step={5}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 5, label: "" },
+              { value: 10, label: "" },
+              { value: 15, label: "" },
+              { value: 20, label: "" },
+              { value: 25, label: "" },
+              { value: 30, label: "" },
+              { value: 35, label: "" },
+              { value: 40, label: "" },
+              { value: 45, label: "" },
+              { value: 50, label: "" },
+              { value: 55, label: "" },
+              { value: 60, label: "" },
+              { value: 65, label: "" },
+              { value: 70, label: "" },
+              { value: 75, label: "" },
+              { value: 80, label: "" },
+              { value: 85, label: "" },
+              { value: 90, label: "" },
+              { value: 95, label: "" },
+              { value: 100, label: "100" },
+            ]}
+          />
+        </Box>
+
+        <Box mb={3}>
+          <Typography>Originality:</Typography>
+          <Slider
+            value={originality}
+            onChange={(_, newValue) => setOriginality(newValue)}
+            valueLabelDisplay="auto"
+            step={5}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 5, label: "" },
+              { value: 10, label: "" },
+              { value: 15, label: "" },
+              { value: 20, label: "" },
+              { value: 25, label: "" },
+              { value: 30, label: "" },
+              { value: 35, label: "" },
+              { value: 40, label: "" },
+              { value: 45, label: "" },
+              { value: 50, label: "" },
+              { value: 55, label: "" },
+              { value: 60, label: "" },
+              { value: 65, label: "" },
+              { value: 70, label: "" },
+              { value: 75, label: "" },
+              { value: 80, label: "" },
+              { value: 85, label: "" },
+              { value: 90, label: "" },
+              { value: 95, label: "" },
+              { value: 100, label: "100" },
+            ]}
+          />
+        </Box>
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={6}
+        lg={6}
+        sx={{
+          margin: "20px 0",
+        }}
+      >
+        <Box mb={3}>
+          <Typography>Visual Appeal:</Typography>
+          <Slider
+            value={visualAppeal}
+            onChange={(_, newValue) => setVisualAppeal(newValue)}
+            valueLabelDisplay="auto"
+            step={5}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 5, label: "" },
+              { value: 10, label: "" },
+              { value: 15, label: "" },
+              { value: 20, label: "" },
+              { value: 25, label: "" },
+              { value: 30, label: "" },
+              { value: 35, label: "" },
+              { value: 40, label: "" },
+              { value: 45, label: "" },
+              { value: 50, label: "" },
+              { value: 55, label: "" },
+              { value: 60, label: "" },
+              { value: 65, label: "" },
+              { value: 70, label: "" },
+              { value: 75, label: "" },
+              { value: 80, label: "" },
+              { value: 85, label: "" },
+              { value: 90, label: "" },
+              { value: 95, label: "" },
+              { value: 100, label: "100" },
+            ]}
+          />
+        </Box>
+
+        <Box mb={3}>
+          <Typography>Availability of Ingredients:</Typography>
+          <Slider
+            value={availability}
+            onChange={(_, newValue) => setAvailability(newValue)}
+            valueLabelDisplay="auto"
+            step={5}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 5, label: "" },
+              { value: 10, label: "" },
+              { value: 15, label: "" },
+              { value: 20, label: "" },
+              { value: 25, label: "" },
+              { value: 30, label: "" },
+              { value: 35, label: "" },
+              { value: 40, label: "" },
+              { value: 45, label: "" },
+              { value: 50, label: "" },
+              { value: 55, label: "" },
+              { value: 60, label: "" },
+              { value: 65, label: "" },
+              { value: 70, label: "" },
+              { value: 75, label: "" },
+              { value: 80, label: "" },
+              { value: 85, label: "" },
+              { value: 90, label: "" },
+              { value: 95, label: "" },
+              { value: 100, label: "100" },
+            ]}
+          />
+        </Box>
+
+        <Box mb={3}>
+          <Typography>Difficulty:</Typography>
+          <Slider
+            value={difficulty}
+            onChange={(_, newValue) => setDifficulty(newValue)}
+            valueLabelDisplay="auto"
+            step={5}
+            marks={[
+              { value: 0, label: "0" },
+              { value: 5, label: "" },
+              { value: 10, label: "" },
+              { value: 15, label: "" },
+              { value: 20, label: "" },
+              { value: 25, label: "" },
+              { value: 30, label: "" },
+              { value: 35, label: "" },
+              { value: 40, label: "" },
+              { value: 45, label: "" },
+              { value: 50, label: "" },
+              { value: 55, label: "" },
+              { value: 60, label: "" },
+              { value: 65, label: "" },
+              { value: 70, label: "" },
+              { value: 75, label: "" },
+              { value: 80, label: "" },
+              { value: 85, label: "" },
+              { value: 90, label: "" },
+              { value: 95, label: "" },
+              { value: 100, label: "100" },
+            ]}
+          />
+        </Box>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        // sx={{
+        //   margin: "20px 0",
+        // }}
+      >
+        <div>
+          <div>
+            <Typography variant="h6" textAlign="center">
+              Would You Make It Again?
+            </Typography>
+
+            <Box display="flex" justifyContent="center" mt={2}>
+              <Button variant={wouldMakeAgain === "Yes" ? "contained" : "outlined"} color="primary" onClick={() => handleButtonClick("Yes")}>
+                Yes
+              </Button>
+              <Button variant={wouldMakeAgain === "No" ? "contained" : "outlined"} color="primary" onClick={() => handleButtonClick("No")} sx={{ marginLeft: 2 }}>
+                No
+              </Button>
+            </Box>
+            <Box display="flex" justifyContent="left" mt={2}>
+              <Button variant="contained" color="primary" onClick={handleSubmit} disabled={wouldMakeAgain === null}>
+                Submit Rating
+              </Button>
+            </Box>
+          </div>
+
+          {/* <Button variant="contained" color="primary" onClick={handleSubmit} disabled={wouldMakeAgain === null}>
         Submit Ratings
       </Button> */}
-    </div>
+        </div>
+      </Grid>
+    </>
   );
 };
-
-// const QuestionRating = () => {
-//   const [taste, setTaste] = useState(0);
-//   const [presentation, setPresentation] = useState(0);
-//   const [preparation, setPreparation] = useState(0);
-//   const [availability, setAvailability] = useState(0);
-//   const [cookingTime, setCookingTime] = useState(0);
-//   const [nutritionalValue, setNutritionalValue] = useState(0);
-//   const [versatility, setVersatility] = useState(0);
-//   const [familyFriendliness, setFamilyFriendliness] = useState(0);
-//   const [valueForEffort, setValueForEffort] = useState(0);
-//   const [originality, setOriginality] = useState(0);
-//   const [visualAppeal, setVisualAppeal] = useState(0);
-//   const [leftoversQuality, setLeftoversQuality] = useState(0);
-
-//   const handleSubmit = () => {
-//     // Implement your logic to submit the review with the chosen ratings.
-//     console.log("Taste:", taste);
-//     console.log("Presentation:", presentation);
-//     console.log("Preparation:", preparation);
-//     console.log("Ingredient Availability:", availability);
-//     console.log("Cooking Time:", cookingTime);
-//     console.log("Nutritional Value:", nutritionalValue);
-//     console.log("Versatility:", versatility);
-//     console.log("Family Friendliness:", familyFriendliness);
-//     console.log("Value for Effort:", valueForEffort);
-//     console.log("Originality:", originality);
-//     console.log("Visual Appeal:", visualAppeal);
-//     console.log("Leftovers Quality:", leftoversQuality);
-//   };
-
-//   return (
-//     <div>
-//       <Typography variant="h6">Rate the Recipe</Typography>
-
-//       <Box mb={3}>
-//         <Typography>Taste:</Typography>
-//         <Slider
-//           value={taste}
-//           onChange={(_, newValue) => setTaste(newValue)}
-//           valueLabelDisplay="auto"
-//           step={1}
-//           marks={[
-//             { value: 0, label: "0" },
-//             { value: 10, label: "10" },
-//           ]}
-//         />
-//       </Box>
-
-//       <Box mb={3}>
-//         <Typography>Presentation:</Typography>
-//         <Slider
-//           value={presentation}
-//           onChange={(_, newValue) => setPresentation(newValue)}
-//           valueLabelDisplay="auto"
-//           step={1}
-//           marks={[
-//             { value: 0, label: "0" },
-//             { value: 10, label: "10" },
-//           ]}
-//         />
-//       </Box>
-
-//       {/* Repeat the above structure for other aspects */}
-
-//       <Button variant="contained" color="primary" onClick={handleSubmit}>
-//         Submit Ratings
-//       </Button>
-//     </div>
-//   );
-// };
-
-// const QuestionRating = () => {
-//   const [taste, setTaste] = useState(0);
-//   const [presentation, setPresentation] = useState(0);
-//   const [makeAgain, setMakeAgain] = useState(null);
-
-//   const handleSubmit = () => {
-//     // Implement your logic to submit the review with the chosen ratings.
-//     console.log("Taste:", taste);
-//     console.log("Presentation:", presentation);
-//     console.log("Will you make it again?", makeAgain);
-//   };
-
-//   return (
-//     <div>
-//       <Typography variant="h6">Rate the Recipe</Typography>
-
-//       <Typography>Taste:</Typography>
-//       <Slider value={taste} onChange={(_, newValue) => setTaste(newValue)} valueLabelDisplay="auto" step={0.5} marks min={0} max={5} />
-
-//       <Typography>Presentation:</Typography>
-//       <Slider value={presentation} onChange={(_, newValue) => setPresentation(newValue)} valueLabelDisplay="auto" step={0.5} marks min={0} max={5} />
-
-//       <Typography>Will you make it again?</Typography>
-//       <Box display="flex" justifyContent="space-between">
-//         <Button variant={makeAgain === true ? "contained" : "outlined"} onClick={() => setMakeAgain(true)} style={{ backgroundColor: "#4CAF50", color: "white" }}>
-//           Yes
-//         </Button>
-//         <Button variant={makeAgain === false ? "contained" : "outlined"} onClick={() => setMakeAgain(false)} style={{ backgroundColor: "#F44336", color: "white" }}>
-//           No
-//         </Button>
-//       </Box>
-
-//       <Button variant="contained" color="primary" onClick={handleSubmit}>
-//         Submit Ratings
-//       </Button>
-//     </div>
-//   );
-// };
-
 const RecipeReviewForm = () => {
   // const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -723,7 +559,6 @@ const RecipeReviewForm = () => {
     </div>
   );
 };
-
 const ThumbsUpDown = () => {
   const [liked, setLiked] = useState(null);
 
@@ -765,31 +600,6 @@ const SliderRating = () => {
     </div>
   );
 };
-
-// const QuestionRating = () => {
-//   const [taste, setTaste] = useState(0);
-//   const [presentation, setPresentation] = useState(0);
-
-//   const handleSubmit = () => {
-//     // Implement your logic to submit the review with the chosen ratings.
-//     console.log("Taste:", taste);
-//     console.log("Presentation:", presentation);
-//   };
-
-//   return (
-//     <div>
-//       <Typography variant="h6">Rate the Recipe</Typography>
-//       <Typography>Taste:</Typography>
-//       <Rating name="taste-rating" value={taste} onChange={(_, newValue) => setTaste(newValue)} precision={0.5} />
-//       <Typography>Presentation:</Typography>
-//       <Rating name="presentation-rating" value={presentation} onChange={(_, newValue) => setPresentation(newValue)} precision={0.5} />
-//       <Button variant="contained" color="primary" onClick={handleSubmit}>
-//         Submit Ratings
-//       </Button>
-//     </div>
-//   );
-// };
-
 const VideoPlayer = ({ videoUrl }) => {
   return (
     <Paper elevation={3} style={{ padding: "16px", textAlign: "center" }}>
@@ -819,35 +629,35 @@ const TipsCarousel = () => {
     </Carousel>
   );
 };
-
 const TotalNutritionDonutChart = ({ ingredients }) => {
-  const [totalNutritionData, setTotalNutritionData] = useState(null);
+  const calculateTotalNutrition = (data) => {
+    return data.reduce(
+      (total, category) => {
+        category.items.forEach((item) => {
+          const allowedUnit = item.ingredient.allowedUnits.find((unit) => unit.unit.name === item.unit);
 
-  // Function to calculate total nutrition from all ingredients
-  const calculateTotalNutrition = (items) => {
-    return items.reduce(
-      (total, item) => {
-        total.calories += item.ingredient.calories * (item.quantity / 100);
-        total.fat += item.ingredient.fat * (item.quantity / 100);
-        total.protein += item.ingredient.protein * (item.quantity / 100);
-        // Add other nutrition properties as needed
+          if (allowedUnit) {
+            const adjustedQuantity = item.quantity * allowedUnit.conversionFactor;
+            total.calories += (item.ingredient.calories / 100) * adjustedQuantity;
+            total.fat += (item.ingredient.fat / 100) * adjustedQuantity;
+            total.carbohydrates += (item.ingredient.carbohydrates / 100) * adjustedQuantity;
+            total.fiber += (item.ingredient.fiber / 100) * adjustedQuantity;
+            total.sugar += (item.ingredient.sugar / 100) * adjustedQuantity;
+            total.protein += (item.ingredient.protein / 100) * adjustedQuantity;
+          } else {
+            console.error(`Conversion factor not found for unit ${item.unit} in ingredient ${item.ingredient.name}`);
+          }
+        });
+
         return total;
       },
-      { calories: 0, fat: 0, protein: 0 } // Initial values for total nutrition
+      { calories: 0, fat: 0, carbohydrates: 0, fiber: 0, sugar: 0, protein: 0 }
     );
   };
+  // Calculate the total nutrition for all ingredients
+  const totalNutrition = calculateTotalNutrition(ingredients);
 
-  useEffect(() => {
-    // Calculate total nutrition data from all ingredients
-    const calculatedTotalNutrition = calculateTotalNutrition(ingredients.reduce((allItems, category) => allItems.concat(category.items), []));
-    setTotalNutritionData(calculatedTotalNutrition);
-  }, [ingredients]);
-
-  if (!totalNutritionData) {
-    return <div>No data available</div>;
-  }
-
-  const chartData = Object.entries(totalNutritionData).map(([nutrient, amount]) => [nutrient, amount]);
+  const chartData = Object.entries(totalNutrition).map(([nutrient, amount]) => [nutrient, amount]);
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -885,24 +695,34 @@ const TotalNutritionDonutChart = ({ ingredients }) => {
     </div>
   );
 };
-
 const IngredientTable = ({ ingredients }) => {
-  // Function to calculate total nutrition and calories for all ingredients
-  const calculateTotalNutrition = (items) => {
-    return items.reduce(
-      (total, item) => {
-        total.calories += item.ingredient.calories * (item.quantity / 100);
-        total.fat += item.ingredient.fat * (item.quantity / 100);
-        total.protein += item.ingredient.protein * (item.quantity / 100);
-        // Add other nutrition properties as needed
+  const calculateTotalNutrition = (data) => {
+    return data.reduce(
+      (total, category) => {
+        category.items.forEach((item) => {
+          const allowedUnit = item.ingredient.allowedUnits.find((unit) => unit.unit.name === item.unit);
+
+          if (allowedUnit) {
+            const adjustedQuantity = item.quantity * allowedUnit.conversionFactor;
+            total.calories += (item.ingredient.calories / 100) * adjustedQuantity;
+            total.fat += (item.ingredient.fat / 100) * adjustedQuantity;
+            total.carbohydrates += (item.ingredient.carbohydrates / 100) * adjustedQuantity;
+            total.fiber += (item.ingredient.fiber / 100) * adjustedQuantity;
+            total.sugar += (item.ingredient.sugar / 100) * adjustedQuantity;
+            total.protein += (item.ingredient.protein / 100) * adjustedQuantity;
+          } else {
+            console.error(`Conversion factor not found for unit ${item.unit} in ingredient ${item.ingredient.name}`);
+          }
+        });
+
         return total;
       },
-      { calories: 0, fat: 0, protein: 0 } // Initial values for total nutrition
+      { calories: 0, fat: 0, carbohydrates: 0, fiber: 0, sugar: 0, protein: 0 }
     );
   };
-
   // Calculate the total nutrition for all ingredients
-  const totalNutrition = calculateTotalNutrition(ingredients.reduce((allItems, category) => allItems.concat(category.items), []));
+  const totalNutrition = calculateTotalNutrition(ingredients);
+  //const totalNutrition = calculateTotalNutrition(ingredients.reduce((allItems, category) => allItems.concat(category.items), []));
 
   return (
     <TableContainer component={Paper}>
@@ -923,6 +743,18 @@ const IngredientTable = ({ ingredients }) => {
             <TableCell>{totalNutrition.fat.toFixed(2)}</TableCell>
           </TableRow>
           <TableRow>
+            <TableCell>Total Carbohydrates</TableCell>
+            <TableCell>{totalNutrition.carbohydrates.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Total Fiber</TableCell>
+            <TableCell>{totalNutrition.fiber.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Total Sugar</TableCell>
+            <TableCell>{totalNutrition.sugar.toFixed(2)}</TableCell>
+          </TableRow>
+          <TableRow>
             <TableCell>Total Protein</TableCell>
             <TableCell>{totalNutrition.protein.toFixed(2)}</TableCell>
           </TableRow>
@@ -932,82 +764,12 @@ const IngredientTable = ({ ingredients }) => {
     </TableContainer>
   );
 };
-
-// const IngredientTable = ({ ingredients }) => {
-//   // Function to calculate total nutrition and calories for each ingredient category
-//   const calculateTotalNutrition = (items) => {
-//     return items.reduce(
-//       (total, item) => {
-//         total.calories += item.ingredient.calories * (item.quantity / 100); // Assuming calories are provided per 100g
-//         total.fat += item.ingredient.fat * (item.quantity / 100);
-//         total.protein += item.ingredient.protein * (item.quantity / 100);
-//         // Add other nutrition properties as needed
-//         return total;
-//       },
-//       { calories: 0, fat: 0, protein: 0 } // Initial values for total nutrition
-//     );
-//   };
-
-//   return (
-//     <TableContainer component={Paper}>
-//       <Table aria-label="ingredient nutrition table">
-//         <TableHead>
-//           <TableRow>
-//             <TableCell>Ingredient Category</TableCell>
-//             <TableCell>Total Calories</TableCell>
-//             <TableCell>Total Fat</TableCell>
-//             <TableCell>Total Protein</TableCell>
-//             {/* Add other nutrition properties as needed */}
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {ingredients.map((category, categoryIndex) => (
-//             <TableRow key={categoryIndex}>
-//               <TableCell>{category.name}</TableCell>
-//               <TableCell>{calculateTotalNutrition(category.items).calories.toFixed(2)}</TableCell>
-//               <TableCell>{calculateTotalNutrition(category.items).fat.toFixed(2)}</TableCell>
-//               <TableCell>{calculateTotalNutrition(category.items).protein.toFixed(2)}</TableCell>
-//               {/* Display other total nutrition properties as needed */}
-//             </TableRow>
-//           ))}
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   );
-// };
-
 function IconLabelTabs({ recipe }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // const Section = ({ section }) => (
-  //   <div key={section.section}>
-  //     <Typography variant="h6">{section.section}:</Typography>
-  //     {section.items.map((ingredient) => (
-  //       <div key={ingredient.id}>
-  //         <FormControlLabel control={<Checkbox color="default" icon={<RadioButtonUncheckedIcon />} checkedIcon={<CheckCircleIcon />} />} label={`${ingredient.name} (${ingredient.amount} ${ingredient.unit})`} />
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
-
-  // const Section = ({ ingredients }) => (
-  //   <div>
-  //     {ingredients.map((ingredientGroup) => (
-  //       <div key={ingredientGroup.name}>
-  //         <Typography variant="h6">{ingredientGroup.name}:</Typography>
-  //         {ingredientGroup.items.map((ingredient) => (
-  //           <div key={ingredient._id}>
-  //             <FormControlLabel control={<Checkbox color="default" icon={<RadioButtonUncheckedIcon />} checkedIcon={<CheckCircleIcon />} />} label={`${ingredient.name} (${ingredient.quantity} ${ingredient.unit})`} />
-  //           </div>
-  //         ))}
-  //       </div>
-  //     ))}
-  //   </div>
-  // );
 
   const Section = ({ ingredients }) => (
     <div>
@@ -1016,6 +778,7 @@ function IconLabelTabs({ recipe }) {
           <Typography variant="h6">{ingredientGroup.name}:</Typography>
           {ingredientGroup.items.map((ingredient) => (
             <div key={ingredient._id}>
+              {console.log(ingredient)} {/* Log the entire ingredient object */}
               <FormControlLabel control={<Checkbox color="default" icon={<RadioButtonUncheckedIcon />} checkedIcon={<CheckCircleIcon />} />} label={`${ingredient.ingredient.name} (${ingredient.quantity} ${ingredient.unit})`} />
             </div>
           ))}
@@ -1031,6 +794,7 @@ function IconLabelTabs({ recipe }) {
       </div>
     );
   };
+
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   return (
     <div style={{ margin: "2rem 0" }}>
@@ -1087,29 +851,8 @@ function IconLabelTabs({ recipe }) {
             }}
           >
             <IngredientTable ingredients={recipe.ingredients} />
-            {/* <TableContainer component={Paper}>
-              <Table aria-label="nutrition data table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Percent of Daily Needs</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {recipe.ingredients &&
-                    recipe.ingredients.map((item) => (
-                      <TableRow key={item.id}>
-                        <TableCell>{item.name}</TableCell>
-                        <TableCell>
-                          {item.amount} {item.unit}
-                        </TableCell>
-                        <TableCell>{item.dailyNeedPercent}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer> */}
+
+            {/* <NutritionFactsTable /> */}
           </Grid>
           <Grid
             item
@@ -1122,14 +865,12 @@ function IconLabelTabs({ recipe }) {
             }}
           >
             <TotalNutritionDonutChart ingredients={recipe.ingredients} />
-            {/* <NutritionDonutChart nutritionData={recipe.ingredients} /> */}
           </Grid>
         </Grid>
       </TabPanel>
     </div>
   );
 }
-
 const RecipePreparationButton = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -1181,7 +922,6 @@ const RecipePreparationButton = () => {
     </>
   );
 };
-
 function CircularIndeterminate() {
   return (
     <Box sx={{ display: "flex" }}>
@@ -1189,13 +929,12 @@ function CircularIndeterminate() {
     </Box>
   );
 }
-
 const CustomRecipeInfo = () => {
   const { id } = useParams();
   const API_URL = `http://localhost:3000/api/recipes/${id}`;
 
   const [recipe, setRecipe] = useState(null);
-  const [totalCalories, setTotalCalories] = useState(0); // New state for total calories
+  // const [totalCalories, setTotalCalories] = useState(0); // New state for total calories
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -1215,8 +954,8 @@ const CustomRecipeInfo = () => {
           setRecipe(data);
 
           // Calculate total calories when recipe data is available
-          const newTotalCalories = data.ingredients.reduce((total, category) => total + category.items.reduce((sum, item) => sum + item.ingredient.calories * (item.quantity / 100), 0), 0);
-          setTotalCalories(newTotalCalories);
+          // const newTotalCalories = data.ingredients.reduce((total, category) => total + category.items.reduce((sum, item) => sum + item.ingredient.calories * (item.quantity / 100), 0), 0);
+          // setTotalCalories(newTotalCalories);
         } else {
           throw new Error("Failed to fetch recipe details");
         }
@@ -1340,7 +1079,6 @@ const CustomRecipeInfo = () => {
       {/* General Info */}
       <Grid container spacing={3}>
         {/* Title | Rating | Action Buttons | Author | Description */}
-
         <Grid item xs={12} sm={12} md={12} lg={12}>
           {recipe && recipe.title && (
             <Typography variant="h4" sx={{ fontWeight: "bold" }}>
@@ -1399,7 +1137,16 @@ const CustomRecipeInfo = () => {
               {recipe.description}
             </Typography>
           )}
+          <Typography
+            variant="subtitle2"
+            sx={{
+              margin: "1rem 0 0 0",
+            }}
+          >
+            Updated on {formatUpdatedAt(recipe.updatedAt)}
+          </Typography>
         </Grid>
+
         <Grid item xs={12} sm={12} md={7} lg={7} style={{ display: "flex", alignItems: "center" }}>
           <Chip label="95%" style={{ backgroundColor: "#424242", color: "#ffffff" }} />
           <Typography style={{ marginLeft: "4px" }}>would make this again</Typography>
@@ -1436,13 +1183,7 @@ const CustomRecipeInfo = () => {
                 </Grid>
                 <Grid item>
                   <Typography>
-                    {recipe && recipe.ingredients && totalCalories}
-                    {/* Calories HERE */}
-                    {recipe && recipe.nutritionFacts && recipe.nutritionFacts.calories && (
-                      <>
-                        {recipe.nutritionFacts.calories.amount} {recipe.nutritionFacts.calories.unit}
-                      </>
-                    )}
+                    <TotalCalories ingredients={recipe.ingredients} />
                   </Typography>
                 </Grid>
               </Grid>
@@ -1473,11 +1214,11 @@ const CustomRecipeInfo = () => {
                   <BlenderIcon />
                 </Grid>
                 <Grid item>
-                  {recipe.times && recipe.times.length > 0 && (
+                  {/* {recipe.times && recipe.times.length > 0 && (
                     <Typography>
                       Preparation {recipe.times.find((time) => time.label === "Preparation").hours} h {recipe.times.find((time) => time.label === "Preparation").minutes} min
                     </Typography>
-                  )}
+                  )} */}
                   {/* {recipe && recipe.cookingTime && recipe.cookingTime.preparation && (
                     <Typography>
                       Preparation {recipe.cookingTime.preparation.time} {recipe.cookingTime.preparation.unit}
@@ -1498,11 +1239,11 @@ const CustomRecipeInfo = () => {
                   <OutdoorGrillIcon />
                 </Grid>
                 <Grid item>
-                  {recipe.times && recipe.times.length > 0 && (
+                  {/* {recipe.times && recipe.times.length > 0 && (
                     <Typography>
                       Cooking {recipe.times.find((time) => time.label === "Cooking").hours} h {recipe.times.find((time) => time.label === "Cooking").minutes} min
                     </Typography>
-                  )}
+                  )} */}
                   {/* {recipe && recipe.cookingTime && recipe.cookingTime.cooking && (
                     <Typography>
                       Cooking {recipe.cookingTime.cooking.time} {recipe.cookingTime.cooking.unit}
@@ -1523,11 +1264,11 @@ const CustomRecipeInfo = () => {
                   <TimelapseIcon />
                 </Grid>
                 <Grid item>
-                  {recipe.times && recipe.times.length > 0 && (
+                  {/* {recipe.times && recipe.times.length > 0 && (
                     <Typography>
                       Resting {recipe.times.find((time) => time.label === "Resting").hours} h {recipe.times.find((time) => time.label === "Resting").minutes} min
                     </Typography>
-                  )}
+                  )} */}
                 </Grid>
               </Grid>
               {/* Total Time */}
@@ -1794,8 +1535,17 @@ const CustomRecipeInfo = () => {
         </Grid>
       </Grid>
       {/* Questions */}
+      <Typography
+        variant="h6"
+        sx={{
+          margin: "20px 0",
+        }}
+      >
+        Rate the Recipe
+      </Typography>
       <Grid container spacing={3}>
-        <Grid
+        <QuestionRating />
+        {/* <Grid
           item
           xs={12}
           sm={12}
@@ -1819,7 +1569,7 @@ const CustomRecipeInfo = () => {
           }}
         >
           <QuestionRating />
-        </Grid>
+        </Grid> */}
       </Grid>
       {/* Make Again */}
 
@@ -1893,14 +1643,6 @@ const CustomRecipeInfo = () => {
       <Typography variant="h6">You May Also Like</Typography>
 
       <Home />
-      <Typography
-        variant="subtitle2"
-        sx={{
-          margin: "1rem 0",
-        }}
-      >
-        Updated on {formatUpdatedAt(recipe.updatedAt)}
-      </Typography>
     </React.Fragment>
   );
 };

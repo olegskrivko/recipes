@@ -65,8 +65,10 @@
 /////////////////////
 
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Grid, CircularProgress, MenuItem, Snackbar, FormControl, InputLabel, Select, FormHelperText } from "@mui/material";
+import { TextField, Button, Grid, CircularProgress, MenuItem, Snackbar, IconButton, FormControl, InputLabel, Select, FormHelperText } from "@mui/material";
 import axios from "axios";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreTimeIcon from "@mui/icons-material/MoreTime";
 
 const RecipeForm = () => {
   const [title, setTitle] = useState("");
@@ -84,18 +86,17 @@ const RecipeForm = () => {
   const [selectedCuisines, setSelectedCuisines] = useState([]);
   const [selectedTools, setSelectedTools] = useState([]);
   const [selectedCookingMethods, setSelectedCookingMethods] = useState([]);
+  const [selectedTimes, setSelectedTimes] = useState([{ label: "", hours: 0, minutes: 0 }]);
 
-  // const [times, setTimes] = useState([]); // Add this line to decl
-  // const [selectedTimes, setSelectedTimes] = useState([]);
-  // const [selectedHours, setSelectedHours] = useState({});
-  // const [selectedMinutes, setSelectedMinutes] = useState({});
-  // State for handling times
-  const [selectedTimes, setSelectedTimes] = useState([]);
+  // const [hours, setHours] = useState(0);
+  // const [minutes, setMinutes] = useState(0);
 
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  // const [availableCategories, setAvailableCategories] = useState([]);
+  // const [category, setCategory] = useState("");
+  // const [subcategories, setSubcategories] = useState([]);
+  // const [subcategory, setSubcategory] = useState("");
+
   const [times, setTimes] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [titleError, setTitleError] = useState(null);
   const [descriptionError, setDescriptionError] = useState(null);
@@ -106,13 +107,12 @@ const RecipeForm = () => {
   const [toolError, setToolError] = useState("");
   const [cookingMethodError, setCookingMethodError] = useState("");
   const [servingsError, setServingsError] = useState("");
-
   const [successMessage, setSuccessMessage] = useState(null);
-
   const [instructions, setInstructions] = useState([{ name: "", steps: [{ step: 1, description: "", image: "" }] }]);
   const [ingredientCategories, setIngredientCategories] = useState([{ name: "", items: [{ ingredient: "", quantity: 0, unit: "", ingredientPrice: "" }] }]);
   // check how long user is on page and if he clicks after preparation time than it means he did it
   // Fetch times from the backend on component mount
+
   useEffect(() => {
     const fetchTimes = async () => {
       try {
@@ -126,6 +126,23 @@ const RecipeForm = () => {
     fetchTimes();
   }, []);
 
+  // new down
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:3000/api/ingredient-categories");
+
+  //       const topLevelCategories = response.data.filter((category) => category.parentCategory === null);
+  //       setAvailableCategories(topLevelCategories);
+  //       // setAvailableCategories(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching categories:", error.message);
+  //     }
+  //   };
+
+  //   fetchCategories();
+  // }, []);
+  // new up
   const handleTimeChange = (event, index) => {
     const updatedTimes = [...selectedTimes];
     updatedTimes[index].label = event.target.value;
@@ -376,6 +393,33 @@ const RecipeForm = () => {
     setIngredientCategories([...ingredientCategories, { name: "", items: [{ ingredient: "", quantity: 0, unit: "", ingredientPrice: "" }] }]);
   };
 
+  // new down
+  // const handleFieldChange = (field, value) => {
+  //   // setErrors((prevErrors) => ({ ...prevErrors, [field]: null }));
+
+  //   switch (field) {
+  //     case "category":
+  //       setCategory(value);
+  //       fetchSubcategories(value);
+  //       break;
+  //     case "subcategory":
+  //       setSubcategory(value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  // const fetchSubcategories = async (categoryId) => {
+  //   try {
+  //     const response = await axios.get(`http://localhost:3000/api/ingredient-categories/${categoryId}/subcategories`);
+  //     setSubcategories(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching subcategories:", error.message);
+  //   }
+  // };
+  // new up
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -463,6 +507,9 @@ const RecipeForm = () => {
   const handleCloseSuccessMessage = () => {
     setSuccessMessage(null);
   };
+  // Array of available times (0 to 24 hours)
+  const hours = Array.from({ length: 25 }, (_, i) => i);
+  const minutes = [0, 15, 30, 45];
 
   return (
     <>
@@ -590,28 +637,35 @@ const RecipeForm = () => {
         </FormControl>
         {selectedTimes.map((time, index) => (
           <Grid container spacing={2} key={index}>
-            <Grid item xs={4}>
-              <FormControl fullWidth>
-                <InputLabel id={`select-time-label-${index}`}>Select Time</InputLabel>
-                <Select labelId={`select-time-label-${index}`} id={`select-time-${index}`} value={time.name} onChange={(e) => handleTimeChange(e, index)}>
-                  {times.map((availableTime) => (
-                    <MenuItem key={availableTime._id} value={availableTime.name}>
-                      {availableTime.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+            <Grid item xs={6} style={{ display: "flex", alignItems: "center" }}>
+              <IconButton color="secondary" onClick={() => handleRemoveTime(index)}>
+                <DeleteIcon />
+              </IconButton>
+              <TextField label="Select Time" variant="outlined" fullWidth select value={time.name} onChange={(e) => handleTimeChange(e, index)} margin="normal">
+                {times.map((availableTime) => (
+                  <MenuItem key={availableTime._id} value={availableTime.name}>
+                    {availableTime.name}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
-            <Grid item xs={4}>
-              <TextField label="Hours" variant="outlined" fullWidth type="number" value={time.hours} onChange={(e) => handleHoursChange(e, index)} margin="normal" />
+            <Grid item xs={3}>
+              <TextField label="Hours" variant="outlined" fullWidth select value={time.hours} onChange={(e) => handleHoursChange(e, index)} margin="normal">
+                {hours.map((hour) => (
+                  <MenuItem key={hour} value={hour}>
+                    {hour}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
-            <Grid item xs={4}>
-              <TextField label="Minutes" variant="outlined" fullWidth type="number" value={time.minutes} onChange={(e) => handleMinutesChange(e, index)} margin="normal" />
-            </Grid>
-            <Grid item xs={2}>
-              <Button variant="outlined" color="secondary" onClick={() => handleRemoveTime(index)}>
-                Remove
-              </Button>
+            <Grid item xs={3}>
+              <TextField label="Minutes" variant="outlined" fullWidth select value={time.minutes} onChange={(e) => handleMinutesChange(e, index)} margin="normal">
+                {[0, 15, 30, 45].map((minute) => (
+                  <MenuItem key={minute} value={minute}>
+                    {minute}
+                  </MenuItem>
+                ))}
+              </TextField>
             </Grid>
           </Grid>
         ))}
@@ -620,135 +674,40 @@ const RecipeForm = () => {
           Add Time
         </Button>
 
-        {/* <FormControl fullWidth>
-          <InputLabel>Select Time</InputLabel>
-          <Select
-            value={selectedTimes}
-            onChange={handleTimeSelect}
-            multiple
-            renderValue={(selected) => (
-              <Grid container spacing={1}>
-                {selected.map((value) => (
-                  <Grid item key={value}>
-                    {times.find((t) => t._id === value).name}
-                  </Grid>
-                ))}
-              </Grid>
-            )}
-          >
-            {times.map((time) => (
-              <MenuItem key={time._id} value={time._id}>
-                {time.label}
+        {/* new down */}
+        {/* <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel>Category</InputLabel>
+          <Select value={category} onChange={(e) => handleFieldChange("category", e.target.value)} label="Category">
+            <MenuItem value="">Select Category</MenuItem>
+            {availableCategories.map((category) => (
+              <MenuItem key={category._id} value={category._id}>
+                {category.name}
               </MenuItem>
             ))}
           </Select>
         </FormControl> */}
-
-        {/* <FormControl fullWidth variant="outlined" margin="normal">
-          <InputLabel htmlFor="time-select">Select Time</InputLabel>
-          <Select
-            multiple
-            value={selectedTimes}
-            onChange={handleTimeSelect}
-            label="Select Time"
-            inputProps={{
-              id: "time-select",
-            }}
-            MenuComponent="div"
-          >
-            {times.map((time) => (
-              <MenuItem key={time._id} value={time._id}>
-                {time.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        {selectedTimes.map((time) => (
-          <div key={time}>
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel htmlFor={`hours-select-${time}`}>Select Hours for {times.find((t) => t._id === time)?.name}</InputLabel>
-              <Select
-                value={selectedHours[time]}
-                onChange={(e) => handleHourSelect(time, e)}
-                label={`Select Hours for ${times.find((t) => t._id === time)?.name}`}
-                inputProps={{
-                  id: `hours-select-${time}`,
-                }}
-                MenuComponent="div"
-              >
-                {Array.from({ length: 24 }, (_, i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel htmlFor={`minutes-select-${time}`}>Select Minutes for {times.find((t) => t._id === time)?.name}</InputLabel>
-              <Select
-                value={selectedMinutes[time]}
-                onChange={(e) => handleMinuteSelect(time, e)}
-                label={`Select Minutes for ${times.find((t) => t._id === time)?.name}`}
-                inputProps={{
-                  id: `minutes-select-${time}`,
-                }}
-                MenuComponent="div"
-              >
-                {Array.from({ length: 60 }, (_, i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        ))} */}
-        {/* <div>
-          {ingredientCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex}>
-              <TextField label={`Ingredient Category ${categoryIndex + 1}`} variant="outlined" fullWidth value={category.name} onChange={(event) => handleIngredientCategoryChange(categoryIndex, event)} margin="normal" />
-              {category.items.map((item, itemIndex) => (
-                <div key={itemIndex}>
-                  <TextField label={`Ingredient Name ${itemIndex + 1}`} variant="outlined" fullWidth value={item.ingredient} onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)} margin="normal" />
-                  <TextField label={`Ingredient Quantity ${itemIndex + 1}`} variant="outlined" fullWidth type="number" value={item.quantity} onChange={(event) => handleIngredientQuantityChange(categoryIndex, itemIndex, event)} margin="normal" />
-                  <TextField label={`Ingredient Unit ${itemIndex + 1}`} variant="outlined" fullWidth value={item.unit} onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)} margin="normal" />
-                </div>
+        {/* Display subcategories dropdown */}
+        {/* {subcategories.length > 0 && (
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <InputLabel>Subcategory</InputLabel>
+            <Select value={subcategory} onChange={(e) => handleFieldChange("subcategory", e.target.value)} label="Subcategory">
+              <MenuItem value="">Select Subcategory</MenuItem>
+              {subcategories.map((subcategory) => (
+                <MenuItem key={subcategory._id} value={subcategory._id}>
+                  {subcategory.name}
+                </MenuItem>
               ))}
-              <Button onClick={() => handleAddIngredientItem(categoryIndex)}>Add Ingredient</Button>
-            </div>
-          ))}
-          <Button onClick={handleAddIngredientCategory}>Add Ingredient Category</Button>
-        </div> */}
+            </Select>
+          </FormControl>
+        )} */}
+
+        {/* new up  */}
         <div>
           {ingredientCategories.map((category, categoryIndex) => (
             <div key={categoryIndex}>
               <TextField label={`Ingredient Category ${categoryIndex + 1}`} variant="outlined" fullWidth value={category.name} onChange={(event) => handleIngredientCategoryChange(categoryIndex, event)} margin="normal" />
               {category.items.map((item, itemIndex) => (
                 <div key={itemIndex}>
-                  {/* <TextField label={`Ingredient Name ${itemIndex + 1}`} variant="outlined" fullWidth value={item.ingredient} onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)} margin="normal" select>
-                    {availableIngredients.map((ingredient) => (
-                      <MenuItem key={ingredient._id} value={ingredient.name}>
-                        {ingredient.name}
-                      </MenuItem>
-                    ))}
-                  </TextField> */}
-                  {/* <TextField
-                    label={`Ingredient Name ${itemIndex + 1}`}
-                    variant="outlined"
-                    fullWidth
-                    value={item.ingredient}
-                    onChange={(event) => handleIngredientNameChange(categoryIndex, itemIndex, event)}
-                    margin="normal"
-                    select // Use select for dropdown
-                  >
-                    {availableIngredients.map((ingredient) => (
-                      <MenuItem key={ingredient._id} value={ingredient._id}>
-                        {ingredient.name}
-                      </MenuItem>
-                    ))}
-                  </TextField> */}
                   <TextField
                     label={`Ingredient Name ${itemIndex + 1}`}
                     variant="outlined"
@@ -766,24 +725,7 @@ const RecipeForm = () => {
                   </TextField>
 
                   <TextField label={`Ingredient Quantity ${itemIndex + 1}`} variant="outlined" fullWidth type="number" value={item.quantity} onChange={(event) => handleIngredientQuantityChange(categoryIndex, itemIndex, event)} margin="normal" />
-                  {/* <TextField label={`Ingredient Unit ${itemIndex + 1}`} variant="outlined" fullWidth value={item.unit} onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)} margin="normal" /> */}
-                  {/* <TextField
-                    label={`Ingredient Unit ${itemIndex + 1}`}
-                    variant="outlined"
-                    fullWidth
-                    select // Use select for dropdown
-                    value={item.unit}
-                    onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)}
-                    margin="normal"
-                  >
-                    {availableIngredients
-                      .find((ingredient) => ingredient._id === item.ingredient)
-                      ?.allowedUnits?.map((allowedUnit) => (
-                        <MenuItem key={allowedUnit.unit} value={allowedUnit.unit}>
-                          {allowedUnit.unit}
-                        </MenuItem>
-                      ))}
-                  </TextField> */}
+
                   <TextField label={`Ingredient Unit ${itemIndex + 1}`} variant="outlined" fullWidth select value={item.unit} onChange={(event) => handleIngredientUnitChange(categoryIndex, itemIndex, event)} margin="normal">
                     {item.ingredient &&
                       availableIngredients

@@ -423,3 +423,60 @@ const IngredientList = () => {
 };
 
 export default IngredientList;
+
+// Estimated Nutrition=100grams×2cups×Conversion Factor
+
+// So, using the conversion factor of 4 cups for 1 cup:
+
+// Estimated Nutrition=100 grams×2×4=800 gramsEstimated Nutrition=100grams×2×4=800grams
+
+// This is a rough estimation based on the assumption that 1 cup is equivalent to 4 times the weight of 1 gram.
+
+// Pastry Ingredients:
+
+//     2 cups all-purpose flour
+//     1 cup unsalted butter, chilled and cubed
+//     1/2 cup sour cream
+//     1/2 cup water
+//     1/4 teaspoon salt
+
+// Cream Ingredients:
+
+//     2 cups whole milk
+//     1 cup granulated sugar
+//     1/2 cup all-purpose flour
+//     4 large egg yolks
+//     1 teaspoon vanilla extract
+//     1 cup unsalted butter, softened
+
+// Instructions:
+
+// Pastry:
+
+//     In a large bowl, combine the flour and salt.
+//     Add the chilled, cubed butter to the flour mixture. Use a pastry cutter or your fingers to cut the butter into the flour until the mixture resembles coarse crumbs.
+//     Mix in the sour cream.
+//     Gradually add water, a little at a time, and mix until the dough comes together.
+//     Divide the dough into 8 equal parts and shape each into a disk. Wrap them in plastic wrap and refrigerate for at least 1 hour.
+
+// Cream:
+
+//     In a saucepan, heat the milk over medium heat until it just starts to simmer. Remove from heat.
+//     In a bowl, whisk together sugar, flour, and egg yolks until well combined.
+//     Gradually pour the hot milk into the egg mixture, whisking constantly.
+//     Return the mixture to the saucepan and cook over medium heat, whisking continuously until it thickens into a custard. Remove from heat.
+//     Stir in vanilla extract and let the custard cool to room temperature.
+//     In a separate bowl, beat the softened butter until creamy.
+//     Gradually add the cooled custard to the butter, beating continuously until smooth and well combined.
+
+// Assembling the Napoleon Cake:
+
+//     Preheat your oven to 400°F (200°C).
+//     Take one pastry disk at a time from the refrigerator and roll it out on a floured surface into a thin circle.
+//     Transfer the rolled pastry to a baking sheet and prick it with a fork. Bake for about 8-10 minutes or until golden. Repeat for all pastry disks.
+//     Let the pastry layers cool completely.
+//     Place one pastry layer on a serving platter and spread a layer of cream over it. Repeat the process, layering pastry and cream until you've used all the disks.
+//     Chill the assembled cake in the refrigerator for a few hours or overnight to allow the layers to meld together.
+//     Optionally, dust the top with powdered sugar before serving.
+
+// Enjoy your delicious homemade Napoleon cake!
